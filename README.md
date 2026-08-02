@@ -20,13 +20,7 @@ python epsilon_greedy.py
 
 ## Coming soon...
 
-More advanced versions of epsilon-greedy and related exploration strategies:
+More advanced versions of epsilon-greedy:
 
 - **Decaying epsilon** - anneal ε over time to explore less as the agent learns
 - **Optimistic initial values** - start estimates high to encourage early exploration
-- **UCB1** - choose arms by upper confidence bound instead of random exploration
-- **Thompson sampling** - sample from a posterior distribution over arm values
-- **Gradient bandits** - learn arm preferences with softmax action selection
-- **Contextual bandits** - pick arms based on observable context features
-- **Q-learning & SARSA** - move from bandits to full MDPs with ε-greedy policies
-- **DQN** - deep Q-networks with ε-greedy exploration for Atari-style tasks
