@@ -1,5 +1,6 @@
 """Plotting helpers for the multi-armed bandit simulation."""
 
+from datetime import datetime
 from pathlib import Path
 
 import matplotlib.pyplot as plt
@@ -12,10 +13,15 @@ def plot_bandit_results(
     true_probs: np.ndarray,
     estimated_values: np.ndarray,
     total_pulls: np.ndarray,
-    output_path: str | Path = "bandit_results.png",
+    output_path: str | Path | None = None,
     show: bool = True,
 ) -> Path:
-    """Create a compact dashboard of learning and arm-selection behavior."""
+    """Create a compact dashboard of learning and arm-selection behavior.
+
+    When ``output_path`` is omitted, the figure is saved with a timestamped
+    filename (e.g. ``bandit_results_20260803_153045.png``) so repeated runs
+    do not overwrite each other.
+    """
     rewards = np.asarray(rewards)
     selected_arms = np.asarray(selected_arms)
     true_probs = np.asarray(true_probs)
@@ -105,6 +111,10 @@ def plot_bandit_results(
 
     for axis in axes.flat:
         axis.grid(alpha=0.25)
+
+    if output_path is None:
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        output_path = f"bandit_results_{timestamp}.png"
 
     destination = Path(output_path)
     destination.parent.mkdir(parents=True, exist_ok=True)

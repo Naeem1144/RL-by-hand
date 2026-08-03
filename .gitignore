@@ -1,2 +1,7 @@
 __pycache__/
 *.pyc
+.venv/
+
+# Generated run artifacts
+bandit_results_*.png
+comparison_*/

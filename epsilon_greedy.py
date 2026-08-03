@@ -14,13 +14,22 @@ def run_bandit(
     n_steps: int = N_STEPS,
     epsilon: float = EPSILON,
     seed: int = SEED,
+    decay: float | None = None,
 ) -> dict[str, np.ndarray]:
-    """Run an epsilon-greedy Bernoulli multi-armed bandit simulation."""
+    """Run an epsilon-greedy Bernoulli multi-armed bandit simulation.
+
+    When ``decay`` is provided (e.g. 0.99), epsilon is multiplied by it after
+    every step so exploration shrinks over time. When ``decay`` is ``None``,
+    epsilon stays constant for the whole run.
+    """
     rng = np.random.default_rng(seed)
 
+    # bandit stats
     estimated_values = np.zeros(n_arms)
     total_pulls = np.zeros(n_arms, dtype=int)
     true_probs = rng.random(n_arms)
+
+    # history
     rewards = np.zeros(n_steps, dtype=int)
     selected_arms = np.zeros(n_steps, dtype=int)
 
@@ -30,16 +39,20 @@ def run_bandit(
         else:  # exploit
             selected_arm = np.argmax(estimated_values)
 
-        # A Bernoulli arm returns 1 with its true success probability.
         reward = int(rng.random() < true_probs[selected_arm])
 
         total_pulls[selected_arm] += 1
+
         estimated_values[selected_arm] += (
             reward - estimated_values[selected_arm]
         ) / total_pulls[selected_arm]
 
         rewards[step] = reward
         selected_arms[step] = selected_arm
+
+        # decaying epsilon
+        if decay is not None:
+            epsilon *= decay
 
     return {
         "rewards": rewards,

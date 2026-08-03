@@ -14,13 +14,26 @@ updated incrementally with the running-average rule.
 python epsilon_greedy.py
 ```
 
-## Results
+Each run saves a timestamped dashboard (e.g. `bandit_results_20260803_001201.png`)
+so repeated runs don't overwrite each other.
 
-![Bandit results](bandit_results.png)
+## Decaying epsilon
+
+`run_bandit` accepts a `decay` parameter: when set (e.g. `decay=0.99`), ε is
+multiplied by the decay factor after every step so the agent explores less as
+it learns. Passing `decay=None` (the default) keeps ε constant for the run.
+
+`compare_bandits.py` compares constant vs decaying epsilon across a grid of
+arm and step counts and a range of decay rates, printing a summary table and
+saving a comparison figure plus CSV:
+
+```
+python compare_bandits.py
+```
 
 ## Coming soon...
 
 More advanced versions of epsilon-greedy:
 
-- **Decaying epsilon** - anneal ε over time to explore less as the agent learns
 - **Optimistic initial values** - start estimates high to encourage early exploration
+- **UCB (upper confidence bound)** - pick arms by uncertainty-adjusted estimate
