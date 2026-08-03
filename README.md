@@ -17,6 +17,8 @@ python epsilon_greedy.py
 Each run saves a timestamped dashboard (e.g. `bandit_results_20260803_001201.png`)
 so repeated runs don't overwrite each other.
 
+![Epsilon-greedy multi-armed bandit results](images/bandit_results.png)
+
 ## Decaying epsilon
 
 `run_bandit` accepts a `decay` parameter: when set (e.g. `decay=0.99`), ε is
@@ -30,6 +32,8 @@ saving a comparison figure plus CSV:
 ```
 python compare_bandits.py
 ```
+
+![Constant vs decaying epsilon comparison](images/comparison.png)
 
 ## Coming soon...
 

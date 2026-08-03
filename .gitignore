@@ -2,6 +2,6 @@ __pycache__/
 *.pyc
 .venv/
 
-# Generated run artifacts
-bandit_results_*.png
-comparison_*/
+# Generated run artifacts (root only; images/ is committed for the README)
+/bandit_results_*.png
+/comparison_*/
