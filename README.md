@@ -34,7 +34,7 @@ probability $\mu_i \in [0,1]$. At time $t$, the agent chooses an arm $a_t$ and
 observes a binary reward
 
 $$
-r_t \sim \operatorname{Bernoulli}\!\left(\mu_{a_t}\right).
+r_t \sim \mathrm{Bernoulli}\!\left(\mu_{a_t}\right).
 $$
 
 The objective is to learn which arm is best while collecting as much reward as
@@ -179,12 +179,12 @@ $c=\sqrt{2}$; the comparison benchmark uses the tuned value $c=0.5$.
 
 For a Bernoulli bandit, Thompson sampling maintains a Beta posterior over each
 unknown arm mean. With the uniform prior
-$\operatorname{Beta}(1,1)$, the posterior after observing $S_i$ successes and
+$\mathrm{Beta}(1,1)$, the posterior after observing $S_i$ successes and
 $F_i$ failures is
 
 $$
 \mu_i \mid \mathcal{D}_t
-\sim \operatorname{Beta}(S_i+1,F_i+1).
+\sim \mathrm{Beta}(S_i+1,F_i+1).
 $$
 
 At every step, the policy samples one plausible mean per arm and selects the
@@ -192,7 +192,7 @@ largest:
 
 $$
 \widetilde{\mu}_i
-\sim \operatorname{Beta}(S_i+1,F_i+1),
+\sim \mathrm{Beta}(S_i+1,F_i+1),
 \qquad
 a_t = \underset{i \in \{1,\ldots,K\}}{\arg\max}\;\widetilde{\mu}_i.
 $$
@@ -257,7 +257,7 @@ over 10 seeds:
 
 1. Constant epsilon-greedy with $\varepsilon=0.1$
 2. Optimistic epsilon-greedy with $\varepsilon=0.1$ and $d=0.99$
-3. Thompson sampling with a $\operatorname{Beta}(1,1)$ prior
+3. Thompson sampling with a $\mathrm{Beta}(1,1)$ prior
 4. UCB1 with $c=0.5$
 
 ```bash
