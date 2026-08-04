@@ -28,7 +28,7 @@ $r_t \sim \text{Bernoulli}(\mu_{a_t})$, and updates its estimates.
 $$
 a_t = \begin{cases}
 \text{random arm} & \text{with probability } \varepsilon \\[4pt]
-\displaystyle\operatorname*{argmax}_{i}\,\hat{Q}_t(i) & \text{with probability } 1-\varepsilon
+\displaystyle\arg\max_{i}\,\hat{Q}_t(i) & \text{with probability } 1-\varepsilon
 \end{cases}
 $$
 
@@ -43,7 +43,7 @@ early exploration.
 ### UCB1 (Upper Confidence Bound)
 
 $$
-a_t = \operatorname*{argmax}_{i}\;\left[\,\hat{Q}_t(i) + c\,\sqrt{\frac{\ln t}{N_t(i)}}\,\right]
+a_t = \arg\max_{i}\;\left[\,\hat{Q}_t(i) + c\,\sqrt{\frac{\ln t}{N_t(i)}}\,\right]
 $$
 
 The second term is an _exploration bonus_ that shrinks as an arm is pulled more
@@ -55,7 +55,7 @@ Each arm maintains a Beta posterior $\text{Beta}(\alpha_i,\beta_i)$ (initialised
 to $\alpha_i=\beta_i=1$, i.e. uniform prior).
 
 1. **Sample** $\tilde{\mu}_i \sim \text{Beta}(\alpha_i,\beta_i)$ for every arm.
-2. **Pull** $a_t = \operatorname*{argmax}_i \tilde{\mu}_i$.
+2. **Pull** $a_t = \arg\max_i \tilde{\mu}_i$.
 3. **Update** with observed reward $r_t$:
    $$
    \alpha_{a_t} \leftarrow \alpha_{a_t} + r_t,\qquad
