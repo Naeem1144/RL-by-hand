@@ -27,7 +27,7 @@ $r_t \sim \text{Bernoulli}(\mu_{a_t})$, and updates its estimates.
 
 $$
 a_t = \begin{cases}
-\text{random arm} & \text{with probability } \varepsilon \\[4pt]
+\text{random arm} & \text{with probability } \varepsilon \\
 \displaystyle\arg\max_{i}\,\hat{Q}_t(i) & \text{with probability } 1-\varepsilon
 \end{cases}
 $$
@@ -57,10 +57,8 @@ to $\alpha_i=\beta_i=1$, i.e. uniform prior).
 1. **Sample** $\tilde{\mu}_i \sim \text{Beta}(\alpha_i,\beta_i)$ for every arm.
 2. **Pull** $a_t = \arg\max_i \tilde{\mu}_i$.
 3. **Update** with observed reward $r_t$:
-   $$
-   \alpha_{a_t} \leftarrow \alpha_{a_t} + r_t,\qquad
-   \beta_{a_t} \leftarrow \beta_{a_t} + (1-r_t)
-   $$
+   $\displaystyle \alpha_{a_t} \leftarrow \alpha_{a_t} + r_t,\qquad
+   \beta_{a_t} \leftarrow \beta_{a_t} + (1-r_t)$
 
 ### Regret
 
