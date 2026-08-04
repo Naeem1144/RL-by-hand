@@ -3,7 +3,7 @@
 <p align="center">
   <strong>Multi-armed bandit algorithms derived from the math and implemented from scratch.</strong>
   <br>
-  No reinforcement-learning frameworks—only NumPy, Matplotlib, and readable Python.
+  No reinforcement-learning frameworks. Only NumPy, Matplotlib, and readable Python.
 </p>
 
 <p align="center">
@@ -155,11 +155,7 @@ UCB1 chooses the arm with the largest upper-confidence index: its empirical
 value plus an exploration bonus.
 
 $$
-a_t = \underset{i \in \{1,\ldots,K\}}{\arg\max}
-\left[
-  \widehat{Q}_t(i)
-  + c\sqrt{\frac{\ln t}{N_t(i)}}
-\right].
+a_t = \underset{1 \le i \le K}{\arg\max}\left[\widehat{Q}_t(i) + c\sqrt{\frac{\ln t}{N_t(i)}}\right].
 $$
 
 The bonus is large for rarely selected arms and shrinks as evidence
@@ -305,6 +301,6 @@ straightforward.
 
 Standalone examples use seed 67. Comparison scripts average every
 configuration over seeds 0 through 9 and evaluate policies on matching
-Bernoulli problem instances. Runtime settings—including arm counts, horizons,
-decay rates, and confidence scales—are declared near the top of each script so
+Bernoulli problem instances. Runtime settings, including arm counts, horizons,
+decay rates, and confidence scales, are declared near the top of each script so
 experiments are easy to inspect and modify.
