@@ -6,3 +6,4 @@ __pycache__/
 /bandit_results_*.png
 /comparison_*/
 /algorithm_comparison_*/
+/hyperparameter_comparison_*/

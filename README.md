@@ -171,13 +171,13 @@ $c=\sqrt{2}$; the comparison benchmark uses the tuned value $c=0.5$.
 ### Thompson sampling
 
 For a Bernoulli bandit, Thompson sampling maintains a Beta posterior over each
-unknown arm mean. With the uniform prior
-$\mathrm{Beta}(1,1)$, the posterior after observing $S_i$ successes and
-$F_i$ failures is
+unknown arm mean. Starting from a common prior
+$\mathrm{Beta}(\alpha_0,\beta_0)$, the posterior after observing $S_i$
+successes and $F_i$ failures is
 
 $$
 \mu_i \mid \mathcal{D}_t
-\sim \mathrm{Beta}(S_i+1,F_i+1).
+\sim \mathrm{Beta}(S_i+\alpha_0,F_i+\beta_0).
 $$
 
 At every step, the policy samples one plausible mean per arm and selects the
@@ -185,7 +185,7 @@ largest:
 
 $$
 \widetilde{\mu}_i
-\sim \mathrm{Beta}(S_i+1,F_i+1),
+\sim \mathrm{Beta}(S_i+\alpha_0,F_i+\beta_0),
 \qquad
 a_t = \underset{i \in \{1,\ldots,K\}}{\arg\max}\;\widetilde{\mu}_i.
 $$
@@ -200,7 +200,9 @@ $$
 
 This randomized posterior sampling naturally balances exploration and
 exploitation. The implementation is in
-[`algorithms/thompson.py`](algorithms/thompson.py).
+[`algorithms/thompson.py`](algorithms/thompson.py). Its default
+$\mathrm{Beta}(1,1)$ prior is uniform; `prior_alpha` and `prior_beta` expose
+the prior mean and strength for controlled ablations.
 
 ## Evaluation
 
@@ -261,6 +263,75 @@ The script prints aggregate reward and regret statistics, writes a timestamped
 `algorithm_comparison_YYYYMMDD_HHMMSS/summary.csv`, and refreshes
 `images/algorithm_comparison.png`.
 
+#### Unified hyperparameter ablation
+
+[`compare_hyperparameters.py`](compare_hyperparameters.py) extends the existing
+comparison workflow across the primary tuning knob for every policy family:
+
+- Epsilon-greedy sweeps constant epsilon and six decay factors, each with zero
+  and optimistic initialization.
+- UCB1 sweeps eight confidence scales from `0.01` through `sqrt(2)`.
+- Thompson sampling sweeps six Beta priors through `prior_alpha` and
+  `prior_beta`.
+
+Every configuration uses $K=100$ arms, $T=2{,}000$ steps, $\varepsilon_0=0.1$,
+and the same 100 problem instances (seeds 0 through 99).
+
+```bash
+uv run python compare_hyperparameters.py
+```
+
+The script follows the other comparison tools: it prints a ranked summary,
+writes `hyperparameter_comparison_YYYYMMDD_HHMMSS/summary.csv`, and refreshes
+`images/hyperparameter_comparison.png`.
+
+Results are ranked by mean cumulative pseudo-regret. Each cell reports
+mean ± standard deviation across seeds.
+
+| Rank | Family | Configuration | Average reward ↑ | Pseudo-regret ↓ |
+| ---: | --- | --- | ---: | ---: |
+| **1** | **Epsilon-greedy** | **optimistic; `d=0.90`** | **0.9423 ± 0.0156** | **95.1 ± 19.6** |
+| 2 | Epsilon-greedy | optimistic; `d=0.95` | 0.9413 ± 0.0151 | 96.7 ± 18.6 |
+| 3 | Epsilon-greedy | optimistic; `d=0.99` | 0.9394 ± 0.0151 | 100.0 ± 17.3 |
+| 4 | **UCB1** | **`c=0.01`** | **0.9389 ± 0.0146** | **102.8 ± 17.0** |
+| 5 | UCB1 | `c=0.03` | 0.9387 ± 0.0141 | 103.3 ± 16.4 |
+| 6 | UCB1 | `c=0.05` | 0.9388 ± 0.0142 | 103.3 ± 16.8 |
+| 7 | UCB1 | `c=0.075` | 0.9383 ± 0.0129 | 104.5 ± 13.7 |
+| 8 | UCB1 | `c=0.10` | 0.9368 ± 0.0131 | 107.6 ± 16.0 |
+| 9 | Epsilon-greedy | zero-init; `d=0.999` | 0.9305 ± 0.0257 | 118.6 ± 45.0 |
+| 10 | **Thompson sampling** | **`Beta(2,2)`** | **0.9294 ± 0.0201** | **119.9 ± 27.7** |
+| 11 | Thompson sampling | `Beta(5,5)` | 0.9265 ± 0.0240 | 127.1 ± 45.0 |
+| 12 | Epsilon-greedy | optimistic; `d=0.999` | 0.9260 ± 0.0176 | 128.5 ± 21.6 |
+| 13 | UCB1 | `c=0.20` | 0.9244 ± 0.0117 | 132.2 ± 14.7 |
+| 14 | Thompson sampling | `Beta(1,1)` | 0.9212 ± 0.0260 | 136.5 ± 35.5 |
+| 15 | Thompson sampling | `Beta(2,1)` | 0.9142 ± 0.0288 | 151.2 ± 38.7 |
+| 16 | Thompson sampling | `Beta(0.5,0.5)` | 0.9119 ± 0.0281 | 155.0 ± 36.7 |
+| 17 | Epsilon-greedy | zero-init; `d=0.9999` | 0.9074 ± 0.0185 | 166.1 ± 30.9 |
+| 18 | Epsilon-greedy | optimistic; `d=0.9999` | 0.9048 ± 0.0149 | 171.0 ± 16.3 |
+| 19 | Epsilon-greedy | zero-init; `d=0.99999` | 0.9019 ± 0.0182 | 176.6 ± 30.9 |
+| 20 | Epsilon-greedy | zero-init; constant | 0.9018 ± 0.0180 | 176.7 ± 29.1 |
+| 21 | Thompson sampling | `Beta(5,1)` | 0.9007 ± 0.0295 | 177.5 ± 42.0 |
+| 22 | Epsilon-greedy | optimistic; `d=0.99999` | 0.9002 ± 0.0161 | 179.7 ± 20.4 |
+| 23 | Epsilon-greedy | optimistic; constant | 0.8999 ± 0.0161 | 180.1 ± 20.0 |
+| 24 | Epsilon-greedy | zero-init; `d=0.99` | 0.8780 ± 0.1060 | 221.5 ± 206.5 |
+| 25 | UCB1 | `c=0.50` | 0.8343 ± 0.0136 | 309.4 ± 22.4 |
+| 26 | Epsilon-greedy | zero-init; `d=0.95` | 0.7066 ± 0.2300 | 564.3 ± 457.7 |
+| 27 | UCB1 | `c=sqrt(2)` | 0.6683 ± 0.0234 | 642.3 ± 46.1 |
+| 28 | Epsilon-greedy | zero-init; `d=0.90` | 0.6229 ± 0.2542 | 731.3 ± 509.2 |
+
+<p align="center">
+  <img src="images/hyperparameter_comparison.png" alt="Hyperparameter ablation for epsilon-greedy decay and initialization, UCB1 confidence scale, and Thompson sampling Beta prior" width="900">
+</p>
+
+The ablation exposes a consistent finite-horizon pattern. Optimistic
+initialization supports aggressive epsilon decay, UCB1 needs a much smaller
+confidence scale than its theoretical default, and a moderately concentrated
+`Beta(2,2)` prior performs best among the tested Thompson configurations.
+
+> [!IMPORTANT]
+> These rankings are specific to a Bernoulli bandit with $T/K=20$. The table
+> identifies strong settings for this experiment, not universal defaults.
+
 ## Using the implementations
 
 Every runner returns the same result dictionary:
@@ -268,7 +339,13 @@ Every runner returns the same result dictionary:
 ```python
 from algorithms.thompson import run_thompson
 
-results = run_thompson(n_arms=20, n_steps=5_000, seed=67)
+results = run_thompson(
+    n_arms=20,
+    n_steps=5_000,
+    seed=67,
+    prior_alpha=2.0,
+    prior_beta=2.0,
+)
 
 rewards = results["rewards"]
 selected_arms = results["selected_arms"]
@@ -288,19 +365,22 @@ straightforward.
 │   ├── epsilon_greedy.py    # Constant/decaying epsilon + optimistic values
 │   ├── thompson.py          # Beta–Bernoulli Thompson sampling
 │   └── ucb.py               # Upper Confidence Bound (UCB1)
-├── images/                  # Figures displayed in this README
-├── bandit_utils.py          # Metrics and multi-seed averaging
-├── compare_algorithms.py    # Cross-algorithm benchmark
-├── compare_bandits.py       # Epsilon schedule and initialization sweep
-├── visualizations.py        # Reusable plotting dashboard
-├── pyproject.toml           # Project metadata and dependencies
-└── uv.lock                  # Reproducible dependency lockfile
+├── images/                    # Figures displayed in this README
+├── bandit_utils.py            # Metrics and multi-seed averaging
+├── compare_algorithms.py      # Cross-algorithm benchmark
+├── compare_bandits.py         # Epsilon schedule and initialization sweep
+├── compare_hyperparameters.py # Unified policy hyperparameter ablation
+├── visualizations.py          # Reusable plotting dashboard
+├── pyproject.toml             # Project metadata and dependencies
+└── uv.lock                    # Reproducible dependency lockfile
 ```
 
 ## Reproducibility
 
-Standalone examples use seed 67. Comparison scripts average every
-configuration over seeds 0 through 9 and evaluate policies on matching
-Bernoulli problem instances. Runtime settings, including arm counts, horizons,
-decay rates, and confidence scales, are declared near the top of each script so
-experiments are easy to inspect and modify.
+Standalone examples use seed 67. The grid comparison scripts average each
+configuration over seeds 0 through 9, while `compare_hyperparameters.py` uses
+seeds 0 through 99 for a lower-variance focused ablation. Every comparison
+evaluates policies on matching Bernoulli problem instances. Runtime settings,
+including arm counts, horizons, decay rates, confidence scales, and Beta
+priors, are declared near the top of each script so experiments are easy to
+inspect and modify.

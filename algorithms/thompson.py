@@ -1,9 +1,10 @@
 """Thompson sampling for a Bernoulli multi-armed bandit, from scratch.
 
-Each arm is modelled with a Beta posterior: ``Beta(successes + 1, failures + 1)``
-starting from a flat ``Beta(1, 1)`` prior. On every step a reward probability is
-sampled from each arm's posterior and the arm with the highest sample is pulled,
-which automatically balances exploration and exploitation.
+Each arm is modelled with a configurable Beta posterior. The default
+``Beta(1, 1)`` prior is uniform; alternative positive ``alpha`` and ``beta``
+values control the prior mean and strength. On every step a reward probability
+is sampled from each arm's posterior and the arm with the highest sample is
+pulled, which automatically balances exploration and exploitation.
 """
 
 import numpy as np
@@ -12,21 +13,33 @@ import numpy as np
 SEED = 67
 N_ARMS = 1_000
 N_STEPS = 10_000
+PRIOR_ALPHA = 1.0
+PRIOR_BETA = 1.0
 
 
 def run_thompson(
     n_arms: int = N_ARMS,
     n_steps: int = N_STEPS,
     seed: int = SEED,
+    prior_alpha: float = PRIOR_ALPHA,
+    prior_beta: float = PRIOR_BETA,
 ) -> dict[str, np.ndarray]:
     """Run a Beta-Bernoulli Thompson-sampling bandit simulation.
+
+    ``prior_alpha`` and ``prior_beta`` must be positive and define the common
+    Beta prior used for every arm. ``Beta(1, 1)`` is the uniform default,
+    ``Beta(0.5, 0.5)`` is the Jeffreys prior, and larger values express
+    stronger prior beliefs.
 
     Returns the same dictionary format as ``run_bandit`` so the shared
     summarizers and plotters work unchanged.
     """
+    if prior_alpha <= 0 or prior_beta <= 0:
+        raise ValueError("prior_alpha and prior_beta must be positive")
+
     rng = np.random.default_rng(seed)
 
-    # Beta(1, 1) prior counts: successes and failures for each arm
+    # Observed successes and failures for each arm.
     successes = np.zeros(n_arms, dtype=int)
     failures = np.zeros(n_arms, dtype=int)
     total_pulls = np.zeros(n_arms, dtype=int)
@@ -37,7 +50,7 @@ def run_thompson(
 
     for step in range(n_steps):
         # Sample a plausible reward probability from each arm's posterior
-        samples = rng.beta(successes + 1, failures + 1)
+        samples = rng.beta(successes + prior_alpha, failures + prior_beta)
         selected_arm = int(np.argmax(samples))
 
         reward = int(rng.random() < true_probs[selected_arm])
@@ -48,8 +61,10 @@ def run_thompson(
         rewards[step] = reward
         selected_arms[step] = selected_arm
 
-    # Posterior means double as estimated values
-    estimated_values = successes / np.maximum(total_pulls, 1)
+    # Return posterior means as the learned value estimates.
+    estimated_values = (successes + prior_alpha) / (
+        total_pulls + prior_alpha + prior_beta
+    )
 
     return {
         "rewards": rewards,
