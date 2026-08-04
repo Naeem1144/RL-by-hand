@@ -17,6 +17,62 @@ compare_algorithms.py # epsilon-greedy vs UCB1 vs Thompson comparison
 images/               # canonical figures used in this README
 ```
 
+## Mathematics
+
+**Setup.** $K$-arm Bernoulli bandit over $T$ steps. Arm $i$ has unknown mean
+$\mu_i \in [0,1]$; at step $t$ the agent pulls $a_t$, observes reward
+$r_t \sim \text{Bernoulli}(\mu_{a_t})$, and updates its estimates.
+
+### Epsilon-greedy
+
+$$
+a_t = \begin{cases}
+\text{random arm} & \text{with probability } \varepsilon \\[4pt]
+\displaystyle\operatorname*{argmax}_{i}\,\hat{Q}_t(i) & \text{with probability } 1-\varepsilon
+\end{cases}
+$$
+
+$$
+\hat{Q}_{t+1}(a_t) = \hat{Q}_t(a_t) + \frac{1}{N_t(a_t)}\bigl(r_t - \hat{Q}_t(a_t)\bigr)
+$$
+
+**Extensions.** Decaying $\varepsilon_t = \varepsilon_0 \cdot d^{\,t}$ reduces
+exploration over time. Optimistic initialisation sets $\hat{Q}_0(i)=1$ to force
+early exploration.
+
+### UCB1 (Upper Confidence Bound)
+
+$$
+a_t = \operatorname*{argmax}_{i}\;\left[\,\hat{Q}_t(i) + c\,\sqrt{\frac{\ln t}{N_t(i)}}\,\right]
+$$
+
+The second term is an _exploration bonus_ that shrinks as an arm is pulled more
+often. The constant $c$ controls the optimism level (default $c=\sqrt{2}$).
+
+### Thompson sampling (Beta-Bernoulli)
+
+Each arm maintains a Beta posterior $\text{Beta}(\alpha_i,\beta_i)$ (initialised
+to $\alpha_i=\beta_i=1$, i.e. uniform prior).
+
+1. **Sample** $\tilde{\mu}_i \sim \text{Beta}(\alpha_i,\beta_i)$ for every arm.
+2. **Pull** $a_t = \operatorname*{argmax}_i \tilde{\mu}_i$.
+3. **Update** with observed reward $r_t$:
+   $$
+   \alpha_{a_t} \leftarrow \alpha_{a_t} + r_t,\qquad
+   \beta_{a_t} \leftarrow \beta_{a_t} + (1-r_t)
+   $$
+
+### Regret
+
+$$
+R_T = T\,\mu^* - \sum_{t=1}^{T} \mu_{a_t},\qquad
+\mu^* = \max_i \mu_i
+$$
+
+Regret measures how much reward was lost by not always pulling the true best arm.
+
+---
+
 ## Epsilon-greedy multi-armed bandit
 
 `algorithms/epsilon_greedy.py` runs a Bernoulli multi-armed bandit (1,000 arms,
