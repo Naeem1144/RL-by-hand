@@ -5,3 +5,4 @@ __pycache__/
 # Generated run artifacts (root only; images/ is committed for the README)
 /bandit_results_*.png
 /comparison_*/
+/algorithm_comparison_*/
