@@ -110,10 +110,7 @@ After observing $r_t$, only the selected arm is updated. If $N_t(a_t)$ is its
 number of pulls so far, the incremental sample-mean update is
 
 $$
-\widehat{Q}_{t+1}(a_t)
-= \widehat{Q}_t(a_t)
-+ \frac{1}{N_t(a_t)}
-  \left(r_t-\widehat{Q}_t(a_t)\right).
+\widehat{Q}_{t+1}(a_t) = \widehat{Q}_t(a_t) + \frac{1}{N_t(a_t)}\left(r_t - \widehat{Q}_t(a_t)\right).
 $$
 
 This is algebraically equivalent to recomputing the empirical mean, but it
