@@ -24,11 +24,13 @@ def run_bandit(
     """Run an epsilon-greedy Bernoulli multi-armed bandit simulation.
 
     On each step the agent explores a random arm with probability ``epsilon``
-    and otherwise exploits its best current estimate. When ``decay_rate`` is
-    provided, epsilon is multiplied by it after every step so exploration
-    shrinks over time; when ``decay_rate`` is ``None`` epsilon stays constant.
-    With ``optimistic_initialization`` all estimates start at 1.0 (the maximum
-    reward), forcing early exploration of every arm.
+    and otherwise exploits its best current estimate, breaking ties uniformly
+    at random so equal estimates do not always favor the lowest-indexed arm.
+    When ``decay_rate`` is provided, epsilon is multiplied by it after every
+    step so exploration shrinks over time; when ``decay_rate`` is ``None``
+    epsilon stays constant. With ``optimistic_initialization`` all estimates
+    start at 1.0 (the maximum reward), which keeps untried arms attractive and
+    encourages broad early exploration.
     """
     rng = np.random.default_rng(seed)
 
@@ -49,8 +51,15 @@ def run_bandit(
             # Explore: pick a random arm
             selected_arm = rng.integers(n_arms)
         else:
-            # Exploit: pick the arm with the highest estimate
-            selected_arm = np.argmax(estimated_values)
+            # Exploit: pick the arm with the highest estimate. Ties are broken
+            # uniformly at random so a block of equal estimates (e.g. every
+            # zero-initialized arm at 0.0) does not always collapse onto arm 0.
+            max_value = estimated_values.max()
+            ties = np.flatnonzero(estimated_values == max_value)
+            if ties.size == 1:
+                selected_arm = int(ties[0])
+            else:
+                selected_arm = int(rng.choice(ties))
 
         reward = int(rng.random() < true_probs[selected_arm])
         total_pulls[selected_arm] += 1

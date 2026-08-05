@@ -18,7 +18,6 @@ from bandit_utils import (
     N_STEPS_GRID,
     SEEDS,
     average_over_seeds,
-    summarize,
 )
 from algorithms.epsilon_greedy import run_bandit
 
@@ -66,6 +65,8 @@ def main() -> None:
                         std_reward,
                         total_regret,
                         std_regret,
+                        _,
+                        _,
                     ) = average_over_seeds(run_one, SEEDS)
                     series[(n_arms, opt_init, label)] = (steps, regret, reward_series)
                     rows.append(

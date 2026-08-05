@@ -114,7 +114,9 @@ $$
 $$
 
 This is algebraically equivalent to recomputing the empirical mean, but it
-requires constant memory.
+requires constant memory. Ties between equal estimates are broken uniformly at
+random, so a block of equal estimates (for example every zero-initialized arm)
+does not collapse onto the lowest-indexed arm.
 
 The standalone demo in [`algorithms/epsilon_greedy.py`](algorithms/epsilon_greedy.py)
 uses 1,000 arms, 1,000 steps, $\varepsilon=0.1$, and seed 67. It writes the
@@ -162,7 +164,8 @@ The bonus is large for rarely selected arms and shrinks as evidence
 accumulates. The confidence scale $c$ controls the strength of exploration.
 [`algorithms/ucb.py`](algorithms/ucb.py) first pulls every arm once, avoiding
 division by zero, and then applies the index above. Its standalone default is
-$c=\sqrt{2}$; the comparison benchmark uses the tuned value $c=0.5$.
+$c=\sqrt{2}$; the comparison benchmark uses the ablation-tuned value
+$c=0.01$.
 
 > [!NOTE]
 > UCB1 needs a horizon longer than the number of arms to move beyond its
@@ -251,9 +254,9 @@ The script prints a summary table, writes a timestamped
 over 10 seeds:
 
 1. Constant epsilon-greedy with $\varepsilon=0.1$
-2. Optimistic epsilon-greedy with $\varepsilon=0.1$ and $d=0.99$
+2. Optimistic epsilon-greedy with $\varepsilon=0.1$ and $d=0.90$
 3. Thompson sampling with a $\mathrm{Beta}(1,1)$ prior
-4. UCB1 with $c=0.5$
+4. UCB1 with $c=0.01$
 
 ```bash
 uv run python compare_algorithms.py
@@ -268,65 +271,98 @@ The script prints aggregate reward and regret statistics, writes a timestamped
 [`compare_hyperparameters.py`](compare_hyperparameters.py) extends the existing
 comparison workflow across the primary tuning knob for every policy family:
 
-- Epsilon-greedy sweeps constant epsilon and six decay factors, each with zero
-  and optimistic initialization.
-- UCB1 sweeps eight confidence scales from `0.01` through `sqrt(2)`.
-- Thompson sampling sweeps six Beta priors through `prior_alpha` and
-  `prior_beta`.
+- Epsilon-greedy sweeps four constant epsilons and six decay factors (all with
+  $\varepsilon_0=0.1$), each with zero and optimistic initialization.
+- UCB1 sweeps ten confidence scales from `0.001` through `sqrt(2)`.
+- Thompson sampling sweeps six symmetric `Beta(a, a)` priors, keeping the
+  prior mean fixed at the correct value $0.5$ while the concentration varies.
 
-Every configuration uses $K=100$ arms, $T=2{,}000$ steps, $\varepsilon_0=0.1$,
-and the same 100 problem instances (seeds 0 through 99).
+Every configuration uses $K=100$ arms, $T=2{,}000$ steps, and the same 100
+problem instances (seeds 0 through 99). Per-seed regrets are saved alongside
+the aggregates, and every configuration is compared against the best one with
+a paired, seed-matched 95% confidence interval.
 
 ```bash
 uv run python compare_hyperparameters.py
 ```
 
 The script follows the other comparison tools: it prints a ranked summary,
-writes `hyperparameter_comparison_YYYYMMDD_HHMMSS/summary.csv`, and refreshes
-`images/hyperparameter_comparison.png`.
+writes `hyperparameter_comparison_YYYYMMDD_HHMMSS/summary.csv` and
+`per_seed.csv`, and refreshes `images/hyperparameter_comparison.png`.
 
-Results are ranked by mean cumulative pseudo-regret. Each cell reports
-mean ± standard deviation across seeds.
+Results are ranked by mean cumulative pseudo-regret. Reward cells report
+mean ± standard deviation across seeds; regret cells report the mean with its
+95% CI. **Bold rows form the top statistical group: their paired CI against
+the best configuration includes zero.** The figure's dashed red line marks the
+uniform-random policy (974.1 regret on these instances).
 
-| Rank | Family | Configuration | Average reward ↑ | Pseudo-regret ↓ |
+| Rank | Family | Configuration | Average reward ↑ | Pseudo-regret ↓ (95% CI) |
 | ---: | --- | --- | ---: | ---: |
-| **1** | **Epsilon-greedy** | **optimistic; `d=0.90`** | **0.9423 ± 0.0156** | **95.1 ± 19.6** |
-| 2 | Epsilon-greedy | optimistic; `d=0.95` | 0.9413 ± 0.0151 | 96.7 ± 18.6 |
-| 3 | Epsilon-greedy | optimistic; `d=0.99` | 0.9394 ± 0.0151 | 100.0 ± 17.3 |
-| 4 | **UCB1** | **`c=0.01`** | **0.9389 ± 0.0146** | **102.8 ± 17.0** |
-| 5 | UCB1 | `c=0.03` | 0.9387 ± 0.0141 | 103.3 ± 16.4 |
-| 6 | UCB1 | `c=0.05` | 0.9388 ± 0.0142 | 103.3 ± 16.8 |
-| 7 | UCB1 | `c=0.075` | 0.9383 ± 0.0129 | 104.5 ± 13.7 |
-| 8 | UCB1 | `c=0.10` | 0.9368 ± 0.0131 | 107.6 ± 16.0 |
-| 9 | Epsilon-greedy | zero-init; `d=0.999` | 0.9305 ± 0.0257 | 118.6 ± 45.0 |
-| 10 | **Thompson sampling** | **`Beta(2,2)`** | **0.9294 ± 0.0201** | **119.9 ± 27.7** |
-| 11 | Thompson sampling | `Beta(5,5)` | 0.9265 ± 0.0240 | 127.1 ± 45.0 |
-| 12 | Epsilon-greedy | optimistic; `d=0.999` | 0.9260 ± 0.0176 | 128.5 ± 21.6 |
-| 13 | UCB1 | `c=0.20` | 0.9244 ± 0.0117 | 132.2 ± 14.7 |
-| 14 | Thompson sampling | `Beta(1,1)` | 0.9212 ± 0.0260 | 136.5 ± 35.5 |
-| 15 | Thompson sampling | `Beta(2,1)` | 0.9142 ± 0.0288 | 151.2 ± 38.7 |
-| 16 | Thompson sampling | `Beta(0.5,0.5)` | 0.9119 ± 0.0281 | 155.0 ± 36.7 |
-| 17 | Epsilon-greedy | zero-init; `d=0.9999` | 0.9074 ± 0.0185 | 166.1 ± 30.9 |
-| 18 | Epsilon-greedy | optimistic; `d=0.9999` | 0.9048 ± 0.0149 | 171.0 ± 16.3 |
-| 19 | Epsilon-greedy | zero-init; `d=0.99999` | 0.9019 ± 0.0182 | 176.6 ± 30.9 |
-| 20 | Epsilon-greedy | zero-init; constant | 0.9018 ± 0.0180 | 176.7 ± 29.1 |
-| 21 | Thompson sampling | `Beta(5,1)` | 0.9007 ± 0.0295 | 177.5 ± 42.0 |
-| 22 | Epsilon-greedy | optimistic; `d=0.99999` | 0.9002 ± 0.0161 | 179.7 ± 20.4 |
-| 23 | Epsilon-greedy | optimistic; constant | 0.8999 ± 0.0161 | 180.1 ± 20.0 |
-| 24 | Epsilon-greedy | zero-init; `d=0.99` | 0.8780 ± 0.1060 | 221.5 ± 206.5 |
-| 25 | UCB1 | `c=0.50` | 0.8343 ± 0.0136 | 309.4 ± 22.4 |
-| 26 | Epsilon-greedy | zero-init; `d=0.95` | 0.7066 ± 0.2300 | 564.3 ± 457.7 |
-| 27 | UCB1 | `c=sqrt(2)` | 0.6683 ± 0.0234 | 642.3 ± 46.1 |
-| 28 | Epsilon-greedy | zero-init; `d=0.90` | 0.6229 ± 0.2542 | 731.3 ± 509.2 |
+| **1** | **Epsilon-greedy** | **optimistic; `d=0.90`** | **0.9402 ± 0.0110** | **100.1 [97.4, 102.8]** |
+| **2** | **Epsilon-greedy** | **optimistic; `d=0.99`** | **0.9395 ± 0.0105** | **101.5 [99.4, 103.6]** |
+| 3 | Epsilon-greedy | optimistic; `d=0.95` | 0.9394 ± 0.0126 | 101.8 [98.8, 104.7] |
+| **4** | **UCB1** | **`c=0.01`** | **0.9389 ± 0.0146** | **102.8 [99.5, 106.2]** |
+| **5** | **UCB1** | **`c=0.001`** | **0.9388 ± 0.0144** | **103.2 [99.8, 106.6]** |
+| **6** | **UCB1** | **`c=0.03`** | **0.9387 ± 0.0142** | **103.3 [100.0, 106.6]** |
+| **7** | **UCB1** | **`c=0.05`** | **0.9388 ± 0.0143** | **103.3 [100.0, 106.7]** |
+| **8** | **UCB1** | **`c=0.003`** | **0.9387 ± 0.0147** | **103.4 [99.9, 106.9]** |
+| 9 | UCB1 | `c=0.075` | 0.9383 ± 0.0130 | 104.5 [101.8, 107.3] |
+| 10 | UCB1 | `c=0.10` | 0.9368 ± 0.0132 | 107.6 [104.4, 110.8] |
+| 11 | Epsilon-greedy | optimistic; constant `eps=0.01` | 0.9359 ± 0.0111 | 108.5 [106.2, 110.8] |
+| 12 | Epsilon-greedy | zero-init; `d=0.999` | 0.9305 ± 0.0261 | 119.6 [109.8, 129.4] |
+| 13 | Thompson sampling | `Beta(2,2)` | 0.9294 ± 0.0202 | 119.9 [114.4, 125.5] |
+| 14 | Epsilon-greedy | optimistic; constant `eps=0.03` | 0.9265 ± 0.0120 | 126.8 [124.4, 129.2] |
+| 15 | Thompson sampling | `Beta(5,5)` | 0.9265 ± 0.0241 | 127.1 [118.1, 136.0] |
+| 16 | UCB1 | `c=0.20` | 0.9244 ± 0.0117 | 132.2 [129.3, 135.2] |
+| 17 | Thompson sampling | `Beta(1,1)` | 0.9212 ± 0.0262 | 136.5 [129.5, 143.6] |
+| 18 | Epsilon-greedy | optimistic; `d=0.999` | 0.9208 ± 0.0137 | 138.1 [134.4, 141.9] |
+| 19 | Thompson sampling | `Beta(10,10)` | 0.9157 ± 0.0290 | 148.8 [137.7, 159.9] |
+| 20 | Thompson sampling | `Beta(0.5,0.5)` | 0.9119 ± 0.0283 | 155.0 [147.6, 162.3] |
+| 21 | Thompson sampling | `Beta(0.25,0.25)` | 0.9072 ± 0.0286 | 163.0 [155.1, 171.0] |
+| 22 | Epsilon-greedy | zero-init; constant `eps=0.03` | 0.9078 ± 0.0409 | 163.6 [147.1, 180.2] |
+| 23 | Epsilon-greedy | zero-init; `d=0.9999` | 0.9086 ± 0.0181 | 164.4 [158.1, 170.7] |
+| 24 | Epsilon-greedy | zero-init; `d=0.99999` | 0.9038 ± 0.0182 | 174.6 [168.5, 180.7] |
+| 25 | Epsilon-greedy | zero-init; constant `eps=0.1` | 0.9035 ± 0.0176 | 174.7 [169.0, 180.4] |
+| 26 | Epsilon-greedy | optimistic; `d=0.9999` | 0.8982 ± 0.0117 | 182.8 [179.9, 185.7] |
+| 27 | Epsilon-greedy | optimistic; `d=0.99999` | 0.8941 ± 0.0116 | 191.3 [188.3, 194.2] |
+| 28 | Epsilon-greedy | optimistic; constant `eps=0.1` | 0.8937 ± 0.0117 | 191.9 [189.0, 194.8] |
+| 29 | Epsilon-greedy | zero-init; `d=0.99` | 0.8924 ± 0.1015 | 194.9 [155.9, 234.0] |
+| 30 | Epsilon-greedy | zero-init; constant `eps=0.01` | 0.8570 ± 0.0954 | 264.0 [226.1, 301.8] |
+| 31 | UCB1 | `c=0.50` | 0.8343 ± 0.0137 | 309.4 [304.9, 313.8] |
+| 32 | Epsilon-greedy | zero-init; constant `eps=0.3` | 0.8161 ± 0.0134 | 346.6 [341.9, 351.2] |
+| 33 | Epsilon-greedy | optimistic; constant `eps=0.3` | 0.8020 ± 0.0143 | 373.8 [368.8, 378.9] |
+| 34 | Epsilon-greedy | zero-init; `d=0.95` | 0.7345 ± 0.2378 | 507.9 [413.8, 602.0] |
+| 35 | Epsilon-greedy | zero-init; `d=0.90` | 0.6917 ± 0.2474 | 595.8 [497.1, 694.5] |
+| 36 | UCB1 | `c=sqrt(2)` | 0.6683 ± 0.0235 | 642.3 [633.1, 651.5] |
 
 <p align="center">
-  <img src="images/hyperparameter_comparison.png" alt="Hyperparameter ablation for epsilon-greedy decay and initialization, UCB1 confidence scale, and Thompson sampling Beta prior" width="900">
+  <img src="images/hyperparameter_comparison.png" alt="Hyperparameter ablation for epsilon-greedy constant epsilon, decay, and initialization, UCB1 confidence scale, and Thompson sampling Beta prior concentration, with 95% CI error bars and a random-policy reference" width="900">
 </p>
 
-The ablation exposes a consistent finite-horizon pattern. Optimistic
-initialization supports aggressive epsilon decay, UCB1 needs a much smaller
-confidence scale than its theoretical default, and a moderately concentrated
-`Beta(2,2)` prior performs best among the tested Thompson configurations.
+The top statistical group — optimistic epsilon-greedy with fast decay and
+UCB1 with $c \le 0.05$ — is statistically indistinguishable, and every member
+reduces to "give each arm about one pull, then commit": with $d=0.90$ the
+expected number of random exploration pulls is
+$\sum_t 0.1 \cdot 0.9^t \approx 1$, so the optimistic initialization performs
+essentially all of the exploration, while UCB1 with $c \le 0.05$ behaves like
+its one-pull-per-arm bootstrap followed by greedy exploitation. Extending the
+UCB grid below $c=0.01$ shows the regret curve is flat as $c \to 0$, so the
+optimum is a small-$c$ plateau rather than a grid-boundary artifact.
+
+Among constant schedules, optimistic initialization prefers the smallest
+epsilon (`eps=0.01`, regret 108.5) because the optimistic values already
+supply the exploration, while zero initialization peaks at `eps=0.03`: too
+little constant exploration lets zero-initialized estimates lock onto a lucky
+early arm, and too much wastes pulls. Zero initialization with fast decay
+remains catastrophic for the same reason — once epsilon vanishes, random
+tie-breaking among equal estimates is the only exploration left, which is also
+why those rows carry the largest confidence intervals.
+
+The symmetric Thompson sweep is unimodal in concentration: `Beta(2,2)` is
+best, weaker priors over-explore, and stronger priors (through `Beta(10,10)`)
+under-explore. For scale, the uniform-random policy scores 974.1 regret on
+the same instances, so every tested configuration learns far better than
+random.
 
 > [!IMPORTANT]
 > These rankings are specific to a Bernoulli bandit with $T/K=20$. The table
@@ -379,7 +415,8 @@ straightforward.
 
 Standalone examples use seed 67. The grid comparison scripts average each
 configuration over seeds 0 through 9, while `compare_hyperparameters.py` uses
-seeds 0 through 99 for a lower-variance focused ablation. Every comparison
+seeds 0 through 99 for a lower-variance focused ablation and additionally
+saves per-seed outcomes with paired 95% confidence intervals. Every comparison
 evaluates policies on matching Bernoulli problem instances. Runtime settings,
 including arm counts, horizons, decay rates, confidence scales, and Beta
 priors, are declared near the top of each script so experiments are easy to

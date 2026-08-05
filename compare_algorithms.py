@@ -1,10 +1,10 @@
 """Compare tuned epsilon-greedy against UCB1 and Thompson sampling.
 
 Benchmarks the constant-epsilon baseline, the best epsilon-greedy configuration
-found in ``compare_bandits.py`` (optimistic initialization + ``decay=0.99``),
-Thompson sampling, and a tuned UCB1 (``c=0.5``) on the same Bernoulli bandits.
-Every configuration is averaged over 10 seeds for robust results; prints a
-summary table and saves a comparison figure plus a CSV.
+found in ``compare_hyperparameters.py`` (optimistic initialization +
+``decay=0.90``), Thompson sampling, and a tuned UCB1 (``c=0.01``) on the same
+Bernoulli bandits. Every configuration is averaged over 10 seeds for robust
+results; prints a summary table and saves a comparison figure plus a CSV.
 
 Note: UCB1 needs ``n_steps`` larger than ``n_arms`` to shine, because it must
 pull every arm once before its confidence-based phase kicks in.
@@ -22,15 +22,14 @@ from bandit_utils import (
     N_STEPS_GRID,
     SEEDS,
     average_over_seeds,
-    summarize,
 )
 from algorithms.epsilon_greedy import run_bandit
 from algorithms.thompson import run_thompson
 from algorithms.ucb import run_ucb
 
 
-DECAY_RATE = 0.99
-UCB_C = 0.5
+DECAY_RATE = 0.90
+UCB_C = 0.01
 
 N_ARMS_GRID = [10, 100, 1_000]
 N_STEPS_GRID = [100, 1_000, 10_000]
@@ -40,7 +39,7 @@ ALGORITHMS = {
     "epsgreedy const": lambda n_arms, n_steps, seed: run_bandit(
         n_arms=n_arms, n_steps=n_steps, epsilon=EPSILON, seed=seed
     ),
-    "epsgreedy optimistic decay=0.99": lambda n_arms, n_steps, seed: run_bandit(
+    "epsgreedy optimistic decay=0.90": lambda n_arms, n_steps, seed: run_bandit(
         n_arms=n_arms,
         n_steps=n_steps,
         epsilon=EPSILON,
@@ -52,7 +51,7 @@ ALGORITHMS = {
     "thompson sampling": lambda n_arms, n_steps, seed: run_thompson(
         n_arms=n_arms, n_steps=n_steps, seed=seed
     ),
-    "ucb1 (c=0.5)": lambda n_arms, n_steps, seed: run_ucb(
+    "ucb1 (c=0.01)": lambda n_arms, n_steps, seed: run_ucb(
         n_arms=n_arms, n_steps=n_steps, c=UCB_C, seed=seed
     ),
 }
@@ -82,6 +81,8 @@ def main() -> None:
                     std_reward,
                     total_regret,
                     std_regret,
+                    _,
+                    _,
                 ) = average_over_seeds(run_one, SEEDS)
                 series[(n_arms, label)] = (steps, regret, reward_series)
                 rows.append(

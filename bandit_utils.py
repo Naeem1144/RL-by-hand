@@ -26,12 +26,16 @@ def summarize(results: dict[str, np.ndarray]) -> tuple[np.ndarray, np.ndarray, n
 def average_over_seeds(
     run_fn,
     seeds: list[int],
-) -> tuple[np.ndarray, np.ndarray, np.ndarray, float, float, float, float]:
+) -> tuple[
+    np.ndarray, np.ndarray, np.ndarray, float, float, float, float, np.ndarray, np.ndarray
+]:
     """Run ``run_fn(seed)`` for each seed and average the results.
 
     ``run_fn(seed)`` must return a results dict in ``run_bandit`` format.
     Returns (steps, mean regret series, mean reward series, mean final reward,
-    std final reward, mean total regret, std total regret).
+    std final reward, mean total regret, std total regret, per-seed final
+    rewards, per-seed total regrets). Standard deviations use ``ddof=1`` so
+    they can be turned into standard errors with ``std / sqrt(len(seeds))``.
     """
     regret_series: list[np.ndarray] = []
     reward_series: list[np.ndarray] = []
@@ -57,7 +61,9 @@ def average_over_seeds(
         np.mean(regret_series, axis=0),
         np.mean(reward_series, axis=0),
         float(np.mean(final_rewards)),
-        float(np.std(final_rewards)),
+        float(np.std(final_rewards, ddof=1)),
         float(np.mean(total_regrets)),
-        float(np.std(total_regrets)),
+        float(np.std(total_regrets, ddof=1)),
+        np.asarray(final_rewards),
+        np.asarray(total_regrets),
     )
