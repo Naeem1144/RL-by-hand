@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-  <img alt="Python 3.14+" src="https://img.shields.io/badge/Python-3.14%2B-3776AB?logo=python&logoColor=white">
+  <img alt="Python 3.12+" src="https://img.shields.io/badge/Python-3.12%2B-3776AB?logo=python&logoColor=white">
   <img alt="NumPy 2.5+" src="https://img.shields.io/badge/NumPy-2.5%2B-013243?logo=numpy&logoColor=white">
   <img alt="Matplotlib 3.11+" src="https://img.shields.io/badge/Matplotlib-3.11%2B-11557C?logo=python&logoColor=white">
   <img alt="Managed with uv" src="https://img.shields.io/badge/managed%20with-uv-DE5FE9?logo=uv&logoColor=white">
@@ -48,7 +48,7 @@ possible during the learning process.
 
 ### Requirements
 
-- Python 3.14 or newer
+- Python 3.12 or newer
 - [`uv`](https://docs.astral.sh/uv/) (recommended), or `pip`
 
 ### Install
@@ -88,7 +88,7 @@ If you installed with `pip`, omit the `uv run` prefix.
 | Algorithm | Exploration strategy | Main parameter |
 | --- | --- | --- |
 | **Epsilon-greedy** | Explore randomly with fixed or decaying probability | Exploration rate `epsilon` |
-| **UCB1** | Add an uncertainty bonus to each value estimate | Confidence scale `c` |
+| **UCB(c)** | Add an uncertainty bonus to each value estimate | Confidence scale `c` |
 | **Thompson sampling** | Sample from a Bayesian posterior for every arm | Beta prior |
 
 ### Epsilon-greedy
@@ -151,9 +151,9 @@ Because 1 is the largest possible Bernoulli mean, untried arms remain
 attractive. This encourages broad early exploration even when $\varepsilon$ is
 small. Enable it with `optimistic_initialization=True`.
 
-### UCB1
+### UCB(c) and UCB1
 
-UCB1 chooses the arm with the largest upper-confidence index: its empirical
+The parameterized UCB policy chooses the arm with the largest upper-confidence index: its empirical
 value plus an exploration bonus.
 
 $$
@@ -164,8 +164,9 @@ The bonus is large for rarely selected arms and shrinks as evidence
 accumulates. The confidence scale $c$ controls the strength of exploration.
 [`algorithms/ucb.py`](algorithms/ucb.py) first pulls every arm once, avoiding
 division by zero, and then applies the index above. Its standalone default is
-$c=\sqrt{2}$; the comparison benchmark uses the ablation-tuned value
-$c=0.01$.
+$c=\sqrt{2}$, which is the classic UCB1 coefficient for this formula. The
+comparison benchmark labels tuned alternatives such as $c=0.01$ as UCB(c),
+because they do not carry the classic UCB1 guarantee.
 
 > [!NOTE]
 > UCB1 needs a horizon longer than the number of arms to move beyond its
@@ -234,15 +235,17 @@ running average reward, for which higher is better.
 
 [`compare_bandits.py`](compare_bandits.py) compares constant epsilon against
 six exponential decay rates, both with zero and optimistic initialization. Each
-configuration is evaluated over 10 seeds on a grid of arm counts and horizons.
+configuration is evaluated over 30 held-out problem instances on a grid of arm
+counts and horizons. Shaded regions in the figure are 95% confidence intervals.
 
 ```bash
 uv run python compare_bandits.py
 ```
 
-The script prints a summary table, writes a timestamped
-`comparison_YYYYMMDD_HHMMSS/summary.csv`, and refreshes
-`images/comparison.png`.
+The script prints a summary table, writes aggregate, per-instance, and
+provenance files under `results/epsilon_sweep/`, and refreshes
+`images/comparison.png`. The figure explicitly plots the longest configured
+horizon; all horizons remain available in the CSV.
 
 <p align="center">
   <img src="images/comparison.png" alt="Comparison of constant and decaying epsilon-greedy with zero and optimistic initialization" width="900">
@@ -251,122 +254,81 @@ The script prints a summary table, writes a timestamped
 ### Cross-algorithm benchmark
 
 [`compare_algorithms.py`](compare_algorithms.py) compares these four policies
-over 10 seeds:
+over 30 held-out instances that are disjoint from hyperparameter tuning:
 
 1. Constant epsilon-greedy with $\varepsilon=0.1$
-2. Optimistic epsilon-greedy with $\varepsilon=0.1$ and $d=0.90$
-3. Thompson sampling with a $\mathrm{Beta}(1,1)$ prior
-4. UCB1 with $c=0.01$
+2. Tuning-selected optimistic epsilon-greedy with $\varepsilon=0.1$ and $d=0.90$
+3. Tuning-selected Thompson sampling with a $\mathrm{Beta}(5,5)$ prior
+4. Tuning-selected UCB(c) with $c=0.003$
 
 ```bash
 uv run python compare_algorithms.py
 ```
 
-The script prints aggregate reward and regret statistics, writes a timestamped
-`algorithm_comparison_YYYYMMDD_HHMMSS/summary.csv`, and refreshes
-`images/algorithm_comparison.png`.
+The script writes aggregate metrics, per-instance outcomes, and a provenance
+manifest under `results/algorithm_comparison/`, then refreshes
+`images/algorithm_comparison.png` with 95% confidence bands.
 
-#### Unified hyperparameter ablation
+### Distribution robustness
+
+[`compare_problem_suites.py`](compare_problem_suites.py) evaluates the same
+policies on four held-out arm-mean suites: uniform, small-gap, clustered, and
+rare-good. This makes distribution sensitivity visible instead of treating the
+Uniform(0,1) ranking as universal.
+
+```bash
+uv run python compare_problem_suites.py
+```
+
+<p align="center">
+  <img src="images/problem_suite_comparison.png" alt="Bandit algorithms compared across uniform, small-gap, clustered, and rare-good arm-mean distributions" width="900">
+</p>
+
+#### Unified hyperparameter tuning and confirmation
 
 [`compare_hyperparameters.py`](compare_hyperparameters.py) extends the existing
 comparison workflow across the primary tuning knob for every policy family:
 
 - Epsilon-greedy sweeps four constant epsilons and six decay factors (all with
   $\varepsilon_0=0.1$), each with zero and optimistic initialization.
-- UCB1 sweeps ten confidence scales from `0.001` through `sqrt(2)`.
+- UCB(c) sweeps ten confidence scales from `0.001` through the classic
+  UCB1 value `sqrt(2)`.
 - Thompson sampling sweeps six symmetric `Beta(a, a)` priors, keeping the
   prior mean fixed at the correct value $0.5$ while the concentration varies.
 
-Every configuration uses $K=100$ arms, $T=2{,}000$ steps, and the same 100
-problem instances (seeds 0 through 99). Per-seed regrets are saved alongside
-the aggregates, and every configuration is compared against the best one with
-a paired, seed-matched 95% confidence interval.
+Every configuration uses $K=100$ arms and $T=2{,}000$ steps. Seeds 0–99 form
+the tuning set. The selected reference is then evaluated on a disjoint
+confirmation set, seeds 10,000–10,099. Comparisons to that fixed reference use
+paired, studentized max-t bootstrap intervals that control family-wise error
+across the complete grid.
 
 ```bash
 uv run python compare_hyperparameters.py
 ```
 
-The script follows the other comparison tools: it prints a ranked summary,
-writes `hyperparameter_comparison_YYYYMMDD_HHMMSS/summary.csv` and
-`per_seed.csv`, and refreshes `images/hyperparameter_comparison.png`.
-
-Results are ranked by mean cumulative pseudo-regret. Reward cells report
-mean ± standard deviation across seeds; regret cells report the mean with its
-95% CI. **Bold rows form the top statistical group: their paired CI against
-the best configuration includes zero.** The figure's dashed red line marks the
-uniform-random policy (974.1 regret on these instances).
-
-| Rank | Family | Configuration | Average reward ↑ | Pseudo-regret ↓ (95% CI) |
-| ---: | --- | --- | ---: | ---: |
-| **1** | **Epsilon-greedy** | **optimistic; `d=0.90`** | **0.9402 ± 0.0110** | **100.1 [97.4, 102.8]** |
-| **2** | **Epsilon-greedy** | **optimistic; `d=0.99`** | **0.9395 ± 0.0105** | **101.5 [99.4, 103.6]** |
-| 3 | Epsilon-greedy | optimistic; `d=0.95` | 0.9394 ± 0.0126 | 101.8 [98.8, 104.7] |
-| **4** | **UCB1** | **`c=0.01`** | **0.9389 ± 0.0146** | **102.8 [99.5, 106.2]** |
-| **5** | **UCB1** | **`c=0.001`** | **0.9388 ± 0.0144** | **103.2 [99.8, 106.6]** |
-| **6** | **UCB1** | **`c=0.03`** | **0.9387 ± 0.0142** | **103.3 [100.0, 106.6]** |
-| **7** | **UCB1** | **`c=0.05`** | **0.9388 ± 0.0143** | **103.3 [100.0, 106.7]** |
-| **8** | **UCB1** | **`c=0.003`** | **0.9387 ± 0.0147** | **103.4 [99.9, 106.9]** |
-| 9 | UCB1 | `c=0.075` | 0.9383 ± 0.0130 | 104.5 [101.8, 107.3] |
-| 10 | UCB1 | `c=0.10` | 0.9368 ± 0.0132 | 107.6 [104.4, 110.8] |
-| 11 | Epsilon-greedy | optimistic; constant `eps=0.01` | 0.9359 ± 0.0111 | 108.5 [106.2, 110.8] |
-| 12 | Epsilon-greedy | zero-init; `d=0.999` | 0.9305 ± 0.0261 | 119.6 [109.8, 129.4] |
-| 13 | Thompson sampling | `Beta(2,2)` | 0.9294 ± 0.0202 | 119.9 [114.4, 125.5] |
-| 14 | Epsilon-greedy | optimistic; constant `eps=0.03` | 0.9265 ± 0.0120 | 126.8 [124.4, 129.2] |
-| 15 | Thompson sampling | `Beta(5,5)` | 0.9265 ± 0.0241 | 127.1 [118.1, 136.0] |
-| 16 | UCB1 | `c=0.20` | 0.9244 ± 0.0117 | 132.2 [129.3, 135.2] |
-| 17 | Thompson sampling | `Beta(1,1)` | 0.9212 ± 0.0262 | 136.5 [129.5, 143.6] |
-| 18 | Epsilon-greedy | optimistic; `d=0.999` | 0.9208 ± 0.0137 | 138.1 [134.4, 141.9] |
-| 19 | Thompson sampling | `Beta(10,10)` | 0.9157 ± 0.0290 | 148.8 [137.7, 159.9] |
-| 20 | Thompson sampling | `Beta(0.5,0.5)` | 0.9119 ± 0.0283 | 155.0 [147.6, 162.3] |
-| 21 | Thompson sampling | `Beta(0.25,0.25)` | 0.9072 ± 0.0286 | 163.0 [155.1, 171.0] |
-| 22 | Epsilon-greedy | zero-init; constant `eps=0.03` | 0.9078 ± 0.0409 | 163.6 [147.1, 180.2] |
-| 23 | Epsilon-greedy | zero-init; `d=0.9999` | 0.9086 ± 0.0181 | 164.4 [158.1, 170.7] |
-| 24 | Epsilon-greedy | zero-init; `d=0.99999` | 0.9038 ± 0.0182 | 174.6 [168.5, 180.7] |
-| 25 | Epsilon-greedy | zero-init; constant `eps=0.1` | 0.9035 ± 0.0176 | 174.7 [169.0, 180.4] |
-| 26 | Epsilon-greedy | optimistic; `d=0.9999` | 0.8982 ± 0.0117 | 182.8 [179.9, 185.7] |
-| 27 | Epsilon-greedy | optimistic; `d=0.99999` | 0.8941 ± 0.0116 | 191.3 [188.3, 194.2] |
-| 28 | Epsilon-greedy | optimistic; constant `eps=0.1` | 0.8937 ± 0.0117 | 191.9 [189.0, 194.8] |
-| 29 | Epsilon-greedy | zero-init; `d=0.99` | 0.8924 ± 0.1015 | 194.9 [155.9, 234.0] |
-| 30 | Epsilon-greedy | zero-init; constant `eps=0.01` | 0.8570 ± 0.0954 | 264.0 [226.1, 301.8] |
-| 31 | UCB1 | `c=0.50` | 0.8343 ± 0.0137 | 309.4 [304.9, 313.8] |
-| 32 | Epsilon-greedy | zero-init; constant `eps=0.3` | 0.8161 ± 0.0134 | 346.6 [341.9, 351.2] |
-| 33 | Epsilon-greedy | optimistic; constant `eps=0.3` | 0.8020 ± 0.0143 | 373.8 [368.8, 378.9] |
-| 34 | Epsilon-greedy | zero-init; `d=0.95` | 0.7345 ± 0.2378 | 507.9 [413.8, 602.0] |
-| 35 | Epsilon-greedy | zero-init; `d=0.90` | 0.6917 ± 0.2474 | 595.8 [497.1, 694.5] |
-| 36 | UCB1 | `c=sqrt(2)` | 0.6683 ± 0.0235 | 642.3 [633.1, 651.5] |
+The script writes tuning and held-out summaries, both per-instance datasets,
+and a machine-readable provenance manifest under
+`results/hyperparameter_comparison/`. Rankings in `summary.csv` describe the
+held-out set; `delta_ci95_*` columns are simultaneous intervals relative to
+the tuning-selected reference. A confidence interval containing zero is
+reported only as “not detectably different,” not as proof of equivalence.
 
 <p align="center">
-  <img src="images/hyperparameter_comparison.png" alt="Hyperparameter ablation for epsilon-greedy constant epsilon, decay, and initialization, UCB1 confidence scale, and Thompson sampling Beta prior concentration, with 95% CI error bars and a random-policy reference" width="900">
+  <img src="images/hyperparameter_comparison.png" alt="Held-out hyperparameter comparison for epsilon-greedy, UCB(c), and Thompson sampling with 95% confidence intervals" width="900">
 </p>
 
-The top statistical group — optimistic epsilon-greedy with fast decay and
-UCB1 with $c \le 0.05$ — is statistically indistinguishable, and every member
-reduces to "give each arm about one pull, then commit": with $d=0.90$ the
-expected number of random exploration pulls is
-$\sum_t 0.1 \cdot 0.9^t \approx 1$, so the optimistic initialization performs
-essentially all of the exploration, while UCB1 with $c \le 0.05$ behaves like
-its one-pull-per-arm bootstrap followed by greedy exploitation. Extending the
-UCB grid below $c=0.01$ shows the regret curve is flat as $c \to 0$, so the
-optimum is a small-$c$ plateau rather than a grid-boundary artifact.
-
-Among constant schedules, optimistic initialization prefers the smallest
-epsilon (`eps=0.01`, regret 108.5) because the optimistic values already
-supply the exploration, while zero initialization peaks at `eps=0.03`: too
-little constant exploration lets zero-initialized estimates lock onto a lucky
-early arm, and too much wastes pulls. Zero initialization with fast decay
-remains catastrophic for the same reason — once epsilon vanishes, random
-tie-breaking among equal estimates is the only exploration left, which is also
-why those rows carry the largest confidence intervals.
-
-The symmetric Thompson sweep is unimodal in concentration: `Beta(2,2)` is
-best, weaker priors over-explore, and stronger priors (through `Beta(10,10)`)
-under-explore. For scale, the uniform-random policy scores 974.1 regret on
-the same instances, so every tested configuration learns far better than
-random.
+The tuning set selected UCB(c) with `c=0.003`. On held-out instances its mean
+pseudo-regret is 98.8; `c=0.001` ranks first at 98.5, but its simultaneous
+difference interval versus the fixed reference is `[-1.1, 0.5]`. The data
+therefore do not detect a difference between those settings; they do not prove
+the settings equivalent.
 
 > [!IMPORTANT]
-> These rankings are specific to a Bernoulli bandit with $T/K=20$. The table
-> identifies strong settings for this experiment, not universal defaults.
+> These rankings are specific to independent arm means drawn from
+> $\mathrm{Uniform}(0,1)$, Bernoulli rewards, and $T/K=20$. They are finite-
+> horizon experimental settings, not universal defaults or theoretical policy
+> recommendations. Consult the distribution-robustness benchmark before
+> generalizing the result.
 
 ## Using the implementations
 
@@ -391,7 +353,9 @@ total_pulls = results["total_pulls"]
 ```
 
 The shared shape makes custom analyses and side-by-side experiments
-straightforward.
+straightforward. For controlled comparisons, pass the same explicit
+`true_probs` array to every runner and provide separate `policy_seed` and
+`reward_seed` values. The benchmark helpers do this automatically.
 
 ## Project layout
 
@@ -400,12 +364,17 @@ straightforward.
 ├── algorithms/
 │   ├── epsilon_greedy.py    # Constant/decaying epsilon + optimistic values
 │   ├── thompson.py          # Beta–Bernoulli Thompson sampling
-│   └── ucb.py               # Upper Confidence Bound (UCB1)
+│   ├── ucb.py               # Parameterized UCB; sqrt(2) is classic UCB1
+│   └── _common.py           # Validation and independent RNG streams
 ├── images/                    # Figures displayed in this README
-├── bandit_utils.py            # Metrics and multi-seed averaging
+├── results/                   # Canonical CSVs and provenance manifests
+├── tests/                     # Correctness, validation, and inference tests
+├── .github/workflows/ci.yml   # Locked install, lint, tests, and package build
+├── bandit_utils.py            # Metrics, instances, aggregation, provenance
 ├── compare_algorithms.py      # Cross-algorithm benchmark
 ├── compare_bandits.py         # Epsilon schedule and initialization sweep
 ├── compare_hyperparameters.py # Unified policy hyperparameter ablation
+├── compare_problem_suites.py  # Robustness across arm-mean distributions
 ├── visualizations.py          # Reusable plotting dashboard
 ├── pyproject.toml             # Project metadata and dependencies
 └── uv.lock                    # Reproducible dependency lockfile
@@ -413,11 +382,22 @@ straightforward.
 
 ## Reproducibility
 
-Standalone examples use seed 67. The grid comparison scripts average each
-configuration over seeds 0 through 9, while `compare_hyperparameters.py` uses
-seeds 0 through 99 for a lower-variance focused ablation and additionally
-saves per-seed outcomes with paired 95% confidence intervals. Every comparison
-evaluates policies on matching Bernoulli problem instances. Runtime settings,
-including arm counts, horizons, decay rates, confidence scales, and Beta
-priors, are declared near the top of each script so experiments are easy to
-inspect and modify.
+Standalone examples use master seed 67. Each master seed is split into
+independent environment, policy, and reward streams. Benchmarks generate arm
+means explicitly and use common reward streams, so matching does not depend on
+algorithms consuming random numbers in the same order.
+
+Hyperparameters are tuned on environment seeds 0–99 and confirmed on disjoint
+seeds 10,000–10,099. The broader grid comparisons use held-out seeds
+20,000–20,029. Canonical result directories contain aggregate CSVs,
+per-instance outcomes, and manifests recording the full settings, software
+versions, arm distribution, and a SHA-256 digest of the source and lockfile.
+
+## References
+
+- Peter Auer, Nicolò Cesa-Bianchi, and Paul Fischer, [“Finite-time Analysis of
+  the Multiarmed Bandit Problem”](https://doi.org/10.1023/A:1013689704352),
+  *Machine Learning*, 2002.
+- William R. Thompson, [“On the Likelihood that One Unknown Probability Exceeds
+  Another in View of the Evidence of Two Samples”](https://doi.org/10.1093/biomet/25.3-4.285),
+  *Biometrika*, 1933.

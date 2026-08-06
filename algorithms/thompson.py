@@ -9,6 +9,7 @@ pulled, which automatically balances exploration and exploitation.
 
 import numpy as np
 
+from algorithms._common import prepare_simulation
 
 SEED = 67
 N_ARMS = 1_000
@@ -23,6 +24,9 @@ def run_thompson(
     seed: int = SEED,
     prior_alpha: float = PRIOR_ALPHA,
     prior_beta: float = PRIOR_BETA,
+    true_probs: np.ndarray | None = None,
+    policy_seed: int | None = None,
+    reward_seed: int | None = None,
 ) -> dict[str, np.ndarray]:
     """Run a Beta-Bernoulli Thompson-sampling bandit simulation.
 
@@ -34,26 +38,32 @@ def run_thompson(
     Returns the same dictionary format as ``run_bandit`` so the shared
     summarizers and plotters work unchanged.
     """
-    if prior_alpha <= 0 or prior_beta <= 0:
+    if (
+        not np.isfinite(prior_alpha)
+        or not np.isfinite(prior_beta)
+        or prior_alpha <= 0
+        or prior_beta <= 0
+    ):
         raise ValueError("prior_alpha and prior_beta must be positive")
 
-    rng = np.random.default_rng(seed)
+    inputs = prepare_simulation(n_arms, n_steps, seed, true_probs, policy_seed, reward_seed)
+    policy_rng = inputs.policy_rng
+    reward_rng = inputs.reward_rng
+    true_probs = inputs.true_probs
 
     # Observed successes and failures for each arm.
     successes = np.zeros(n_arms, dtype=int)
     failures = np.zeros(n_arms, dtype=int)
     total_pulls = np.zeros(n_arms, dtype=int)
-    true_probs = rng.random(n_arms)
-
     rewards = np.zeros(n_steps, dtype=int)
     selected_arms = np.zeros(n_steps, dtype=int)
 
     for step in range(n_steps):
         # Sample a plausible reward probability from each arm's posterior
-        samples = rng.beta(successes + prior_alpha, failures + prior_beta)
+        samples = policy_rng.beta(successes + prior_alpha, failures + prior_beta)
         selected_arm = int(np.argmax(samples))
 
-        reward = int(rng.random() < true_probs[selected_arm])
+        reward = int(reward_rng.random() < true_probs[selected_arm])
         successes[selected_arm] += reward
         failures[selected_arm] += 1 - reward
         total_pulls[selected_arm] += 1
@@ -62,9 +72,7 @@ def run_thompson(
         selected_arms[step] = selected_arm
 
     # Return posterior means as the learned value estimates.
-    estimated_values = (successes + prior_alpha) / (
-        total_pulls + prior_alpha + prior_beta
-    )
+    estimated_values = (successes + prior_alpha) / (total_pulls + prior_alpha + prior_beta)
 
     return {
         "rewards": rewards,

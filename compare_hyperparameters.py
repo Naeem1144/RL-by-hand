@@ -1,20 +1,20 @@
 """Compare exploration hyperparameters across all implemented bandit families.
 
-The experiment fixes one finite-horizon Bernoulli problem size and evaluates
-every configuration on the same 100 seeded problem instances. It sweeps the
-epsilon-greedy constant epsilon, decay factor, and initialization, the UCB1
+The experiment fixes one finite-horizon Bernoulli problem size, tunes on 100
+problem instances, and confirms the selected reference on 100 disjoint held-out
+instances. It sweeps the
+epsilon-greedy constant epsilon, decay factor, and initialization, the UCB(c)
 confidence scale, and the Thompson sampling Beta prior concentration
 (symmetric ``Beta(a, a)`` priors, so prior mean and strength are not
 confounded).
 
-Per-seed results are saved alongside the aggregates so paired significance
-tests can be recomputed after the fact. Rankings report 95% confidence
-intervals and paired comparisons against the best configuration.
+Per-instance results are saved alongside the aggregates. Comparisons against
+the tuning-selected reference use seed-matched simultaneous bootstrap
+intervals, controlling the family-wise error rate across the full grid.
 """
 
 import csv
 from collections.abc import Callable
-from datetime import datetime
 from pathlib import Path
 
 import matplotlib.pyplot as plt
@@ -23,17 +23,24 @@ import numpy as np
 from algorithms.epsilon_greedy import run_bandit
 from algorithms.thompson import run_thompson
 from algorithms.ucb import run_ucb
-from bandit_utils import average_over_seeds
-
+from bandit_utils import (
+    average_over_seeds,
+    generate_problem,
+    simulation_seeds,
+    write_manifest,
+)
 
 N_ARMS = 100
 N_STEPS = 2_000
-SEEDS = list(range(100))
+TUNING_ENVIRONMENT_SEEDS = list(range(100))
+EVALUATION_ENVIRONMENT_SEEDS = list(range(10_000, 10_100))
 
 # Starting epsilon shared by every decay schedule.
 DECAY_EPSILON_0 = 0.10
-# Two-sided 95% critical value of Student's t with len(SEEDS) - 1 = 99 dof.
+# Two-sided 95% critical value of Student's t with 99 degrees of freedom.
 T_CRIT_95 = 1.9842
+BOOTSTRAP_REPLICATES = 10_000
+BOOTSTRAP_SEED = 20_260_806
 
 CONSTANT_EPSILON_GRID = [0.01, 0.03, 0.10, 0.30]
 # The decay values match compare_bandits.py.
@@ -50,11 +57,18 @@ UCB_C_GRID = [
     0.50,
     float(np.sqrt(2.0)),
 ]
-# Symmetric Beta(a, a) priors keep the prior mean fixed at the correct value
-# 0.5 while varying concentration, isolating prior strength from prior mean.
+# Symmetric Beta(a, a) priors keep their mean fixed at 0.5 while varying
+# concentration, isolating prior strength from prior mean.
 THOMPSON_CONCENTRATION_GRID = [0.25, 0.5, 1.0, 2.0, 5.0, 10.0]
 
 RunFn = Callable[[int], dict[str, np.ndarray]]
+
+
+def _matched_inputs(environment_seed: int) -> tuple[np.ndarray, int, int]:
+    """Return one explicit problem plus independent policy and reward seeds."""
+    true_probs = generate_problem(N_ARMS, environment_seed)
+    policy_seed, reward_seed = simulation_seeds(environment_seed)
+    return true_probs, policy_seed, reward_seed
 
 
 def build_run_specs() -> list[tuple[str, str, RunFn, dict[str, object]]]:
@@ -72,11 +86,14 @@ def build_run_specs() -> list[tuple[str, str, RunFn, dict[str, object]]]:
                 optimistic: bool = optimistic,
                 epsilon: float = epsilon,
             ) -> dict[str, np.ndarray]:
+                true_probs, policy_seed, reward_seed = _matched_inputs(seed)
                 return run_bandit(
                     n_arms=N_ARMS,
                     n_steps=N_STEPS,
                     epsilon=epsilon,
-                    seed=seed,
+                    true_probs=true_probs,
+                    policy_seed=policy_seed,
+                    reward_seed=reward_seed,
                     optimistic_initialization=optimistic,
                 )
 
@@ -97,11 +114,14 @@ def build_run_specs() -> list[tuple[str, str, RunFn, dict[str, object]]]:
                 optimistic: bool = optimistic,
                 decay: float = decay,
             ) -> dict[str, np.ndarray]:
+                true_probs, policy_seed, reward_seed = _matched_inputs(seed)
                 return run_bandit(
                     n_arms=N_ARMS,
                     n_steps=N_STEPS,
                     epsilon=DECAY_EPSILON_0,
-                    seed=seed,
+                    true_probs=true_probs,
+                    policy_seed=policy_seed,
+                    reward_seed=reward_seed,
                     decay=True,
                     decay_rate=decay,
                     optimistic_initialization=optimistic,
@@ -120,14 +140,17 @@ def build_run_specs() -> list[tuple[str, str, RunFn, dict[str, object]]]:
         variant = "c=sqrt(2)" if np.isclose(c, np.sqrt(2.0)) else f"c={c:g}"
 
         def run_confidence_bound(seed: int, c: float = c) -> dict[str, np.ndarray]:
+            true_probs, policy_seed, reward_seed = _matched_inputs(seed)
             return run_ucb(
                 n_arms=N_ARMS,
                 n_steps=N_STEPS,
                 c=c,
-                seed=seed,
+                true_probs=true_probs,
+                policy_seed=policy_seed,
+                reward_seed=reward_seed,
             )
 
-        specs.append(("UCB1", variant, run_confidence_bound, {"x": c}))
+        specs.append(("UCB(c)", variant, run_confidence_bound, {"x": c}))
 
     for concentration in THOMPSON_CONCENTRATION_GRID:
         variant = f"Beta({concentration:g},{concentration:g})"
@@ -136,10 +159,13 @@ def build_run_specs() -> list[tuple[str, str, RunFn, dict[str, object]]]:
             seed: int,
             concentration: float = concentration,
         ) -> dict[str, np.ndarray]:
+            true_probs, policy_seed, reward_seed = _matched_inputs(seed)
             return run_thompson(
                 n_arms=N_ARMS,
                 n_steps=N_STEPS,
-                seed=seed,
+                true_probs=true_probs,
+                policy_seed=policy_seed,
+                reward_seed=reward_seed,
                 prior_alpha=concentration,
                 prior_beta=concentration,
             )
@@ -149,13 +175,15 @@ def build_run_specs() -> list[tuple[str, str, RunFn, dict[str, object]]]:
     return specs
 
 
-def evaluate() -> list[dict[str, object]]:
+def evaluate(environment_seeds: list[int]) -> list[dict[str, object]]:
     """Evaluate every configuration and return aggregate plus per-seed metrics."""
     rows: list[dict[str, object]] = []
-    n_seeds = len(SEEDS)
+    n_seeds = len(environment_seeds)
 
     for family, variant, run_fn, meta in build_run_specs():
         (
+            _,
+            _,
             _,
             _,
             _,
@@ -165,7 +193,7 @@ def evaluate() -> list[dict[str, object]]:
             std_regret,
             per_seed_reward,
             per_seed_regret,
-        ) = average_over_seeds(run_fn, SEEDS)
+        ) = average_over_seeds(run_fn, environment_seeds)
         row: dict[str, object] = {
             "family": family,
             "variant": variant,
@@ -184,58 +212,93 @@ def evaluate() -> list[dict[str, object]]:
     return rows
 
 
-def annotate_significance(rows: list[dict[str, object]]) -> dict[str, object]:
-    """Add 95% CIs and paired seed-matched comparisons against the best row."""
-    best = min(rows, key=lambda row: float(row["total_regret"]))
+def row_key(row: dict[str, object]) -> tuple[str, str]:
+    """Return the stable identity of a configuration row."""
+    return str(row["family"]), str(row["variant"])
+
+
+def annotate_significance(
+    rows: list[dict[str, object]],
+    reference_key: tuple[str, str],
+) -> tuple[dict[str, object], float]:
+    """Add marginal CIs and simultaneous comparisons to a fixed reference.
+
+    The reference must have been selected without using ``rows``. A paired,
+    studentized max-t bootstrap supplies one critical value for the entire
+    family of comparisons, controlling family-wise error at approximately 5%.
+    """
+    reference = next((row for row in rows if row_key(row) == reference_key), None)
+    if reference is None:
+        raise ValueError(f"reference configuration not found: {reference_key}")
+
+    n_instances = np.asarray(reference["per_seed_regret"]).size
+    rng = np.random.default_rng(BOOTSTRAP_SEED)
+    resamples = rng.integers(0, n_instances, size=(BOOTSTRAP_REPLICATES, n_instances))
+    max_statistics = np.zeros(BOOTSTRAP_REPLICATES)
 
     for row in rows:
         half_width = T_CRIT_95 * float(row["se_regret"])
         row["ci_regret_low"] = float(row["total_regret"]) - half_width
         row["ci_regret_high"] = float(row["total_regret"]) + half_width
 
-        delta = row["per_seed_regret"] - best["per_seed_regret"]
+        delta = np.asarray(row["per_seed_regret"]) - np.asarray(reference["per_seed_regret"])
         mean_delta = float(delta.mean())
         se_delta = float(delta.std(ddof=1) / np.sqrt(delta.size))
-        row["delta_vs_best"] = mean_delta
-        row["delta_ci_low"] = mean_delta - T_CRIT_95 * se_delta
-        row["delta_ci_high"] = mean_delta + T_CRIT_95 * se_delta
-        # Significantly worse only if the entire paired CI lies above zero.
-        row["sig_worse_than_best"] = bool(row["delta_ci_low"] > 0.0)
+        row["delta_vs_reference"] = mean_delta
+        row["se_delta"] = se_delta
 
-    return best
+        if se_delta > 0.0:
+            centered = delta - mean_delta
+            bootstrap_means = centered[resamples].mean(axis=1)
+            max_statistics = np.maximum(max_statistics, np.abs(bootstrap_means / se_delta))
+
+    simultaneous_critical = float(np.quantile(max_statistics, 0.95))
+    for row in rows:
+        mean_delta = float(row["delta_vs_reference"])
+        half_width = simultaneous_critical * float(row["se_delta"])
+        row["delta_ci_low"] = mean_delta - half_width
+        row["delta_ci_high"] = mean_delta + half_width
+        row["sig_worse_than_reference"] = bool(row["delta_ci_low"] > 0.0)
+
+    return reference, simultaneous_critical
 
 
-def random_policy_regret() -> float:
+def random_policy_regret(environment_seeds: list[int]) -> float:
     """Expected pseudo-regret of the uniform-random policy on the same instances."""
     regrets: list[float] = []
-    for seed in SEEDS:
-        rng = np.random.default_rng(seed)
-        true_probs = rng.random(N_ARMS)
+    for seed in environment_seeds:
+        true_probs = generate_problem(N_ARMS, seed)
         regrets.append(float(N_STEPS * (true_probs.max() - true_probs.mean())))
     return float(np.mean(regrets))
 
 
-def print_results(rows: list[dict[str, object]]) -> None:
+def print_results(
+    rows: list[dict[str, object]],
+    reference: dict[str, object],
+    simultaneous_critical: float,
+) -> None:
     """Print configurations ranked by mean cumulative pseudo-regret."""
     ranked = sorted(rows, key=lambda row: float(row["total_regret"]))
     header = (
         f"{'rank':>4} {'family':<18} {'variant':<30} {'avg reward':>10} "
-        f"{'regret':>8} {'regret 95% CI':>17} {'d(best)':>8} {'d(best) 95% CI':>17} "
+        f"{'regret':>8} {'regret 95% CI':>17} {'d(ref)':>8} {'simul 95% CI':>17} "
         f"{'sig worse':>9}"
     )
     print(header)
     print("-" * len(header))
     for rank, row in enumerate(ranked, start=1):
-        sig = "yes" if row["sig_worse_than_best"] else "-"
+        sig = "yes" if row["sig_worse_than_reference"] else "-"
         print(
             f"{rank:>4} {str(row['family']):<18} {str(row['variant']):<30} "
             f"{float(row['avg_reward']):>10.4f} "
             f"{float(row['total_regret']):>8.1f} "
             f"[{float(row['ci_regret_low']):>7.1f}, {float(row['ci_regret_high']):>7.1f}] "
-            f"{float(row['delta_vs_best']):>8.1f} "
+            f"{float(row['delta_vs_reference']):>8.1f} "
             f"[{float(row['delta_ci_low']):>7.1f}, {float(row['delta_ci_high']):>7.1f}] "
             f"{sig:>9}"
         )
+    print(f"\nReference selected on tuning set: {reference['family']} / {reference['variant']}")
+    print(f"Simultaneous bootstrap critical value: {simultaneous_critical:.3f}")
 
 
 def save_csv(rows: list[dict[str, object]], output_dir: Path) -> Path:
@@ -253,15 +316,15 @@ def save_csv(rows: list[dict[str, object]], output_dir: Path) -> Path:
         "se_regret",
         "ci95_regret_low",
         "ci95_regret_high",
-        "delta_vs_best",
+        "delta_vs_reference",
         "delta_ci95_low",
         "delta_ci95_high",
-        "sig_worse_than_best",
+        "sig_worse_than_reference",
     ]
     ranked = sorted(rows, key=lambda row: float(row["total_regret"]))
 
     with csv_path.open("w", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=fieldnames)
+        writer = csv.DictWriter(handle, fieldnames=fieldnames, lineterminator="\n")
         writer.writeheader()
         for rank, row in enumerate(ranked, start=1):
             writer.writerow(
@@ -277,33 +340,77 @@ def save_csv(rows: list[dict[str, object]], output_dir: Path) -> Path:
                     "se_regret": row["se_regret"],
                     "ci95_regret_low": row["ci_regret_low"],
                     "ci95_regret_high": row["ci_regret_high"],
-                    "delta_vs_best": row["delta_vs_best"],
+                    "delta_vs_reference": row["delta_vs_reference"],
                     "delta_ci95_low": row["delta_ci_low"],
                     "delta_ci95_high": row["delta_ci_high"],
-                    "sig_worse_than_best": row["sig_worse_than_best"],
+                    "sig_worse_than_reference": row["sig_worse_than_reference"],
                 }
             )
 
     return csv_path
 
 
-def save_per_seed_csv(rows: list[dict[str, object]], output_dir: Path) -> Path:
+def save_per_seed_csv(
+    rows: list[dict[str, object]],
+    environment_seeds: list[int],
+    output_dir: Path,
+    filename: str,
+) -> Path:
     """Save per-seed outcomes so paired tests can be recomputed later."""
-    csv_path = output_dir / "per_seed.csv"
+    csv_path = output_dir / filename
 
     with csv_path.open("w", newline="") as handle:
-        writer = csv.writer(handle)
-        writer.writerow(["family", "variant", "seed", "total_regret", "final_reward"])
+        writer = csv.writer(handle, lineterminator="\n")
+        writer.writerow(["family", "variant", "environment_seed", "total_regret", "final_reward"])
         for row in rows:
             for seed, regret, reward in zip(
-                SEEDS, row["per_seed_regret"], row["per_seed_reward"]
+                environment_seeds,
+                row["per_seed_regret"],
+                row["per_seed_reward"],
+                strict=True,
             ):
                 writer.writerow([row["family"], row["variant"], seed, regret, reward])
 
     return csv_path
 
 
-def plot_results(rows: list[dict[str, object]], random_regret: float) -> Path:
+def save_tuning_csv(rows: list[dict[str, object]], output_dir: Path) -> Path:
+    """Save tuning-set aggregates without attaching inferential claims."""
+    path = output_dir / "tuning_summary.csv"
+    ranked = sorted(rows, key=lambda row: float(row["total_regret"]))
+    with path.open("w", newline="") as handle:
+        writer = csv.writer(handle, lineterminator="\n")
+        writer.writerow(
+            [
+                "tuning_rank",
+                "family",
+                "variant",
+                "avg_reward",
+                "std_reward",
+                "total_regret",
+                "std_regret",
+            ]
+        )
+        for rank, row in enumerate(ranked, start=1):
+            writer.writerow(
+                [
+                    rank,
+                    row["family"],
+                    row["variant"],
+                    row["avg_reward"],
+                    row["std_reward"],
+                    row["total_regret"],
+                    row["std_regret"],
+                ]
+            )
+    return path
+
+
+def plot_results(
+    rows: list[dict[str, object]],
+    random_regret: float,
+    reference: dict[str, object],
+) -> Path:
     """Plot regret and reward sensitivity for the three policy families."""
     plt.rcParams.update(
         {
@@ -325,7 +432,7 @@ def plot_results(rows: list[dict[str, object]], random_regret: float) -> Path:
         left=0.05,
         right=0.99,
         top=0.84,
-        bottom=0.14,
+        bottom=0.18,
         hspace=0.34,
         wspace=0.28,
     )
@@ -367,12 +474,22 @@ def plot_results(rows: list[dict[str, object]], random_regret: float) -> Path:
         selected = epsilon_rows("constant", optimistic)
         label = "Optimistic init" if optimistic else "Zero init"
         plot_series(
-            axes[0, 0], eps_values, selected, "total_regret",
-            color=color, marker=marker, label=label,
+            axes[0, 0],
+            eps_values,
+            selected,
+            "total_regret",
+            color=color,
+            marker=marker,
+            label=label,
         )
         plot_series(
-            axes[1, 0], eps_values, selected, "avg_reward",
-            color=color, marker=marker, label=label,
+            axes[1, 0],
+            eps_values,
+            selected,
+            "avg_reward",
+            color=color,
+            marker=marker,
+            label=label,
         )
 
     x_decay = np.arange(len(DECAY_GRID))
@@ -380,16 +497,26 @@ def plot_results(rows: list[dict[str, object]], random_regret: float) -> Path:
         selected = epsilon_rows("decay", optimistic)
         label = "Optimistic init" if optimistic else "Zero init"
         plot_series(
-            axes[0, 1], x_decay, selected, "total_regret",
-            color=color, marker=marker, label=label,
+            axes[0, 1],
+            x_decay,
+            selected,
+            "total_regret",
+            color=color,
+            marker=marker,
+            label=label,
         )
         plot_series(
-            axes[1, 1], x_decay, selected, "avg_reward",
-            color=color, marker=marker, label=label,
+            axes[1, 1],
+            x_decay,
+            selected,
+            "avg_reward",
+            color=color,
+            marker=marker,
+            label=label,
         )
 
     ucb_rows = sorted(
-        (row for row in rows if row["family"] == "UCB1"),
+        (row for row in rows if row["family"] == "UCB(c)"),
         key=lambda row: float(row["x"]),
     )
     c_values = np.array([float(row["x"]) for row in ucb_rows])
@@ -419,7 +546,7 @@ def plot_results(rows: list[dict[str, object]], random_regret: float) -> Path:
     ):
         axes[row_i, 0].set(title="Epsilon-greedy · constant ε", ylabel=ylabel)
         axes[row_i, 1].set(title="Epsilon-greedy · decay (ε₀=0.1)")
-        axes[row_i, 2].set(title="UCB1")
+        axes[row_i, 2].set(title="UCB(c)")
         axes[row_i, 3].set(title="Thompson sampling")
 
         axes[row_i, 0].set_xscale("log")
@@ -428,10 +555,7 @@ def plot_results(rows: list[dict[str, object]], random_regret: float) -> Path:
         axes[row_i, 2].set_xscale("log")
         axes[row_i, 2].set_xticks(
             c_values,
-            [
-                "sqrt(2)" if np.isclose(c, np.sqrt(2.0)) else f"{c:g}"
-                for c in c_values
-            ],
+            ["sqrt(2)" if np.isclose(c, np.sqrt(2.0)) else f"{c:g}" for c in c_values],
             rotation=45,
             ha="right",
         )
@@ -450,7 +574,7 @@ def plot_results(rows: list[dict[str, object]], random_regret: float) -> Path:
     axes[1, 2].set_xlabel("Confidence scale c", labelpad=16)
     axes[1, 3].set_xlabel("Prior concentration a (Beta(a, a))")
 
-    best = min(rows, key=lambda row: float(row["total_regret"]))
+    evaluation_best = min(rows, key=lambda row: float(row["total_regret"]))
     fig.suptitle(
         "Bandit hyperparameter ablation",
         y=0.965,
@@ -461,8 +585,8 @@ def plot_results(rows: list[dict[str, object]], random_regret: float) -> Path:
     fig.text(
         0.5,
         0.915,
-        f"K={N_ARMS} arms, T={N_STEPS:,} steps, averaged over {len(SEEDS)} matched seeds; "
-        "error bars are 95% CIs",
+        f"K={N_ARMS}, T={N_STEPS:,}, arm means ~ Uniform(0,1), "
+        f"{len(EVALUATION_ENVIRONMENT_SEEDS)} held-out instances; error bars are marginal 95% CIs",
         ha="center",
         fontsize=12,
         color="#64748B",
@@ -470,10 +594,11 @@ def plot_results(rows: list[dict[str, object]], random_regret: float) -> Path:
     fig.text(
         0.5,
         0.035,
-        "Best configuration: "
-        f"{best['family']} ({best['variant']})  |  "
-        f"reward={float(best['avg_reward']):.4f}  |  "
-        f"pseudo-regret={float(best['total_regret']):.1f}  |  "
+        "Tuning-selected reference: "
+        f"{reference['family']} ({reference['variant']}); "
+        f"held-out regret={float(reference['total_regret']):.1f}  |  "
+        "held-out rank-1: "
+        f"{evaluation_best['family']} ({evaluation_best['variant']})  |  "
         f"random-policy regret={random_regret:.1f}",
         ha="center",
         fontsize=10,
@@ -487,22 +612,45 @@ def plot_results(rows: list[dict[str, object]], random_regret: float) -> Path:
 
 
 def main() -> None:
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    output_dir = Path(f"hyperparameter_comparison_{timestamp}")
+    output_dir = Path("results/hyperparameter_comparison")
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    rows = evaluate()
-    annotate_significance(rows)
-    random_regret = random_policy_regret()
+    tuning_rows = evaluate(TUNING_ENVIRONMENT_SEEDS)
+    tuning_selected = min(tuning_rows, key=lambda row: float(row["total_regret"]))
+    rows = evaluate(EVALUATION_ENVIRONMENT_SEEDS)
+    reference, simultaneous_critical = annotate_significance(rows, row_key(tuning_selected))
+    random_regret = random_policy_regret(EVALUATION_ENVIRONMENT_SEEDS)
 
-    print_results(rows)
+    print_results(rows, reference, simultaneous_critical)
     print(f"\nRandom-policy reference regret: {random_regret:.1f}")
 
     csv_path = save_csv(rows, output_dir)
-    per_seed_path = save_per_seed_csv(rows, output_dir)
-    figure_path = plot_results(rows, random_regret)
+    tuning_path = save_tuning_csv(tuning_rows, output_dir)
+    tuning_per_seed_path = save_per_seed_csv(
+        tuning_rows, TUNING_ENVIRONMENT_SEEDS, output_dir, "tuning_per_seed.csv"
+    )
+    per_seed_path = save_per_seed_csv(
+        rows, EVALUATION_ENVIRONMENT_SEEDS, output_dir, "evaluation_per_seed.csv"
+    )
+    figure_path = plot_results(rows, random_regret, reference)
+    write_manifest(
+        output_dir,
+        "hyperparameter tuning and held-out confirmation",
+        {
+            "n_arms": N_ARMS,
+            "n_steps": N_STEPS,
+            "tuning_environment_seeds": TUNING_ENVIRONMENT_SEEDS,
+            "evaluation_environment_seeds": EVALUATION_ENVIRONMENT_SEEDS,
+            "bootstrap_replicates": BOOTSTRAP_REPLICATES,
+            "bootstrap_seed": BOOTSTRAP_SEED,
+            "tuning_selected_reference": list(row_key(tuning_selected)),
+            "simultaneous_bootstrap_critical": simultaneous_critical,
+        },
+    )
 
     print(f"\nSaved summary to {csv_path.resolve()}")
+    print(f"Saved tuning summary to {tuning_path.resolve()}")
+    print(f"Saved tuning per-seed results to {tuning_per_seed_path.resolve()}")
     print(f"Saved per-seed results to {per_seed_path.resolve()}")
     print(f"Saved figure to {figure_path.resolve()}")
 

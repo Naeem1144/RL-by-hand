@@ -14,7 +14,8 @@ def plot_bandit_results(
     estimated_values: np.ndarray,
     total_pulls: np.ndarray,
     output_path: str | Path | None = None,
-    show: bool = True,
+    show: bool = False,
+    algorithm_name: str = "Epsilon-greedy",
 ) -> Path:
     """Create a compact dashboard of learning and arm-selection behavior.
 
@@ -34,18 +35,20 @@ def plot_bandit_results(
         raise ValueError("rewards and selected_arms must have the same shape.")
     if not (true_probs.shape == estimated_values.shape == total_pulls.shape):
         raise ValueError("All arm-level arrays must have the same shape.")
+    if true_probs.ndim != 1 or true_probs.size == 0:
+        raise ValueError("Arm-level arrays must be non-empty and one-dimensional.")
+    if np.any((selected_arms < 0) | (selected_arms >= true_probs.size)):
+        raise ValueError("selected_arms contains an out-of-range arm index.")
 
     steps = np.arange(1, rewards.size + 1)
     optimal_arm = int(np.argmax(true_probs))
     optimal_probability = true_probs[optimal_arm]
     cumulative_reward = np.cumsum(rewards)
     running_average = cumulative_reward / steps
-    cumulative_regret = np.cumsum(
-        optimal_probability - true_probs[selected_arms]
-    )
+    cumulative_regret = np.cumsum(optimal_probability - true_probs[selected_arms])
 
     fig, axes = plt.subplots(2, 2, figsize=(13, 9), constrained_layout=True)
-    fig.suptitle("Epsilon-greedy multi-armed bandit", fontsize=16)
+    fig.suptitle(f"{algorithm_name} multi-armed bandit", fontsize=16)
 
     reward_axis = axes[0, 0]
     reward_axis.plot(steps, running_average, label="Observed average reward")
@@ -70,9 +73,7 @@ def plot_bandit_results(
     pulls_axis = axes[1, 0]
     top_count = min(20, total_pulls.size)
     top_arms = np.argsort(total_pulls)[-top_count:]
-    bar_colors = [
-        "tab:green" if arm == optimal_arm else "tab:blue" for arm in top_arms
-    ]
+    bar_colors = ["tab:green" if arm == optimal_arm else "tab:blue" for arm in top_arms]
     pulls_axis.barh([str(arm) for arm in top_arms], total_pulls[top_arms], color=bar_colors)
     pulls_axis.set(
         title=f"{top_count} most-selected arms",
@@ -91,15 +92,16 @@ def plot_bandit_results(
         edgecolors="none",
     )
     estimate_axis.plot([0, 1], [0, 1], color="tab:gray", linestyle="--", label="Perfect estimate")
-    estimate_axis.scatter(
-        true_probs[optimal_arm],
-        estimated_values[optimal_arm],
-        marker="*",
-        s=180,
-        color="tab:green",
-        label=f"Best arm ({optimal_arm})",
-        zorder=3,
-    )
+    if pulled[optimal_arm]:
+        estimate_axis.scatter(
+            true_probs[optimal_arm],
+            estimated_values[optimal_arm],
+            marker="*",
+            s=180,
+            color="tab:green",
+            label=f"Best arm ({optimal_arm})",
+            zorder=3,
+        )
     estimate_axis.set(
         title="Learned estimates for pulled arms",
         xlabel="True reward probability",

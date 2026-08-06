@@ -1,0 +1,61 @@
+{
+  "arm_mean_distribution": "independent Uniform(0, 1)",
+  "experiment": "cross-algorithm comparison",
+  "generated_at_utc": "2026-08-06T08:15:57.386966+00:00",
+  "numpy": "2.5.1",
+  "python": "3.14.4",
+  "reward_distribution": "Bernoulli(true arm mean)",
+  "schema_version": 1,
+  "settings": {
+    "algorithms": [
+      "epsgreedy const",
+      "epsgreedy optimistic decay=0.90",
+      "thompson Beta(5,5)",
+      "ucb(c=0.003)"
+    ],
+    "environment_seeds": [
+      20000,
+      20001,
+      20002,
+      20003,
+      20004,
+      20005,
+      20006,
+      20007,
+      20008,
+      20009,
+      20010,
+      20011,
+      20012,
+      20013,
+      20014,
+      20015,
+      20016,
+      20017,
+      20018,
+      20019,
+      20020,
+      20021,
+      20022,
+      20023,
+      20024,
+      20025,
+      20026,
+      20027,
+      20028,
+      20029
+    ],
+    "n_arms_grid": [
+      10,
+      100,
+      1000
+    ],
+    "n_steps_grid": [
+      100,
+      1000,
+      10000
+    ],
+    "plot_horizon": 10000
+  },
+  "source_sha256": "0f7781e2240ad7a09341e3aed5642a0aeac9704a3a3c1a4eac228dfb5ea350e3"
+}
