@@ -2,56 +2,72 @@
 
 Runs a constant-epsilon baseline and several exponential decay schedules, each
 with and without optimistic initialization, over a grid of ``n_arms`` and
-``n_steps`` values. Every configuration is averaged over 10 seeds for robust
-results; prints a summary table and saves a comparison figure plus a CSV.
+``n_steps`` values. Every configuration is averaged over 30 held-out matched
+instances; the script saves aggregate and per-instance data plus a figure.
 """
 
-from datetime import datetime
+import csv
 from pathlib import Path
 
 import matplotlib.pyplot as plt
 import numpy as np
 
+from algorithms.epsilon_greedy import run_bandit
 from bandit_utils import (
+    BENCHMARK_ENVIRONMENT_SEEDS,
     EPSILON,
     N_ARMS_GRID,
     N_STEPS_GRID,
-    SEEDS,
     average_over_seeds,
+    generate_problem,
+    simulation_seeds,
+    write_manifest,
 )
-from algorithms.epsilon_greedy import run_bandit
-
 
 # Exponential decay factors to sweep; None means constant epsilon.
 DECAY_GRID = [0.90, 0.95, 0.99, 0.999, 0.9999, 0.99999]
 
 OPTIMISTIC_INITIALIZATION = [True, False]
+PLOT_HORIZON = max(N_STEPS_GRID)
+T_CRIT_95 = 2.0452  # Student's t, 29 degrees of freedom.
 
-RUN_SPECS = [("constant", None)] + [
-    (f"decay={decay}", decay) for decay in DECAY_GRID
-]
+RUN_SPECS = [("constant", None)] + [(f"decay={decay}", decay) for decay in DECAY_GRID]
 
 
 def main() -> None:
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    out_dir = Path(f"comparison_{timestamp}")
+    out_dir = Path("results/epsilon_sweep")
     out_dir.mkdir(parents=True, exist_ok=True)
 
     # Collect metrics for the table
     rows: list[tuple[int, int, bool, str, float, float, float, float]] = []
-    # Store averaged series keyed by (n_arms, optimistic_init, label) for plotting
-    series: dict[tuple[int, bool, str], tuple[np.ndarray, np.ndarray, np.ndarray]] = {}
+    # Keep the horizon in the key so grid results cannot overwrite one another.
+    series: dict[
+        tuple[int, int, bool, str],
+        tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray],
+    ] = {}
+    per_seed_rows: list[tuple[int, int, bool, str, int, float, float]] = []
 
     for n_arms in N_ARMS_GRID:
         for n_steps in N_STEPS_GRID:
             for opt_init in OPTIMISTIC_INITIALIZATION:
                 for label, decay in RUN_SPECS:
-                    def run_one(seed: int) -> dict[str, np.ndarray]:
+
+                    def run_one(
+                        environment_seed: int,
+                        n_arms: int = n_arms,
+                        n_steps: int = n_steps,
+                        decay: float | None = decay,
+                        opt_init: bool = opt_init,
+                    ) -> dict[str, np.ndarray]:
+                        true_probs = generate_problem(n_arms, environment_seed)
+                        policy_seed, reward_seed = simulation_seeds(environment_seed)
                         return run_bandit(
                             n_arms=n_arms,
                             n_steps=n_steps,
                             epsilon=EPSILON,
-                            seed=seed,
+                            true_probs=true_probs,
+                            policy_seed=policy_seed,
+                            reward_seed=reward_seed,
                             decay=decay is not None,
                             decay_rate=decay,
                             optimistic_initialization=opt_init,
@@ -60,15 +76,23 @@ def main() -> None:
                     (
                         steps,
                         regret,
+                        regret_se,
                         reward_series,
+                        reward_se,
                         avg_reward,
                         std_reward,
                         total_regret,
                         std_regret,
-                        _,
-                        _,
-                    ) = average_over_seeds(run_one, SEEDS)
-                    series[(n_arms, opt_init, label)] = (steps, regret, reward_series)
+                        per_seed_rewards,
+                        per_seed_regrets,
+                    ) = average_over_seeds(run_one, BENCHMARK_ENVIRONMENT_SEEDS)
+                    series[(n_arms, n_steps, opt_init, label)] = (
+                        steps,
+                        regret,
+                        regret_se,
+                        reward_series,
+                        reward_se,
+                    )
                     rows.append(
                         (
                             n_arms,
@@ -79,6 +103,23 @@ def main() -> None:
                             std_reward,
                             total_regret,
                             std_regret,
+                        )
+                    )
+                    per_seed_rows.extend(
+                        (
+                            n_arms,
+                            n_steps,
+                            opt_init,
+                            label,
+                            environment_seed,
+                            float(seed_reward),
+                            float(seed_regret),
+                        )
+                        for environment_seed, seed_reward, seed_regret in zip(
+                            BENCHMARK_ENVIRONMENT_SEEDS,
+                            per_seed_rewards,
+                            per_seed_regrets,
+                            strict=True,
                         )
                     )
 
@@ -99,16 +140,70 @@ def main() -> None:
 
     # Save CSV
     csv_path = out_dir / "summary.csv"
-    with csv_path.open("w") as handle:
-        handle.write(
-            "n_arms,n_steps,optimistic_init,variant,"
-            "final_avg_reward,final_avg_reward_std,total_regret,total_regret_std\n"
+    with csv_path.open("w", newline="") as handle:
+        writer = csv.writer(handle, lineterminator="\n")
+        writer.writerow(
+            [
+                "n_arms",
+                "n_steps",
+                "optimistic_init",
+                "variant",
+                "final_avg_reward",
+                "final_avg_reward_std",
+                "total_regret",
+                "total_regret_std",
+            ]
         )
-        for n_arms, n_steps, opt_init, label, avg_reward, std_reward, total_regret, std_regret in rows:
-            handle.write(
-                f"{n_arms},{n_steps},{int(opt_init)},{label},"
-                f"{avg_reward:.6f},{std_reward:.6f},{total_regret:.1f},{std_regret:.1f}\n"
+        for (
+            n_arms,
+            n_steps,
+            opt_init,
+            label,
+            avg_reward,
+            std_reward,
+            total_regret,
+            std_regret,
+        ) in rows:
+            writer.writerow(
+                [
+                    n_arms,
+                    n_steps,
+                    int(opt_init),
+                    label,
+                    f"{avg_reward:.6f}",
+                    f"{std_reward:.6f}",
+                    f"{total_regret:.6f}",
+                    f"{std_regret:.6f}",
+                ]
             )
+
+    with (out_dir / "per_seed.csv").open("w", newline="") as handle:
+        writer = csv.writer(handle, lineterminator="\n")
+        writer.writerow(
+            [
+                "n_arms",
+                "n_steps",
+                "optimistic_init",
+                "variant",
+                "environment_seed",
+                "final_avg_reward",
+                "total_regret",
+            ]
+        )
+        writer.writerows(per_seed_rows)
+
+    write_manifest(
+        out_dir,
+        "epsilon-greedy schedule sweep",
+        {
+            "environment_seeds": BENCHMARK_ENVIRONMENT_SEEDS,
+            "n_arms_grid": N_ARMS_GRID,
+            "n_steps_grid": N_STEPS_GRID,
+            "epsilon": EPSILON,
+            "decay_grid": DECAY_GRID,
+            "plot_horizon": PLOT_HORIZON,
+        },
+    )
 
     # Comparison figure: regret (top) and average reward (bottom) vs steps,
     # with separate row blocks for zero-initialized and optimistic estimates.
@@ -129,27 +224,57 @@ def main() -> None:
             reward_axis = axes[2 * init_row + 1, col]
 
             # Constant-epsilon baseline (dashed black line)
-            steps, regret, reward_series = series[(n_arms, opt_init, "constant")]
+            steps, regret, regret_se, reward_series, reward_se = series[
+                (n_arms, PLOT_HORIZON, opt_init, "constant")
+            ]
             regret_axis.plot(
                 steps, regret, color="black", linestyle="--", linewidth=2, label="constant"
             )
             reward_axis.plot(
                 steps, reward_series, color="black", linestyle="--", linewidth=2, label="constant"
             )
+            regret_axis.fill_between(
+                steps,
+                regret - T_CRIT_95 * regret_se,
+                regret + T_CRIT_95 * regret_se,
+                color="black",
+                alpha=0.08,
+            )
+            reward_axis.fill_between(
+                steps,
+                reward_series - T_CRIT_95 * reward_se,
+                reward_series + T_CRIT_95 * reward_se,
+                color="black",
+                alpha=0.08,
+            )
 
-            for decay, color in zip(decay_values, decay_colors):
+            for decay, color in zip(decay_values, decay_colors, strict=True):
                 label = f"decay={decay}"
-                steps, regret, reward_series = series[(n_arms, opt_init, label)]
+                steps, regret, regret_se, reward_series, reward_se = series[
+                    (n_arms, PLOT_HORIZON, opt_init, label)
+                ]
                 regret_axis.plot(steps, regret, color=color, label=label)
                 reward_axis.plot(steps, reward_series, color=color, label=label)
+                regret_axis.fill_between(
+                    steps,
+                    regret - T_CRIT_95 * regret_se,
+                    regret + T_CRIT_95 * regret_se,
+                    color=color,
+                    alpha=0.06,
+                )
+                reward_axis.fill_between(
+                    steps,
+                    reward_series - T_CRIT_95 * reward_se,
+                    reward_series + T_CRIT_95 * reward_se,
+                    color=color,
+                    alpha=0.06,
+                )
 
             best_prob = float(
                 np.mean(
                     [
-                        np.max(
-                            run_bandit(n_arms=n_arms, n_steps=1, seed=seed)["true_probs"]
-                        )
-                        for seed in SEEDS
+                        np.max(generate_problem(n_arms, environment_seed))
+                        for environment_seed in BENCHMARK_ENVIRONMENT_SEEDS
                     ]
                 )
             )
@@ -165,8 +290,9 @@ def main() -> None:
             reward_axis.legend(fontsize=7)
 
     fig.suptitle(
-        "Epsilon-greedy decay sweep (averaged over "
-        f"{len(SEEDS)} seeds, epsilon={EPSILON}, with/without optimistic initialization)",
+        "Epsilon-greedy decay sweep "
+        f"(T={PLOT_HORIZON:,}, {len(BENCHMARK_ENVIRONMENT_SEEDS)} held-out instances; "
+        "shaded 95% CIs)",
         fontsize=15,
     )
     fig_path = Path("images/comparison.png")

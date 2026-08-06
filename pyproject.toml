@@ -2,16 +2,44 @@
 name = "rl-by-hand"
 version = "0.1.0"
 description = "Reinforcement learning algorithms implemented from scratch with NumPy and Matplotlib."
-requires-python = ">=3.14"
+requires-python = ">=3.12"
 dependencies = [
     "matplotlib>=3.11.1",
     "numpy>=2.5.1",
 ]
 
 [build-system]
-requires = ["uv_build>=0.12.1,<0.13.0"]
-build-backend = "uv_build"
+requires = ["setuptools>=80"]
+build-backend = "setuptools.build_meta"
 
-[tool.uv]
-# Script-only project: there is no importable package to build or install.
-package = false
+[project.scripts]
+rl-compare-algorithms = "compare_algorithms:main"
+rl-compare-epsilon = "compare_bandits:main"
+rl-compare-hyperparameters = "compare_hyperparameters:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.4",
+    "ruff>=0.12",
+]
+
+[tool.setuptools]
+py-modules = [
+    "bandit_utils",
+    "compare_algorithms",
+    "compare_bandits",
+    "compare_hyperparameters",
+    "compare_problem_suites",
+    "visualizations",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["algorithms*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]

@@ -1,0 +1,58 @@
+{
+  "arm_mean_distribution": "named suite; see compare_problem_suites.py",
+  "experiment": "arm-mean distribution robustness",
+  "generated_at_utc": "2026-08-06T08:15:57.388360+00:00",
+  "numpy": "2.5.1",
+  "python": "3.14.4",
+  "reward_distribution": "Bernoulli(true arm mean)",
+  "schema_version": 1,
+  "settings": {
+    "algorithms": [
+      "epsgreedy const",
+      "epsgreedy optimistic decay=0.90",
+      "thompson Beta(5,5)",
+      "ucb(c=0.003)"
+    ],
+    "environment_seeds": [
+      30000,
+      30001,
+      30002,
+      30003,
+      30004,
+      30005,
+      30006,
+      30007,
+      30008,
+      30009,
+      30010,
+      30011,
+      30012,
+      30013,
+      30014,
+      30015,
+      30016,
+      30017,
+      30018,
+      30019,
+      30020,
+      30021,
+      30022,
+      30023,
+      30024,
+      30025,
+      30026,
+      30027,
+      30028,
+      30029
+    ],
+    "n_arms": 100,
+    "n_steps": 2000,
+    "problem_suites": [
+      "uniform",
+      "small-gap",
+      "clustered",
+      "rare-good"
+    ]
+  },
+  "source_sha256": "0f7781e2240ad7a09341e3aed5642a0aeac9704a3a3c1a4eac228dfb5ea350e3"
+}

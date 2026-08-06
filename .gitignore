@@ -1,6 +1,9 @@
 __pycache__/
 *.pyc
 .venv/
+/build/
+/*.egg-info/
+/dist/
 
 # Generated run artifacts (root only; images/ is committed for the README)
 /bandit_results_*.png

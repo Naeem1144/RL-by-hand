@@ -9,6 +9,7 @@ Fischer (2002).
 
 import numpy as np
 
+from algorithms._common import prepare_simulation, validate_nonnegative
 
 SEED = 67
 N_ARMS = 1_000
@@ -23,6 +24,9 @@ def run_ucb(
     n_steps: int = N_STEPS,
     c: float = C,
     seed: int = SEED,
+    true_probs: np.ndarray | None = None,
+    policy_seed: int | None = None,
+    reward_seed: int | None = None,
 ) -> dict[str, np.ndarray]:
     """Run a UCB1 Bernoulli multi-armed bandit simulation.
 
@@ -31,12 +35,13 @@ def run_ucb(
     returned dictionary matches the format of ``run_bandit`` so the same
     summarizers and plotters work for both algorithms.
     """
-    rng = np.random.default_rng(seed)
+    c = validate_nonnegative(c, "c")
+    inputs = prepare_simulation(n_arms, n_steps, seed, true_probs, policy_seed, reward_seed)
+    reward_rng = inputs.reward_rng
+    true_probs = inputs.true_probs
 
     estimated_values = np.zeros(n_arms)
     total_pulls = np.zeros(n_arms, dtype=int)
-    true_probs = rng.random(n_arms)
-
     rewards = np.zeros(n_steps, dtype=int)
     selected_arms = np.zeros(n_steps, dtype=int)
 
@@ -45,11 +50,11 @@ def run_ucb(
     bootstrap_steps = min(n_arms, n_steps)
     for step in range(bootstrap_steps):
         selected_arm = step
-        reward = int(rng.random() < true_probs[selected_arm])
+        reward = int(reward_rng.random() < true_probs[selected_arm])
         total_pulls[selected_arm] += 1
-        estimated_values[selected_arm] += (
-            reward - estimated_values[selected_arm]
-        ) / total_pulls[selected_arm]
+        estimated_values[selected_arm] += (reward - estimated_values[selected_arm]) / total_pulls[
+            selected_arm
+        ]
         rewards[step] = reward
         selected_arms[step] = selected_arm
 
@@ -58,11 +63,11 @@ def run_ucb(
         t = step + 1  # 1-indexed step count
         ucb = estimated_values + c * np.sqrt(np.log(t) / total_pulls)
         selected_arm = int(np.argmax(ucb))
-        reward = int(rng.random() < true_probs[selected_arm])
+        reward = int(reward_rng.random() < true_probs[selected_arm])
         total_pulls[selected_arm] += 1
-        estimated_values[selected_arm] += (
-            reward - estimated_values[selected_arm]
-        ) / total_pulls[selected_arm]
+        estimated_values[selected_arm] += (reward - estimated_values[selected_arm]) / total_pulls[
+            selected_arm
+        ]
         rewards[step] = reward
         selected_arms[step] = selected_arm
 

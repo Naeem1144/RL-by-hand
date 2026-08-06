@@ -1,92 +1,189 @@
-"""Compare tuned epsilon-greedy against UCB1 and Thompson sampling.
+"""Compare tuned epsilon-greedy against UCB(c) and Thompson sampling.
 
 Benchmarks the constant-epsilon baseline, the best epsilon-greedy configuration
-found in ``compare_hyperparameters.py`` (optimistic initialization +
-``decay=0.90``), Thompson sampling, and a tuned UCB1 (``c=0.01``) on the same
-Bernoulli bandits. Every configuration is averaged over 10 seeds for robust
-results; prints a summary table and saves a comparison figure plus a CSV.
+selected in ``compare_hyperparameters.py``: optimistic epsilon-greedy with
+``decay=0.90``, Thompson sampling with ``Beta(5,5)``, and UCB(c) with
+``c=0.003``. The constant-epsilon policy remains as an untuned baseline. All use the same
+held-out Bernoulli bandits. Every configuration uses explicit matched problem,
+policy, and reward streams; the tuning seeds are never reused here.
 
-Note: UCB1 needs ``n_steps`` larger than ``n_arms`` to shine, because it must
+Note: this UCB implementation needs ``n_steps`` larger than ``n_arms`` to
+adapt, because it must
 pull every arm once before its confidence-based phase kicks in.
 """
 
-from datetime import datetime
+import csv
 from pathlib import Path
 
 import matplotlib.pyplot as plt
 import numpy as np
 
-from bandit_utils import (
-    EPSILON,
-    N_ARMS_GRID,
-    N_STEPS_GRID,
-    SEEDS,
-    average_over_seeds,
-)
 from algorithms.epsilon_greedy import run_bandit
 from algorithms.thompson import run_thompson
 from algorithms.ucb import run_ucb
-
+from bandit_utils import (
+    BENCHMARK_ENVIRONMENT_SEEDS,
+    EPSILON,
+    N_ARMS_GRID,
+    N_STEPS_GRID,
+    average_over_seeds,
+    generate_problem,
+    simulation_seeds,
+    write_manifest,
+)
 
 DECAY_RATE = 0.90
-UCB_C = 0.01
+UCB_C = 0.003
+THOMPSON_PRIOR = 5.0
+PLOT_HORIZON = max(N_STEPS_GRID)
+T_CRIT_95 = 2.0452  # Student's t, 29 degrees of freedom.
 
-N_ARMS_GRID = [10, 100, 1_000]
-N_STEPS_GRID = [100, 1_000, 10_000]
 
-# Algorithm runners: (label, callable(n_arms, n_steps, seed) -> results dict)
-ALGORITHMS = {
-    "epsgreedy const": lambda n_arms, n_steps, seed: run_bandit(
-        n_arms=n_arms, n_steps=n_steps, epsilon=EPSILON, seed=seed
-    ),
-    "epsgreedy optimistic decay=0.90": lambda n_arms, n_steps, seed: run_bandit(
+def run_constant_epsilon(
+    n_arms: int,
+    n_steps: int,
+    true_probs: np.ndarray,
+    policy_seed: int,
+    reward_seed: int,
+) -> dict[str, np.ndarray]:
+    return run_bandit(
         n_arms=n_arms,
         n_steps=n_steps,
         epsilon=EPSILON,
-        seed=seed,
+        true_probs=true_probs,
+        policy_seed=policy_seed,
+        reward_seed=reward_seed,
+    )
+
+
+def run_optimistic_decay(
+    n_arms: int,
+    n_steps: int,
+    true_probs: np.ndarray,
+    policy_seed: int,
+    reward_seed: int,
+) -> dict[str, np.ndarray]:
+    return run_bandit(
+        n_arms=n_arms,
+        n_steps=n_steps,
+        epsilon=EPSILON,
+        true_probs=true_probs,
+        policy_seed=policy_seed,
+        reward_seed=reward_seed,
         decay=True,
         decay_rate=DECAY_RATE,
         optimistic_initialization=True,
-    ),
-    "thompson sampling": lambda n_arms, n_steps, seed: run_thompson(
-        n_arms=n_arms, n_steps=n_steps, seed=seed
-    ),
-    "ucb1 (c=0.01)": lambda n_arms, n_steps, seed: run_ucb(
-        n_arms=n_arms, n_steps=n_steps, c=UCB_C, seed=seed
-    ),
+    )
+
+
+def run_tuned_thompson(
+    n_arms: int,
+    n_steps: int,
+    true_probs: np.ndarray,
+    policy_seed: int,
+    reward_seed: int,
+) -> dict[str, np.ndarray]:
+    return run_thompson(
+        n_arms=n_arms,
+        n_steps=n_steps,
+        true_probs=true_probs,
+        policy_seed=policy_seed,
+        reward_seed=reward_seed,
+        prior_alpha=THOMPSON_PRIOR,
+        prior_beta=THOMPSON_PRIOR,
+    )
+
+
+def run_tuned_ucb(
+    n_arms: int,
+    n_steps: int,
+    true_probs: np.ndarray,
+    policy_seed: int,
+    reward_seed: int,
+) -> dict[str, np.ndarray]:
+    return run_ucb(
+        n_arms=n_arms,
+        n_steps=n_steps,
+        c=UCB_C,
+        true_probs=true_probs,
+        policy_seed=policy_seed,
+        reward_seed=reward_seed,
+    )
+
+
+ALGORITHMS = {
+    "epsgreedy const": run_constant_epsilon,
+    "epsgreedy optimistic decay=0.90": run_optimistic_decay,
+    "thompson Beta(5,5)": run_tuned_thompson,
+    "ucb(c=0.003)": run_tuned_ucb,
 }
 
 
 def main() -> None:
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    out_dir = Path(f"algorithm_comparison_{timestamp}")
+    out_dir = Path("results/algorithm_comparison")
     out_dir.mkdir(parents=True, exist_ok=True)
 
     # Collect metrics for the table
     rows: list[tuple[int, int, str, float, float, float, float]] = []
-    # Store averaged series keyed by (n_arms, algorithm) for plotting
-    series: dict[tuple[int, str], tuple[np.ndarray, np.ndarray, np.ndarray]] = {}
+    # Keep the horizon in the key so grid results cannot overwrite one another.
+    series: dict[
+        tuple[int, int, str],
+        tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray],
+    ] = {}
+    per_seed_rows: list[tuple[int, int, str, int, float, float]] = []
 
     for n_arms in N_ARMS_GRID:
         for n_steps in N_STEPS_GRID:
             for label, run_fn in ALGORITHMS.items():
-                def run_one(seed: int) -> dict[str, np.ndarray]:
-                    return run_fn(n_arms, n_steps, seed)
+
+                def run_one(
+                    environment_seed: int,
+                    n_arms: int = n_arms,
+                    n_steps: int = n_steps,
+                    run_fn=run_fn,
+                ) -> dict[str, np.ndarray]:
+                    true_probs = generate_problem(n_arms, environment_seed)
+                    policy_seed, reward_seed = simulation_seeds(environment_seed)
+                    return run_fn(n_arms, n_steps, true_probs, policy_seed, reward_seed)
 
                 (
                     steps,
                     regret,
+                    regret_se,
                     reward_series,
+                    reward_se,
                     avg_reward,
                     std_reward,
                     total_regret,
                     std_regret,
-                    _,
-                    _,
-                ) = average_over_seeds(run_one, SEEDS)
-                series[(n_arms, label)] = (steps, regret, reward_series)
+                    per_seed_rewards,
+                    per_seed_regrets,
+                ) = average_over_seeds(run_one, BENCHMARK_ENVIRONMENT_SEEDS)
+                series[(n_arms, n_steps, label)] = (
+                    steps,
+                    regret,
+                    regret_se,
+                    reward_series,
+                    reward_se,
+                )
                 rows.append(
                     (n_arms, n_steps, label, avg_reward, std_reward, total_regret, std_regret)
+                )
+                per_seed_rows.extend(
+                    (
+                        n_arms,
+                        n_steps,
+                        label,
+                        environment_seed,
+                        float(seed_reward),
+                        float(seed_regret),
+                    )
+                    for environment_seed, seed_reward, seed_regret in zip(
+                        BENCHMARK_ENVIRONMENT_SEEDS,
+                        per_seed_rewards,
+                        per_seed_regrets,
+                        strict=True,
+                    )
                 )
 
     # Print summary table
@@ -105,16 +202,57 @@ def main() -> None:
 
     # Save CSV
     csv_path = out_dir / "summary.csv"
-    with csv_path.open("w") as handle:
-        handle.write(
-            "n_arms,n_steps,algorithm,"
-            "final_avg_reward,final_avg_reward_std,total_regret,total_regret_std\n"
+    with csv_path.open("w", newline="") as handle:
+        writer = csv.writer(handle, lineterminator="\n")
+        writer.writerow(
+            [
+                "n_arms",
+                "n_steps",
+                "algorithm",
+                "final_avg_reward",
+                "final_avg_reward_std",
+                "total_regret",
+                "total_regret_std",
+            ]
         )
         for n_arms, n_steps, label, avg_reward, std_reward, total_regret, std_regret in rows:
-            handle.write(
-                f"{n_arms},{n_steps},{label},"
-                f"{avg_reward:.6f},{std_reward:.6f},{total_regret:.1f},{std_regret:.1f}\n"
+            writer.writerow(
+                [
+                    n_arms,
+                    n_steps,
+                    label,
+                    f"{avg_reward:.6f}",
+                    f"{std_reward:.6f}",
+                    f"{total_regret:.6f}",
+                    f"{std_regret:.6f}",
+                ]
             )
+
+    with (out_dir / "per_seed.csv").open("w", newline="") as handle:
+        writer = csv.writer(handle, lineterminator="\n")
+        writer.writerow(
+            [
+                "n_arms",
+                "n_steps",
+                "algorithm",
+                "environment_seed",
+                "final_avg_reward",
+                "total_regret",
+            ]
+        )
+        writer.writerows(per_seed_rows)
+
+    write_manifest(
+        out_dir,
+        "cross-algorithm comparison",
+        {
+            "environment_seeds": BENCHMARK_ENVIRONMENT_SEEDS,
+            "n_arms_grid": N_ARMS_GRID,
+            "n_steps_grid": N_STEPS_GRID,
+            "algorithms": list(ALGORITHMS),
+            "plot_horizon": PLOT_HORIZON,
+        },
+    )
 
     # Comparison figure: regret (top) and average reward (bottom) vs steps
     labels = list(ALGORITHMS)
@@ -125,19 +263,33 @@ def main() -> None:
         regret_axis = axes[0, col]
         reward_axis = axes[1, col]
 
-        for label, color in zip(labels, colors):
-            steps, regret, reward_series = series[(n_arms, label)]
+        for label, color in zip(labels, colors, strict=True):
+            steps, regret, regret_se, reward_series, reward_se = series[
+                (n_arms, PLOT_HORIZON, label)
+            ]
             linestyle = "--" if label == "epsgreedy const" else "-"
             regret_axis.plot(steps, regret, color=color, linestyle=linestyle, label=label)
             reward_axis.plot(steps, reward_series, color=color, linestyle=linestyle, label=label)
+            regret_axis.fill_between(
+                steps,
+                regret - T_CRIT_95 * regret_se,
+                regret + T_CRIT_95 * regret_se,
+                color=color,
+                alpha=0.10,
+            )
+            reward_axis.fill_between(
+                steps,
+                reward_series - T_CRIT_95 * reward_se,
+                reward_series + T_CRIT_95 * reward_se,
+                color=color,
+                alpha=0.10,
+            )
 
         best_prob = float(
             np.mean(
                 [
-                    np.max(
-                        run_bandit(n_arms=n_arms, n_steps=1, seed=seed)["true_probs"]
-                    )
-                    for seed in SEEDS
+                    np.max(generate_problem(n_arms, environment_seed))
+                    for environment_seed in BENCHMARK_ENVIRONMENT_SEEDS
                 ]
             )
         )
@@ -152,8 +304,9 @@ def main() -> None:
         reward_axis.legend(fontsize=8)
 
     fig.suptitle(
-        "Epsilon-greedy vs UCB1 vs Thompson sampling (averaged over "
-        f"{len(SEEDS)} seeds, epsilon={EPSILON})",
+        "Epsilon-greedy vs UCB(c) vs Thompson sampling "
+        f"(T={PLOT_HORIZON:,}, {len(BENCHMARK_ENVIRONMENT_SEEDS)} held-out "
+        "instances; shaded 95% CIs)",
         fontsize=15,
     )
     fig_path = Path("images/algorithm_comparison.png")
