@@ -313,6 +313,51 @@ held-out set; `delta_ci95_*` columns are simultaneous intervals relative to
 the tuning-selected reference. A confidence interval containing zero is
 reported only as “not detectably different,” not as proof of equivalence.
 
+The following table reports the fresh held-out results over 100 problem
+instances. Reward is the mean ± sample standard deviation; the regret interval
+is a marginal 95% confidence interval. The final column is the paired regret
+difference from the tuning-selected reference with a simultaneous 95% max-t
+interval; positive values favor the reference.
+
+| Rank | Family | Configuration | Average reward ↑ | Pseudo-regret ↓ (95% CI) | Δ vs selected ↓ (simultaneous 95% CI) |
+| ---: | --- | --- | ---: | ---: | ---: |
+| 1 | UCB(c) | `c=0.001` | 0.9416 ± 0.0096 | 98.5 [96.6, 100.5] | -0.3 [-1.1, +0.5] |
+| 2 | UCB(c) | `c=0.01` | 0.9414 ± 0.0101 | 98.7 [96.9, 100.5] | -0.1 [-1.9, +1.6] |
+| 3 | UCB(c) | `c=0.003` (selected on tuning set) | 0.9414 ± 0.0101 | 98.8 [96.9, 100.8] | +0.0 [+0.0, +0.0] |
+| 4 | UCB(c) | `c=0.03` | 0.9412 ± 0.0100 | 99.3 [97.5, 101.1] | +0.5 [-1.2, +2.1] |
+| 5 | UCB(c) | `c=0.05` | 0.9409 ± 0.0102 | 100.1 [98.2, 102.0] | +1.3 [-0.7, +3.3] |
+| 6 | UCB(c) | `c=0.075` | 0.9404 ± 0.0097 | 101.1 [99.2, 102.9] | +2.2 [+0.6, +3.9] |
+| 7 | Epsilon-greedy | optimistic, `d=0.95` | 0.9401 ± 0.0122 | 101.6 [99.3, 103.9] | +2.8 [-1.6, +7.1] |
+| 8 | Epsilon-greedy | optimistic, `d=0.90` | 0.9398 ± 0.0124 | 102.3 [99.9, 104.8] | +3.5 [-1.0, +8.0] |
+| 9 | UCB(c) | `c=0.1` | 0.9389 ± 0.0096 | 103.9 [102.2, 105.7] | +5.1 [+2.6, +7.6] |
+| 10 | Epsilon-greedy | optimistic, `d=0.99` | 0.9384 ± 0.0129 | 104.4 [101.6, 107.2] | +5.6 [+0.8, +10.3] |
+| 11 | Epsilon-greedy | optimistic, constant `eps=0.01` | 0.9351 ± 0.0129 | 111.3 [108.3, 114.3] | +12.4 [+7.6, +17.3] |
+| 12 | Thompson sampling | `Beta(2,2)` | 0.9311 ± 0.0204 | 120.6 [115.1, 126.1] | +21.8 [+12.7, +30.8] |
+| 13 | Epsilon-greedy | zero-init, `d=0.999` | 0.9288 ± 0.0310 | 125.5 [113.8, 137.2] | +26.7 [+8.2, +45.2] |
+| 14 | Thompson sampling | `Beta(5,5)` | 0.9284 ± 0.0278 | 126.9 [116.8, 136.9] | +28.0 [+12.1, +43.9] |
+| 15 | Epsilon-greedy | optimistic, constant `eps=0.03` | 0.9252 ± 0.0138 | 131.5 [128.6, 134.5] | +32.7 [+27.9, +37.6] |
+| 16 | UCB(c) | `c=0.2` | 0.9248 ± 0.0102 | 132.8 [130.1, 135.4] | +33.9 [+30.3, +37.6] |
+| 17 | Epsilon-greedy | optimistic, `d=0.999` | 0.9219 ± 0.0119 | 138.6 [136.4, 140.9] | +39.8 [+35.6, +44.0] |
+| 18 | Thompson sampling | `Beta(1,1)` | 0.9207 ± 0.0250 | 141.4 [134.8, 148.0] | +42.6 [+31.6, +53.5] |
+| 19 | Epsilon-greedy | zero-init, constant `eps=0.03` | 0.9133 ± 0.0432 | 155.3 [138.7, 172.0] | +56.5 [+30.1, +82.9] |
+| 20 | Thompson sampling | `Beta(0.5,0.5)` | 0.9132 ± 0.0293 | 155.5 [146.9, 164.0] | +56.6 [+42.5, +70.8] |
+| 21 | Thompson sampling | `Beta(0.25,0.25)` | 0.9081 ± 0.0287 | 164.9 [156.9, 172.9] | +66.0 [+53.2, +78.9] |
+| 22 | Epsilon-greedy | zero-init, `d=0.9999` | 0.9071 ± 0.0210 | 167.6 [160.1, 175.1] | +68.7 [+56.7, +80.8] |
+| 23 | Thompson sampling | `Beta(10,10)` | 0.9057 ± 0.0332 | 170.4 [158.0, 182.8] | +71.6 [+51.7, +91.4] |
+| 24 | Epsilon-greedy | zero-init, `d=0.99999` | 0.9021 ± 0.0234 | 178.5 [170.1, 186.9] | +79.7 [+66.2, +93.2] |
+| 25 | Epsilon-greedy | zero-init, constant `eps=0.1` | 0.9015 ± 0.0231 | 179.8 [171.4, 188.3] | +81.0 [+67.5, +94.4] |
+| 26 | Epsilon-greedy | optimistic, `d=0.9999` | 0.8981 ± 0.0130 | 186.4 [183.5, 189.3] | +87.6 [+82.5, +92.6] |
+| 27 | Epsilon-greedy | optimistic, `d=0.99999` | 0.8944 ± 0.0120 | 193.1 [190.3, 195.9] | +94.3 [+89.5, +99.0] |
+| 28 | Epsilon-greedy | optimistic, constant `eps=0.1` | 0.8941 ± 0.0121 | 194.2 [191.4, 197.1] | +95.4 [+90.6, +100.2] |
+| 29 | Epsilon-greedy | zero-init, `d=0.99` | 0.8928 ± 0.1011 | 197.5 [157.1, 238.0] | +98.7 [+35.0, +162.4] |
+| 30 | Epsilon-greedy | zero-init, constant `eps=0.01` | 0.8628 ± 0.0854 | 257.2 [223.3, 291.1] | +158.4 [+105.4, +211.4] |
+| 31 | UCB(c) | `c=0.5` | 0.8340 ± 0.0133 | 315.0 [310.3, 319.6] | +216.1 [+208.9, +223.3] |
+| 32 | Epsilon-greedy | zero-init, constant `eps=0.3` | 0.8139 ± 0.0155 | 354.8 [350.0, 359.6] | +256.0 [+247.5, +264.5] |
+| 33 | Epsilon-greedy | optimistic, constant `eps=0.3` | 0.8012 ± 0.0147 | 378.9 [374.2, 383.6] | +280.1 [+272.2, +287.9] |
+| 34 | Epsilon-greedy | zero-init, `d=0.95` | 0.7722 ± 0.2017 | 441.5 [360.5, 522.5] | +342.7 [+215.2, +470.2] |
+| 35 | Epsilon-greedy | zero-init, `d=0.90` | 0.7042 ± 0.2278 | 576.3 [485.1, 667.5] | +477.5 [+334.0, +620.9] |
+| 36 | UCB(c) | `c=sqrt(2)` | 0.6671 ± 0.0254 | 648.1 [638.6, 657.6] | +549.3 [+533.8, +564.7] |
+
 <p align="center">
   <img src="images/hyperparameter_comparison.png" alt="Held-out hyperparameter comparison for epsilon-greedy, UCB(c), and Thompson sampling with 95% confidence intervals" width="900">
 </p>
