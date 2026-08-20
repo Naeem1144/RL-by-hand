@@ -1,0 +1,10 @@
+baseline,configuration,n_seeds,mean_regret_difference,ci95_half_width,win_rate
+Thompson-Normal sigma0=2,UCB c=1,50,-1.330000,25.945828,0.7800
+Thompson-Normal sigma0=2,UCB c=1.41,50,-19.270000,5.451609,0.2000
+Thompson-Normal sigma0=2,UCB c=0.5,50,-34.470000,66.481284,0.9000
+Thompson-Normal sigma0=2,"Epsilon epsilon=0, optimistic",50,-81.460000,107.485570,0.9000
+Thompson-Normal sigma0=2,Thompson-Normal sigma0=1,50,-153.210000,73.856024,0.4800
+Thompson-Normal sigma0=2,Epsilon epsilon=0.05,50,-401.810000,73.978538,0.0000
+Thompson-Normal sigma0=2,Epsilon epsilon=0.1,50,-535.620000,52.129530,0.0000
+Thompson-Normal sigma0=2,Epsilon epsilon=0.2,50,-902.760000,20.239744,0.0000
+Thompson-Normal sigma0=2,Thompson-Normal sigma0=0.5,50,-1117.810000,254.431014,0.3000

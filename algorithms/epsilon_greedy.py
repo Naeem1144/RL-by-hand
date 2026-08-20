@@ -1,107 +1,82 @@
-"""Epsilon-greedy Bernoulli multi-armed bandit, implemented from scratch."""
+"""Epsilon-greedy bandit algorithm."""
+
+from dataclasses import dataclass, field
 
 import numpy as np
 
-from algorithms._common import prepare_simulation, validate_probability
-from visualizations import plot_bandit_results
-
-SEED = 67
-EPSILON = 0.10
-N_ARMS = 1_000
-N_STEPS = 1_000
-OUTPUT_PATH = "images/bandit_results.png"
+from algorithms.base import BanditAlgorithm
 
 
-def run_bandit(
-    n_arms: int = N_ARMS,
-    n_steps: int = N_STEPS,
-    epsilon: float = EPSILON,
-    seed: int = SEED,
-    decay: bool = False,
-    decay_rate: float | None = None,
-    optimistic_initialization: bool = False,
-    true_probs: np.ndarray | None = None,
-    policy_seed: int | None = None,
-    reward_seed: int | None = None,
-) -> dict[str, np.ndarray]:
-    """Run an epsilon-greedy Bernoulli multi-armed bandit simulation.
+@dataclass
+class EpsilonGreedy(BanditAlgorithm):
+    """Explore randomly with probability epsilon, otherwise exploit.
 
-    On each step the agent explores a random arm with probability ``epsilon``
-    and otherwise exploits its best current estimate, breaking ties uniformly
-    at random so equal estimates do not always favor the lowest-indexed arm.
-    When ``decay`` is true, epsilon is multiplied by ``decay_rate`` after every
-    step. With ``optimistic_initialization`` all estimates
-    start at 1.0 (the maximum reward), which keeps untried arms attractive and
-    encourages broad early exploration.
-
-    ``true_probs`` and the two optional random-stream seeds support explicit,
-    matched benchmark instances. When omitted, independent streams derived
-    from ``seed`` generate the problem, policy choices, and rewards.
+    Values are sample means by default.  Pass ``step_size`` to use an
+    exponential recency-weighted average instead, which tracks non-stationary
+    problems.  Pass ``optimistic_value`` above every arm's mean to encourage
+    early exploration through pessimistic initial estimates.
     """
-    if not isinstance(decay, bool):
-        raise TypeError("decay must be a boolean")
-    if not isinstance(optimistic_initialization, bool):
-        raise TypeError("optimistic_initialization must be a boolean")
-    epsilon = validate_probability(epsilon, "epsilon")
-    if decay:
-        if decay_rate is None:
-            raise ValueError("decay_rate is required when decay=True")
-        decay_rate = validate_probability(decay_rate, "decay_rate")
-        if decay_rate in (0.0, 1.0):
-            raise ValueError("decay_rate must lie strictly between 0 and 1")
-    elif decay_rate is not None:
-        raise ValueError("decay_rate must be None when decay=False")
 
-    inputs = prepare_simulation(n_arms, n_steps, seed, true_probs, policy_seed, reward_seed)
-    policy_rng = inputs.policy_rng
-    reward_rng = inputs.reward_rng
-    true_probs = inputs.true_probs
+    epsilon: float = 0.1
+    decay_rate: float | None = None
+    step_size: float | None = None
+    optimistic_value: float | None = None
+    _rng: np.random.Generator = field(init=False, repr=False)
+    _values: np.ndarray = field(init=False, repr=False)
+    _pulls: np.ndarray = field(init=False, repr=False)
+    _current_epsilon: float = field(init=False, repr=False)
 
-    estimated_values = np.full(n_arms, 1.0) if optimistic_initialization else np.zeros(n_arms)
+    def __post_init__(self) -> None:
+        self.epsilon = float(self.epsilon)
+        if not np.isfinite(self.epsilon) or not 0.0 <= self.epsilon <= 1.0:
+            raise ValueError("epsilon must be finite and lie in [0, 1]")
+        if self.decay_rate is not None:
+            self.decay_rate = float(self.decay_rate)
+            if not np.isfinite(self.decay_rate) or not 0.0 < self.decay_rate < 1.0:
+                raise ValueError("decay_rate must lie strictly between 0 and 1")
+        if self.step_size is not None:
+            self.step_size = float(self.step_size)
+            if not np.isfinite(self.step_size) or not 0.0 < self.step_size <= 1.0:
+                raise ValueError("step_size must be finite and lie in (0, 1]")
+        if self.optimistic_value is not None:
+            self.optimistic_value = float(self.optimistic_value)
+            if not np.isfinite(self.optimistic_value):
+                raise ValueError("optimistic_value must be finite")
 
-    total_pulls = np.zeros(n_arms, dtype=int)
-    # History
-    rewards = np.zeros(n_steps, dtype=int)
-    selected_arms = np.zeros(n_steps, dtype=int)
+    @property
+    def name(self) -> str:
+        suffix = f", decay={self.decay_rate:g}" if self.decay_rate is not None else ""
+        suffix += f", alpha={self.step_size:g}" if self.step_size is not None else ""
+        suffix += ", optimistic" if self.optimistic_value is not None else ""
+        return f"Epsilon-greedy(epsilon={self.epsilon:g}{suffix})"
 
-    for step in range(n_steps):
-        if policy_rng.random() < epsilon:
-            # Explore: pick a random arm
-            selected_arm = policy_rng.integers(n_arms)
+    def reset(self, n_arms: int, rng: np.random.Generator) -> None:
+        self._rng = rng
+        initial_value = 0.0 if self.optimistic_value is None else self.optimistic_value
+        self._values = np.full(n_arms, initial_value)
+        self._pulls = np.zeros(n_arms, dtype=int)
+        self._current_epsilon = self.epsilon
+
+    def select_arm(self, step: int) -> int:
+        del step
+        if self._rng.random() < self._current_epsilon:
+            return int(self._rng.integers(self._values.size))
+        best = np.flatnonzero(self._values == self._values.max())
+        return int(best[0]) if best.size == 1 else int(self._rng.choice(best))
+
+    def update(self, arm: int, reward: float) -> None:
+        self._pulls[arm] += 1
+        if self.step_size is None:
+            self._values[arm] += (reward - self._values[arm]) / self._pulls[arm]
         else:
-            # Exploit: pick the arm with the highest estimate. Ties are broken
-            # uniformly at random so a block of equal estimates (e.g. every
-            # zero-initialized arm at 0.0) does not always collapse onto arm 0.
-            max_value = estimated_values.max()
-            ties = np.flatnonzero(estimated_values == max_value)
-            selected_arm = int(ties[0]) if ties.size == 1 else int(policy_rng.choice(ties))
+            self._values[arm] += self.step_size * (reward - self._values[arm])
+        if self.decay_rate is not None:
+            self._current_epsilon *= self.decay_rate
 
-        reward = int(reward_rng.random() < true_probs[selected_arm])
-        total_pulls[selected_arm] += 1
-        estimated_values[selected_arm] += (reward - estimated_values[selected_arm]) / total_pulls[
-            selected_arm
-        ]
+    @property
+    def estimated_values(self) -> np.ndarray:
+        return self._values
 
-        rewards[step] = reward
-        selected_arms[step] = selected_arm
-
-        if decay:
-            epsilon *= decay_rate
-
-    return {
-        "rewards": rewards,
-        "selected_arms": selected_arms,
-        "true_probs": true_probs,
-        "estimated_values": estimated_values,
-        "total_pulls": total_pulls,
-    }
-
-
-def main() -> None:
-    results = run_bandit()
-    output_path = plot_bandit_results(**results, output_path=OUTPUT_PATH)
-    print(f"Saved visualization to {output_path.resolve()}")
-
-
-if __name__ == "__main__":
-    main()
+    @property
+    def total_pulls(self) -> np.ndarray:
+        return self._pulls

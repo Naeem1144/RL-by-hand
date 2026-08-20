@@ -1,0 +1,18 @@
+rank,family,configuration,mean_reward,reward_ci95_half_width,mean_regret,regret_ci95_half_width
+1,UCB,UCB c=0.5,0.516310,0.005563,61.682000,9.071894
+2,Thompson sampling,"Thompson Beta(0.5,0.5)",0.513380,0.004785,67.845000,5.586319
+3,Thompson sampling,"Thompson Beta(1,1)",0.511110,0.005844,71.096000,6.250995
+4,Thompson sampling,"Thompson Beta(2,2)",0.507530,0.004479,81.552000,5.177612
+5,Thompson sampling,"Thompson Beta(5,5)",0.504830,0.005240,84.338000,5.999403
+6,Epsilon-greedy,Epsilon epsilon=0.1,0.486420,0.011614,121.871000,22.342769
+7,Epsilon-greedy,"Epsilon epsilon=0.1, decay=0.999",0.484270,0.016935,126.754000,32.773609
+8,Epsilon-greedy,Epsilon epsilon=0.05,0.480130,0.014947,134.344000,28.920202
+9,Epsilon-greedy,"Epsilon epsilon=0.2, decay=0.995",0.477530,0.018933,139.853000,38.599268
+10,Epsilon-greedy,Epsilon epsilon=0.2,0.472150,0.009651,151.327000,16.919918
+11,UCB,UCB c=1,0.469470,0.004670,154.843000,5.444258
+12,UCB,UCB c=0.1,0.466260,0.022081,164.477000,43.458087
+13,Epsilon-greedy,Epsilon epsilon=0.3,0.448550,0.006487,198.375000,11.071175
+14,Epsilon-greedy,Epsilon epsilon=0.01,0.449450,0.025532,198.455000,50.068666
+15,Epsilon-greedy,"Epsilon epsilon=0, optimistic",0.444350,0.031064,208.480000,62.077393
+16,UCB,UCB c=1.41,0.430500,0.004930,235.919000,5.016719
+17,UCB,UCB c=2,0.395810,0.004532,307.012000,4.474981

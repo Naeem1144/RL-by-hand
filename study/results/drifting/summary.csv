@@ -1,0 +1,9 @@
+rank,family,configuration,mean_reward,reward_ci95_half_width,mean_regret,regret_ci95_half_width
+1,Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",0.743400,0.012016,216.482613,10.920734
+2,UCB,UCB c=1.41,0.738660,0.013980,228.319778,13.654564
+3,Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",0.707370,0.015151,291.763289,17.534297
+4,Thompson sampling,"Thompson Beta(1,1)",0.668300,0.022659,366.703306,38.064120
+5,Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",0.654970,0.017503,396.640724,28.115106
+6,Epsilon-greedy,Epsilon epsilon=0.05,0.642020,0.027561,418.512941,45.772633
+7,Epsilon-greedy,Epsilon epsilon=0.1,0.636930,0.023329,431.279042,38.680733
+8,Epsilon-greedy,Epsilon epsilon=0.2,0.621360,0.017567,459.434954,27.675088

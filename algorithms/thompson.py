@@ -1,96 +1,65 @@
-"""Thompson sampling for a Bernoulli multi-armed bandit, from scratch.
+"""Beta-Bernoulli Thompson sampling bandit algorithm."""
 
-Each arm is modelled with a configurable Beta posterior. The default
-``Beta(1, 1)`` prior is uniform; alternative positive ``alpha`` and ``beta``
-values control the prior mean and strength. On every step a reward probability
-is sampled from each arm's posterior and the arm with the highest sample is
-pulled, which automatically balances exploration and exploitation.
-"""
+from dataclasses import dataclass, field
 
 import numpy as np
 
-from algorithms._common import prepare_simulation
-
-SEED = 67
-N_ARMS = 1_000
-N_STEPS = 10_000
-PRIOR_ALPHA = 1.0
-PRIOR_BETA = 1.0
+from algorithms.base import BanditAlgorithm
 
 
-def run_thompson(
-    n_arms: int = N_ARMS,
-    n_steps: int = N_STEPS,
-    seed: int = SEED,
-    prior_alpha: float = PRIOR_ALPHA,
-    prior_beta: float = PRIOR_BETA,
-    true_probs: np.ndarray | None = None,
-    policy_seed: int | None = None,
-    reward_seed: int | None = None,
-) -> dict[str, np.ndarray]:
-    """Run a Beta-Bernoulli Thompson-sampling bandit simulation.
+@dataclass
+class ThompsonSampling(BanditAlgorithm):
+    """Sample from one Beta posterior per Bernoulli arm."""
 
-    ``prior_alpha`` and ``prior_beta`` must be positive and define the common
-    Beta prior used for every arm. ``Beta(1, 1)`` is the uniform default,
-    ``Beta(0.5, 0.5)`` is the Jeffreys prior, and larger values express
-    stronger prior beliefs.
+    prior_alpha: float = 1.0
+    prior_beta: float = 1.0
+    _rng: np.random.Generator = field(init=False, repr=False)
+    _successes: np.ndarray = field(init=False, repr=False)
+    _failures: np.ndarray = field(init=False, repr=False)
+    _pulls: np.ndarray = field(init=False, repr=False)
 
-    Returns the same dictionary format as ``run_bandit`` so the shared
-    summarizers and plotters work unchanged.
-    """
-    if (
-        not np.isfinite(prior_alpha)
-        or not np.isfinite(prior_beta)
-        or prior_alpha <= 0
-        or prior_beta <= 0
-    ):
-        raise ValueError("prior_alpha and prior_beta must be positive")
+    def __post_init__(self) -> None:
+        self.prior_alpha = float(self.prior_alpha)
+        self.prior_beta = float(self.prior_beta)
+        if (
+            not np.isfinite(self.prior_alpha)
+            or not np.isfinite(self.prior_beta)
+            or self.prior_alpha <= 0
+            or self.prior_beta <= 0
+        ):
+            raise ValueError("prior_alpha and prior_beta must be positive")
 
-    inputs = prepare_simulation(n_arms, n_steps, seed, true_probs, policy_seed, reward_seed)
-    policy_rng = inputs.policy_rng
-    reward_rng = inputs.reward_rng
-    true_probs = inputs.true_probs
+    @property
+    def name(self) -> str:
+        return f"Thompson(alpha={self.prior_alpha:g}, beta={self.prior_beta:g})"
 
-    # Observed successes and failures for each arm.
-    successes = np.zeros(n_arms, dtype=int)
-    failures = np.zeros(n_arms, dtype=int)
-    total_pulls = np.zeros(n_arms, dtype=int)
-    rewards = np.zeros(n_steps, dtype=int)
-    selected_arms = np.zeros(n_steps, dtype=int)
+    def reset(self, n_arms: int, rng: np.random.Generator) -> None:
+        self._rng = rng
+        self._successes = np.zeros(n_arms, dtype=int)
+        self._failures = np.zeros(n_arms, dtype=int)
+        self._pulls = np.zeros(n_arms, dtype=int)
 
-    for step in range(n_steps):
-        # Sample a plausible reward probability from each arm's posterior
-        samples = policy_rng.beta(successes + prior_alpha, failures + prior_beta)
-        selected_arm = int(np.argmax(samples))
+    def select_arm(self, step: int) -> int:
+        del step
+        samples = self._rng.beta(
+            self._successes + self.prior_alpha,
+            self._failures + self.prior_beta,
+        )
+        return int(np.argmax(samples))
 
-        reward = int(reward_rng.random() < true_probs[selected_arm])
-        successes[selected_arm] += reward
-        failures[selected_arm] += 1 - reward
-        total_pulls[selected_arm] += 1
+    def update(self, arm: int, reward: float) -> None:
+        if reward not in (0.0, 1.0):
+            raise ValueError("ThompsonSampling requires binary rewards")
+        self._successes[arm] += int(reward)
+        self._failures[arm] += int(1 - reward)
+        self._pulls[arm] += 1
 
-        rewards[step] = reward
-        selected_arms[step] = selected_arm
+    @property
+    def estimated_values(self) -> np.ndarray:
+        return (self._successes + self.prior_alpha) / (
+            self._pulls + self.prior_alpha + self.prior_beta
+        )
 
-    # Return posterior means as the learned value estimates.
-    estimated_values = (successes + prior_alpha) / (total_pulls + prior_alpha + prior_beta)
-
-    return {
-        "rewards": rewards,
-        "selected_arms": selected_arms,
-        "true_probs": true_probs,
-        "estimated_values": estimated_values,
-        "total_pulls": total_pulls,
-    }
-
-
-def main() -> None:
-    results = run_thompson()
-    best_arm = int(np.argmax(results["true_probs"]))
-    print(f"Thompson sampling over {N_STEPS} steps, {N_ARMS} arms")
-    print(f"mean reward:           {float(results['rewards'].mean()):.4f}")
-    print(f"best arm probability:  {float(results['true_probs'].max()):.4f}")
-    print(f"pulls of the best arm: {int(results['total_pulls'][best_arm])}")
-
-
-if __name__ == "__main__":
-    main()
+    @property
+    def total_pulls(self) -> np.ndarray:
+        return self._pulls

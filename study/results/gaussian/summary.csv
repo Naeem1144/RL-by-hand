@@ -1,0 +1,11 @@
+rank,family,configuration,mean_reward,reward_ci95_half_width,mean_regret,regret_ci95_half_width
+1,Thompson sampling,Thompson-Normal sigma0=2,3.470071,0.006408,64.380000,5.131917
+2,UCB,UCB c=1,3.469406,0.013677,65.710000,25.052586
+3,UCB,UCB c=1.41,3.460436,0.006865,83.650000,3.387913
+4,UCB,UCB c=0.5,3.452836,0.032574,98.850000,66.999695
+5,Epsilon-greedy,"Epsilon epsilon=0, optimistic",3.429341,0.053037,145.840000,106.014088
+6,Thompson sampling,Thompson-Normal sigma0=1,3.393466,0.038131,217.590000,74.136115
+7,Epsilon-greedy,Epsilon epsilon=0.05,3.269166,0.037076,466.190000,73.802035
+8,Epsilon-greedy,Epsilon epsilon=0.1,3.202261,0.028282,600.000000,52.089814
+9,Epsilon-greedy,Epsilon epsilon=0.2,3.018691,0.011743,967.140000,20.759655
+10,Thompson sampling,Thompson-Normal sigma0=0.5,2.911166,0.126871,1182.190000,255.246619
