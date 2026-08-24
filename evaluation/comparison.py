@@ -16,13 +16,22 @@ Z_95 = 1.96
 
 @dataclass(frozen=True)
 class AlgorithmSummary:
-    """Aggregate outcome for one algorithm across repeated runs."""
+    """Aggregate outcome for one algorithm across repeated runs.
+
+    ``mean_regret`` and ``regret_std`` summarise the average performance;
+    ``median_regret``, ``p90_regret`` and ``max_regret`` describe the risk
+    profile, because a per-seed-mean ordering can hide rare catastrophic
+    runs (the mean is dominated by the tail while the median stays low).
+    """
 
     name: str
     mean_reward: float
     reward_std: float
     mean_regret: float
     regret_std: float
+    median_regret: float
+    p90_regret: float
+    max_regret: float
 
 
 @dataclass(frozen=True)
@@ -31,9 +40,11 @@ class PairedComparison:
 
     ``mean_regret_difference`` is the baseline regret minus this
     configuration's regret, so positive values mean the configuration beats
-    the baseline on the same seed.  Because both runs share a seed the
-    comparison is paired, which is far more sensitive than comparing two
-    independent confidence intervals.
+    the baseline on the same seed.  ``win_rate`` is the fraction of seeds
+    where the difference is strictly positive, so ties count against the
+    configuration.  Because both runs share a seed the comparison is
+    paired, which is far more sensitive than comparing two independent
+    confidence intervals.
     """
 
     baseline: str
@@ -63,6 +74,9 @@ class ComparisonResult:
                     reward_std=float(rewards.std(ddof=ddof)),
                     mean_regret=float(regrets.mean()),
                     regret_std=float(regrets.std(ddof=ddof)),
+                    median_regret=float(np.median(regrets)),
+                    p90_regret=float(np.percentile(regrets, 90)),
+                    max_regret=float(np.max(regrets)),
                 )
             )
         return tuple(rows)
@@ -72,7 +86,11 @@ class ComparisonResult:
         return min(self.summaries(), key=lambda row: row.mean_regret)
 
     def paired_against(self, baseline: str) -> tuple[PairedComparison, ...]:
-        """Compare every configuration with ``baseline`` seed by seed."""
+        """Compare every configuration with ``baseline`` seed by seed.
+
+        ``win_rate`` counts only strictly positive differences, so matches do
+        not count as wins for either configuration.
+        """
         if baseline not in self.runs:
             raise KeyError(f"unknown baseline: {baseline}")
         baseline_regrets = np.asarray(
@@ -123,6 +141,12 @@ def compare(
         raise ValueError("at least one seed is required")
     if any(not name for name in algorithms):
         raise ValueError("algorithm names must not be empty")
+    if not callable(problem) and getattr(problem, "mutating", False):
+        raise ValueError(
+            f"{type(problem).__name__} is mutating, so runs cannot share one "
+            "instance; pass a factory that returns a fresh problem per seed "
+            "instead of the instance itself"
+        )
 
     collected: dict[str, list[RunResult]] = {name: [] for name in algorithms}
     for seed in seeds:

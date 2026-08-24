@@ -6,7 +6,16 @@ import numpy as np
 
 
 class BanditProblem(Protocol):
-    """A reward source with a fixed expected reward for every arm."""
+    """A reward source with an expected reward for every arm.
+
+    Problems may be stateful: ``sample`` is allowed to advance internal
+    state, as the drifting Bernoulli bandit does.  A stateful problem must
+    set ``mutating = True`` so that ``evaluation.compare`` can refuse to
+    share one instance across runs and ask for a factory instead of
+    silently corrupting results.  Stateless problems need not declare it.
+    """
+
+    mutating: bool = False
 
     @property
     def name(self) -> str:

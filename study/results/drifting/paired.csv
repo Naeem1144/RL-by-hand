@@ -1,8 +1,13 @@
 baseline,configuration,n_seeds,mean_regret_difference,ci95_half_width,win_rate
-"Epsilon epsilon=0.1, alpha=0.2",UCB c=1.41,50,-11.837164,15.348089,0.3800
-"Epsilon epsilon=0.1, alpha=0.2","Epsilon epsilon=0.1, alpha=0.1",50,-75.280676,14.841698,0.0800
-"Epsilon epsilon=0.1, alpha=0.2","Thompson Beta(1,1)",50,-150.220692,37.405094,0.1800
-"Epsilon epsilon=0.1, alpha=0.2","Epsilon epsilon=0.1, alpha=0.05",50,-180.158111,26.009205,0.0200
-"Epsilon epsilon=0.1, alpha=0.2",Epsilon epsilon=0.05,50,-202.030328,45.583799,0.1000
-"Epsilon epsilon=0.1, alpha=0.2",Epsilon epsilon=0.1,50,-214.796428,35.704275,0.0400
-"Epsilon epsilon=0.1, alpha=0.2",Epsilon epsilon=0.2,50,-242.952340,27.659855,0.0000
+"Epsilon epsilon=0.1, alpha=0.2",UCB c=1.41,50,-61.718638,49.767248,0.4400
+"Epsilon epsilon=0.1, alpha=0.2",UCB-V(default),50,-96.685922,45.205019,0.2800
+"Epsilon epsilon=0.1, alpha=0.2","Epsilon epsilon=0.1, alpha=0.1",50,-161.878774,31.088103,0.0800
+"Epsilon epsilon=0.1, alpha=0.2",UCB SW(tau=1000),50,-192.266101,62.686894,0.2200
+"Epsilon epsilon=0.1, alpha=0.2",Thompson decay=0.99,50,-318.166016,23.614136,0.0000
+"Epsilon epsilon=0.1, alpha=0.2",KL-UCB c=3,50,-394.198911,90.755778,0.0200
+"Epsilon epsilon=0.1, alpha=0.2","Epsilon epsilon=0.1, alpha=0.05",50,-477.204907,48.497535,0.0000
+"Epsilon epsilon=0.1, alpha=0.2",Thompson decay=0.95,50,-1151.148534,35.550184,0.0000
+"Epsilon epsilon=0.1, alpha=0.2","Thompson Beta(1,1)",50,-1673.000483,130.292137,0.0000
+"Epsilon epsilon=0.1, alpha=0.2",Epsilon epsilon=0.05,50,-1818.880885,142.926732,0.0000
+"Epsilon epsilon=0.1, alpha=0.2",Epsilon epsilon=0.1,50,-1893.471390,124.018371,0.0000
+"Epsilon epsilon=0.1, alpha=0.2",Epsilon epsilon=0.2,50,-1957.664442,90.918380,0.0000

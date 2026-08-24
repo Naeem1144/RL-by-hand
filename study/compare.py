@@ -14,16 +14,20 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 from algorithms import (
+    KLUCB,
     UCB,
     BanditAlgorithm,
     EpsilonGreedy,
+    ForgettingThompsonSampling,
     NormalThompsonSampling,
+    SlidingWindowUCB,
     ThompsonSampling,
+    UCBVariance,
 )
 from evaluation import AlgorithmSummary, ComparisonResult, compare
 from problems import BanditProblem, BernoulliBandit, DriftingBernoulliBandit, GaussianBandit
 
-N_STEPS = 2_000
+N_STEPS = 10_000
 SEEDS = tuple(range(50))
 
 PROBABILITIES = np.array([0.05, 0.10, 0.15, 0.20, 0.25, 0.30, 0.35, 0.40, 0.45, 0.55])
@@ -42,8 +46,11 @@ NORMAL_PRIOR_STDS = (0.50, 1.00, 2.00)
 
 DRIFTING_EPSILONS = (0.05, 0.10, 0.20)
 STEP_SIZES = (0.05, 0.10, 0.20)
+SLOW_DRIFT_STD = 0.002
+SW_WINDOWS = (1_000, 4_000)
+FORGETTING_GAMMAS = (0.95, 0.99)
 
-OUTPUT_DIR = Path("study/results")
+OUTPUT_DIR = Path(__file__).resolve().parent / "results"
 Z_95 = 1.96
 
 FAMILY_COLORS = {
@@ -74,6 +81,8 @@ def bernoulli_configurations() -> dict[str, BanditAlgorithm]:
             prior_alpha=prior,
             prior_beta=prior,
         )
+    algorithms["KL-UCB c=3"] = KLUCB(c=3.0)
+    algorithms["UCB-V(default)"] = UCBVariance()
     return algorithms
 
 
@@ -94,10 +103,11 @@ def gaussian_configurations() -> dict[str, BanditAlgorithm]:
             prior_mean=0.0,
             prior_std=prior_std,
         )
+    algorithms["UCB-V(default)"] = UCBVariance()
     return algorithms
 
 
-def drifting_configurations() -> dict[str, BanditAlgorithm]:
+def _base_drifting_configurations() -> dict[str, BanditAlgorithm]:
     """Configurations contrasting sample means with recency-weighted estimates."""
     algorithms: dict[str, BanditAlgorithm] = {}
     for epsilon in DRIFTING_EPSILONS:
@@ -109,6 +119,30 @@ def drifting_configurations() -> dict[str, BanditAlgorithm]:
         )
     algorithms["UCB c=1.41"] = UCB(c=float(np.sqrt(2.0)))
     algorithms["Thompson Beta(1,1)"] = ThompsonSampling(prior_alpha=1.0, prior_beta=1.0)
+    return algorithms
+
+
+def drifting_configurations() -> dict[str, BanditAlgorithm]:
+    """Configurations for the fast-drifting scenario: stationary baselines plus
+    drift-aware variants (sliding-window UCB, forgetting Thompson)."""
+    algorithms = _base_drifting_configurations()
+    algorithms["KL-UCB c=3"] = KLUCB(c=3.0)
+    algorithms["UCB-V(default)"] = UCBVariance()
+    algorithms["UCB SW(tau=1000)"] = SlidingWindowUCB(window=1_000)
+    algorithms["Thompson decay=0.95"] = ForgettingThompsonSampling(gamma=0.95)
+    algorithms["Thompson decay=0.99"] = ForgettingThompsonSampling(gamma=0.99)
+    return algorithms
+
+
+def slow_drifting_configurations() -> dict[str, BanditAlgorithm]:
+    """Same families as the fast-drifting scenario, plus a longer window variant."""
+    algorithms = _base_drifting_configurations()
+    algorithms["KL-UCB c=3"] = KLUCB(c=3.0)
+    algorithms["UCB-V(default)"] = UCBVariance()
+    for window in SW_WINDOWS:
+        algorithms[f"UCB SW(tau={window})"] = SlidingWindowUCB(window=window)
+    for gamma in FORGETTING_GAMMAS:
+        algorithms[f"Thompson decay={gamma:g}"] = ForgettingThompsonSampling(gamma=gamma)
     return algorithms
 
 
@@ -139,6 +173,8 @@ SCENARIOS = (
             "optimistic_value": [1.0],
             "ucb_c": list(UCB_SCALES),
             "symmetric_beta_prior": list(THOMPSON_PRIORS),
+            "kl_ucb_c": [3.0],
+            "ucb_v": ["default"],
         },
         reference_reward=float(PROBABILITIES.max()),
     ),
@@ -156,6 +192,7 @@ SCENARIOS = (
             "optimistic_value": [float(GAUSSIAN_MEANS.max()) + 0.5],
             "ucb_c": list(GAUSSIAN_UCB_SCALES),
             "normal_prior_std": list(NORMAL_PRIOR_STDS),
+            "ucb_v": ["default"],
         },
         reference_reward=float(GAUSSIAN_MEANS.max()),
     ),
@@ -173,6 +210,31 @@ SCENARIOS = (
             "step_size": list(STEP_SIZES),
             "ucb_c": [float(np.sqrt(2.0))],
             "symmetric_beta_prior": [1.0],
+            "kl_ucb_c": [3.0],
+            "ucb_v": ["default"],
+            "sw_window": [1_000],
+            "forgetting_gamma": list(FORGETTING_GAMMAS),
+        },
+        reference_reward=None,
+    ),
+    Scenario(
+        key="slow_drifting",
+        title="Slowly drifting ten-arm Bernoulli",
+        make_problem=lambda seed: DriftingBernoulliBandit(
+            PROBABILITIES,
+            drift_std=SLOW_DRIFT_STD,
+            name="slowly drifting ten-arm Bernoulli bandit",
+        ),
+        configurations=slow_drifting_configurations,
+        grids={
+            "epsilon": list(DRIFTING_EPSILONS),
+            "step_size": list(STEP_SIZES),
+            "ucb_c": [float(np.sqrt(2.0))],
+            "symmetric_beta_prior": [1.0],
+            "kl_ucb_c": [3.0],
+            "ucb_v": ["default"],
+            "sw_window": list(SW_WINDOWS),
+            "forgetting_gamma": list(FORGETTING_GAMMAS),
         },
         reference_reward=None,
     ),
@@ -183,7 +245,7 @@ def family_of(configuration: str) -> str:
     """Return the algorithm family represented by a configuration label."""
     if configuration.startswith("Epsilon "):
         return "Epsilon-greedy"
-    if configuration.startswith("UCB "):
+    if configuration.startswith(("UCB ", "UCB-", "KL-UCB")):
         return "UCB"
     if configuration.startswith("Thompson"):
         return "Thompson sampling"
@@ -244,6 +306,9 @@ def _write_summary(comparison: ComparisonResult, output_dir: Path) -> Path:
                 "reward_ci95_half_width",
                 "mean_regret",
                 "regret_ci95_half_width",
+                "median_regret",
+                "p90_regret",
+                "max_regret",
             ]
         )
         for rank, row in enumerate(_ranked(comparison), start=1):
@@ -256,6 +321,9 @@ def _write_summary(comparison: ComparisonResult, output_dir: Path) -> Path:
                     f"{_ci95(row.reward_std, n_runs):.6f}",
                     f"{row.mean_regret:.6f}",
                     f"{_ci95(row.regret_std, n_runs):.6f}",
+                    f"{row.median_regret:.6f}",
+                    f"{row.p90_regret:.6f}",
+                    f"{row.max_regret:.6f}",
                 ]
             )
     return path

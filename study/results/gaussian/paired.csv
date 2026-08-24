@@ -1,10 +1,11 @@
 baseline,configuration,n_seeds,mean_regret_difference,ci95_half_width,win_rate
-Thompson-Normal sigma0=2,UCB c=1,50,-1.330000,25.945828,0.7800
-Thompson-Normal sigma0=2,UCB c=1.41,50,-19.270000,5.451609,0.2000
-Thompson-Normal sigma0=2,UCB c=0.5,50,-34.470000,66.481284,0.9000
-Thompson-Normal sigma0=2,"Epsilon epsilon=0, optimistic",50,-81.460000,107.485570,0.9000
-Thompson-Normal sigma0=2,Thompson-Normal sigma0=1,50,-153.210000,73.856024,0.4800
-Thompson-Normal sigma0=2,Epsilon epsilon=0.05,50,-401.810000,73.978538,0.0000
-Thompson-Normal sigma0=2,Epsilon epsilon=0.1,50,-535.620000,52.129530,0.0000
-Thompson-Normal sigma0=2,Epsilon epsilon=0.2,50,-902.760000,20.239744,0.0000
-Thompson-Normal sigma0=2,Thompson-Normal sigma0=0.5,50,-1117.810000,254.431014,0.3000
+UCB c=1,Thompson-Normal sigma0=2,50,-1.760000,25.560814,0.2000
+UCB c=1,UCB c=1.41,50,-32.750000,23.915823,0.0600
+UCB c=1,Thompson-Normal sigma0=1,50,-156.490000,80.765428,0.3800
+UCB c=1,UCB c=0.5,50,-265.330000,331.130191,0.9200
+UCB c=1,UCB-V(default),50,-367.750000,24.568979,0.0200
+UCB c=1,"Epsilon epsilon=0, optimistic",50,-550.790000,535.997741,0.8800
+UCB c=1,Epsilon epsilon=0.05,50,-1289.670000,79.436610,0.0000
+UCB c=1,Epsilon epsilon=0.1,50,-2322.160000,64.598976,0.0000
+UCB c=1,Epsilon epsilon=0.2,50,-4490.210000,43.070345,0.0000
+UCB c=1,Thompson-Normal sigma0=0.5,50,-5549.800000,1186.631396,0.3000

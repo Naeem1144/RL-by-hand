@@ -19,8 +19,11 @@ class DriftingBernoulliBandit:
 
     Because the problem mutates, pass a factory to ``compare`` so every run
     receives its own instance; matched seeds then reproduce identical drift
-    trajectories for every algorithm.
+    trajectories for every algorithm.  The ``mutating`` marker makes
+    ``compare`` enforce this instead of silently sharing one instance.
     """
+
+    mutating = True
 
     initial_probabilities: np.ndarray
     drift_std: float = 0.02

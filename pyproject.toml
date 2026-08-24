@@ -14,6 +14,7 @@ build-backend = "setuptools.build_meta"
 
 [project.scripts]
 rl-study = "study.compare:main"
+rl-horizons = "study.horizons:main"
 
 [dependency-groups]
 dev = [
@@ -24,6 +25,9 @@ dev = [
 [tool.setuptools.packages.find]
 where = ["."]
 include = ["algorithms*", "evaluation*", "problems*", "study*"]
+
+[tool.setuptools.package-data]
+study = ["results/*.json", "results/*/*.csv", "results/*/*.png"]
 
 [tool.ruff]
 line-length = 100

@@ -1,401 +1,651 @@
 family,configuration,seed,average_reward,total_regret
-Epsilon-greedy,Epsilon epsilon=0.05,0,0.591500,452.709598
-Epsilon-greedy,Epsilon epsilon=0.05,1,0.705500,253.675303
-Epsilon-greedy,Epsilon epsilon=0.05,2,0.763000,263.950824
-Epsilon-greedy,Epsilon epsilon=0.05,3,0.790000,157.809442
-Epsilon-greedy,Epsilon epsilon=0.05,4,0.798000,146.221967
-Epsilon-greedy,Epsilon epsilon=0.05,5,0.714500,264.868699
-Epsilon-greedy,Epsilon epsilon=0.05,6,0.684000,388.306291
-Epsilon-greedy,Epsilon epsilon=0.05,7,0.574000,492.435900
-Epsilon-greedy,Epsilon epsilon=0.05,8,0.661500,360.925708
-Epsilon-greedy,Epsilon epsilon=0.05,9,0.413500,808.624019
-Epsilon-greedy,Epsilon epsilon=0.05,10,0.723500,339.905745
-Epsilon-greedy,Epsilon epsilon=0.05,11,0.812000,210.089216
-Epsilon-greedy,Epsilon epsilon=0.05,12,0.623000,449.003625
-Epsilon-greedy,Epsilon epsilon=0.05,13,0.429500,738.225665
-Epsilon-greedy,Epsilon epsilon=0.05,14,0.693000,314.442394
-Epsilon-greedy,Epsilon epsilon=0.05,15,0.727000,272.042762
-Epsilon-greedy,Epsilon epsilon=0.05,16,0.698500,343.592816
-Epsilon-greedy,Epsilon epsilon=0.05,17,0.691500,404.277730
-Epsilon-greedy,Epsilon epsilon=0.05,18,0.603000,402.621021
-Epsilon-greedy,Epsilon epsilon=0.05,19,0.691500,404.038652
-Epsilon-greedy,Epsilon epsilon=0.05,20,0.556000,465.116780
-Epsilon-greedy,Epsilon epsilon=0.05,21,0.732000,255.783045
-Epsilon-greedy,Epsilon epsilon=0.05,22,0.600500,472.460211
-Epsilon-greedy,Epsilon epsilon=0.05,23,0.598000,541.110855
-Epsilon-greedy,Epsilon epsilon=0.05,24,0.672000,387.436552
-Epsilon-greedy,Epsilon epsilon=0.05,25,0.737000,289.493691
-Epsilon-greedy,Epsilon epsilon=0.05,26,0.671500,366.211822
-Epsilon-greedy,Epsilon epsilon=0.05,27,0.550500,635.304518
-Epsilon-greedy,Epsilon epsilon=0.05,28,0.601500,469.858723
-Epsilon-greedy,Epsilon epsilon=0.05,29,0.795000,170.043441
-Epsilon-greedy,Epsilon epsilon=0.05,30,0.497000,696.836674
-Epsilon-greedy,Epsilon epsilon=0.05,31,0.498000,528.815098
-Epsilon-greedy,Epsilon epsilon=0.05,32,0.644500,305.178797
-Epsilon-greedy,Epsilon epsilon=0.05,33,0.576500,564.928766
-Epsilon-greedy,Epsilon epsilon=0.05,34,0.659000,468.630332
-Epsilon-greedy,Epsilon epsilon=0.05,35,0.688000,390.232591
-Epsilon-greedy,Epsilon epsilon=0.05,36,0.732000,243.281510
-Epsilon-greedy,Epsilon epsilon=0.05,37,0.514500,713.619038
-Epsilon-greedy,Epsilon epsilon=0.05,38,0.718500,324.044709
-Epsilon-greedy,Epsilon epsilon=0.05,39,0.592000,393.640143
-Epsilon-greedy,Epsilon epsilon=0.05,40,0.768500,253.176436
-Epsilon-greedy,Epsilon epsilon=0.05,41,0.670000,385.764554
-Epsilon-greedy,Epsilon epsilon=0.05,42,0.605500,539.768565
-Epsilon-greedy,Epsilon epsilon=0.05,43,0.543500,479.252831
-Epsilon-greedy,Epsilon epsilon=0.05,44,0.443500,748.955674
-Epsilon-greedy,Epsilon epsilon=0.05,45,0.748000,164.186924
-Epsilon-greedy,Epsilon epsilon=0.05,46,0.639000,506.213670
-Epsilon-greedy,Epsilon epsilon=0.05,47,0.496000,724.491992
-Epsilon-greedy,Epsilon epsilon=0.05,48,0.603000,467.278172
-Epsilon-greedy,Epsilon epsilon=0.05,49,0.562000,506.763561
-Epsilon-greedy,Epsilon epsilon=0.1,0,0.511000,600.287336
-Epsilon-greedy,Epsilon epsilon=0.1,1,0.602500,486.646144
-Epsilon-greedy,Epsilon epsilon=0.1,2,0.662000,443.227069
-Epsilon-greedy,Epsilon epsilon=0.1,3,0.785000,178.560383
-Epsilon-greedy,Epsilon epsilon=0.1,4,0.750500,233.147116
-Epsilon-greedy,Epsilon epsilon=0.1,5,0.516500,671.363492
-Epsilon-greedy,Epsilon epsilon=0.1,6,0.563500,625.269467
-Epsilon-greedy,Epsilon epsilon=0.1,7,0.667000,308.796192
-Epsilon-greedy,Epsilon epsilon=0.1,8,0.547000,599.258955
-Epsilon-greedy,Epsilon epsilon=0.1,9,0.720000,217.310802
-Epsilon-greedy,Epsilon epsilon=0.1,10,0.699000,391.837029
-Epsilon-greedy,Epsilon epsilon=0.1,11,0.659500,510.962968
-Epsilon-greedy,Epsilon epsilon=0.1,12,0.612500,465.292667
-Epsilon-greedy,Epsilon epsilon=0.1,13,0.507000,579.647493
-Epsilon-greedy,Epsilon epsilon=0.1,14,0.681500,339.665140
-Epsilon-greedy,Epsilon epsilon=0.1,15,0.695000,341.464916
-Epsilon-greedy,Epsilon epsilon=0.1,16,0.614000,528.351359
-Epsilon-greedy,Epsilon epsilon=0.1,17,0.738500,332.305760
-Epsilon-greedy,Epsilon epsilon=0.1,18,0.644000,327.359867
-Epsilon-greedy,Epsilon epsilon=0.1,19,0.696000,392.368091
-Epsilon-greedy,Epsilon epsilon=0.1,20,0.521000,525.539205
-Epsilon-greedy,Epsilon epsilon=0.1,21,0.696000,329.731462
-Epsilon-greedy,Epsilon epsilon=0.1,22,0.552000,563.676768
-Epsilon-greedy,Epsilon epsilon=0.1,23,0.487000,770.528100
-Epsilon-greedy,Epsilon epsilon=0.1,24,0.606000,513.813323
-Epsilon-greedy,Epsilon epsilon=0.1,25,0.718000,310.757154
-Epsilon-greedy,Epsilon epsilon=0.1,26,0.697000,312.856597
-Epsilon-greedy,Epsilon epsilon=0.1,27,0.725500,288.432733
-Epsilon-greedy,Epsilon epsilon=0.1,28,0.673000,316.369778
-Epsilon-greedy,Epsilon epsilon=0.1,29,0.677000,390.010987
-Epsilon-greedy,Epsilon epsilon=0.1,30,0.511000,682.894408
-Epsilon-greedy,Epsilon epsilon=0.1,31,0.444500,661.291035
-Epsilon-greedy,Epsilon epsilon=0.1,32,0.575500,422.583303
-Epsilon-greedy,Epsilon epsilon=0.1,33,0.649500,438.403634
-Epsilon-greedy,Epsilon epsilon=0.1,34,0.655500,474.999671
-Epsilon-greedy,Epsilon epsilon=0.1,35,0.623000,512.099916
-Epsilon-greedy,Epsilon epsilon=0.1,36,0.696500,311.235345
-Epsilon-greedy,Epsilon epsilon=0.1,37,0.644000,487.942915
-Epsilon-greedy,Epsilon epsilon=0.1,38,0.735500,299.444012
-Epsilon-greedy,Epsilon epsilon=0.1,39,0.522500,554.364238
-Epsilon-greedy,Epsilon epsilon=0.1,40,0.778000,233.342118
-Epsilon-greedy,Epsilon epsilon=0.1,41,0.706000,349.033962
-Epsilon-greedy,Epsilon epsilon=0.1,42,0.609500,526.560434
-Epsilon-greedy,Epsilon epsilon=0.1,43,0.580000,406.124530
-Epsilon-greedy,Epsilon epsilon=0.1,44,0.536000,563.721512
-Epsilon-greedy,Epsilon epsilon=0.1,45,0.721500,205.553691
-Epsilon-greedy,Epsilon epsilon=0.1,46,0.769500,247.035331
-Epsilon-greedy,Epsilon epsilon=0.1,47,0.635000,445.168712
-Epsilon-greedy,Epsilon epsilon=0.1,48,0.628000,415.210046
-Epsilon-greedy,Epsilon epsilon=0.1,49,0.601000,432.104924
-Epsilon-greedy,Epsilon epsilon=0.2,0,0.513500,603.017288
-Epsilon-greedy,Epsilon epsilon=0.2,1,0.619000,440.247059
-Epsilon-greedy,Epsilon epsilon=0.2,2,0.694500,371.952238
-Epsilon-greedy,Epsilon epsilon=0.2,3,0.741000,252.218690
-Epsilon-greedy,Epsilon epsilon=0.2,4,0.724000,282.471482
-Epsilon-greedy,Epsilon epsilon=0.2,5,0.575000,580.394588
-Epsilon-greedy,Epsilon epsilon=0.2,6,0.643000,468.354848
-Epsilon-greedy,Epsilon epsilon=0.2,7,0.604000,426.571052
-Epsilon-greedy,Epsilon epsilon=0.2,8,0.575500,534.632850
-Epsilon-greedy,Epsilon epsilon=0.2,9,0.698500,270.401981
-Epsilon-greedy,Epsilon epsilon=0.2,10,0.673000,433.178794
-Epsilon-greedy,Epsilon epsilon=0.2,11,0.633000,558.626378
-Epsilon-greedy,Epsilon epsilon=0.2,12,0.600500,472.604324
-Epsilon-greedy,Epsilon epsilon=0.2,13,0.487000,613.832115
-Epsilon-greedy,Epsilon epsilon=0.2,14,0.586500,527.633513
-Epsilon-greedy,Epsilon epsilon=0.2,15,0.684500,364.137760
-Epsilon-greedy,Epsilon epsilon=0.2,16,0.697500,365.866425
-Epsilon-greedy,Epsilon epsilon=0.2,17,0.647000,479.025159
-Epsilon-greedy,Epsilon epsilon=0.2,18,0.658000,290.963871
-Epsilon-greedy,Epsilon epsilon=0.2,19,0.621000,550.783805
-Epsilon-greedy,Epsilon epsilon=0.2,20,0.598000,383.667049
-Epsilon-greedy,Epsilon epsilon=0.2,21,0.672000,390.445127
-Epsilon-greedy,Epsilon epsilon=0.2,22,0.569500,531.360529
-Epsilon-greedy,Epsilon epsilon=0.2,23,0.583000,589.014779
-Epsilon-greedy,Epsilon epsilon=0.2,24,0.600500,515.060203
-Epsilon-greedy,Epsilon epsilon=0.2,25,0.664000,402.163902
-Epsilon-greedy,Epsilon epsilon=0.2,26,0.659000,382.029523
-Epsilon-greedy,Epsilon epsilon=0.2,27,0.685000,382.118411
-Epsilon-greedy,Epsilon epsilon=0.2,28,0.675500,311.973986
-Epsilon-greedy,Epsilon epsilon=0.2,29,0.613500,508.085214
-Epsilon-greedy,Epsilon epsilon=0.2,30,0.541500,610.998191
-Epsilon-greedy,Epsilon epsilon=0.2,31,0.508500,535.211787
-Epsilon-greedy,Epsilon epsilon=0.2,32,0.525500,518.835869
-Epsilon-greedy,Epsilon epsilon=0.2,33,0.605000,535.161682
-Epsilon-greedy,Epsilon epsilon=0.2,34,0.644000,511.614577
-Epsilon-greedy,Epsilon epsilon=0.2,35,0.639500,456.219394
-Epsilon-greedy,Epsilon epsilon=0.2,36,0.685500,333.457704
-Epsilon-greedy,Epsilon epsilon=0.2,37,0.570500,619.777466
-Epsilon-greedy,Epsilon epsilon=0.2,38,0.687500,400.090100
-Epsilon-greedy,Epsilon epsilon=0.2,39,0.543500,480.987479
-Epsilon-greedy,Epsilon epsilon=0.2,40,0.719000,350.208773
-Epsilon-greedy,Epsilon epsilon=0.2,41,0.625500,488.990661
-Epsilon-greedy,Epsilon epsilon=0.2,42,0.613000,522.352959
-Epsilon-greedy,Epsilon epsilon=0.2,43,0.518500,524.042306
-Epsilon-greedy,Epsilon epsilon=0.2,44,0.507500,619.878801
-Epsilon-greedy,Epsilon epsilon=0.2,45,0.663500,328.971353
-Epsilon-greedy,Epsilon epsilon=0.2,46,0.703500,384.872584
-Epsilon-greedy,Epsilon epsilon=0.2,47,0.607000,510.604618
-Epsilon-greedy,Epsilon epsilon=0.2,48,0.590000,463.036681
-Epsilon-greedy,Epsilon epsilon=0.2,49,0.573500,493.601761
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",0,0.673000,293.908434
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",1,0.652000,383.778296
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",2,0.713500,346.490901
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",3,0.763000,213.606978
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",4,0.777500,191.910311
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",5,0.705000,300.793367
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",6,0.643500,456.443728
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",7,0.593000,464.653039
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",8,0.693500,283.629552
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",9,0.655500,356.654318
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",10,0.627500,529.763171
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",11,0.706500,412.748230
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",12,0.605500,486.724186
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",13,0.559500,472.462478
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",14,0.677000,341.911825
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",15,0.678500,376.865070
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",16,0.705000,345.291888
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",17,0.650500,494.099464
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",18,0.586000,442.982706
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",19,0.731000,343.730804
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",20,0.659500,258.891663
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",21,0.668000,394.615640
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",22,0.577500,552.655896
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",23,0.719500,302.635654
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",24,0.641500,430.410907
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",25,0.695500,325.992735
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",26,0.622000,479.583431
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",27,0.679000,384.756650
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",28,0.629500,421.616045
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",29,0.779000,203.961876
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",30,0.655000,395.918172
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",31,0.546000,452.603742
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",32,0.643500,316.823434
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",33,0.684000,357.418438
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",34,0.666000,469.999323
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",35,0.692000,381.628628
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",36,0.589500,512.841024
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",37,0.546000,671.373633
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",38,0.795000,181.369801
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",39,0.566500,448.563513
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",40,0.711500,372.569299
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",41,0.644000,450.158889
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",42,0.688000,370.972886
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",43,0.611500,325.064519
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",44,0.527500,577.632438
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",45,0.621500,401.851250
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",46,0.671000,424.012348
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",47,0.680500,395.158493
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",48,0.597500,482.374795
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",49,0.544500,550.132338
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",0,0.686500,276.520573
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",1,0.709500,256.149839
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",2,0.773500,246.136609
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",3,0.774500,194.377573
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",4,0.796500,154.082027
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",5,0.739500,229.376251
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",6,0.723000,312.742097
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",7,0.696500,245.370306
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",8,0.681000,319.348981
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",9,0.719000,231.027510
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",10,0.709500,378.114030
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",11,0.759000,310.155103
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",12,0.692500,304.281012
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",13,0.617500,365.998156
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",14,0.690000,330.984774
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",15,0.727000,279.630744
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",16,0.727000,304.150336
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",17,0.746000,329.559130
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",18,0.611000,385.354197
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",19,0.782500,217.440051
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",20,0.691000,199.070929
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",21,0.714000,299.944142
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",22,0.644500,379.398234
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",23,0.730000,279.110224
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",24,0.696000,314.185422
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",25,0.730000,259.950172
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",26,0.674000,384.993794
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",27,0.764000,210.125265
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",28,0.645000,386.661102
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",29,0.776500,204.466594
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",30,0.677000,341.759045
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",31,0.586000,378.984265
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",32,0.625000,346.930918
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",33,0.735000,240.102411
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",34,0.752000,303.800682
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",35,0.734500,294.797162
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",36,0.690000,309.638018
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",37,0.695500,375.450777
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",38,0.797500,172.552598
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",39,0.584000,397.832334
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",40,0.787000,220.157965
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",41,0.730000,292.670126
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",42,0.728500,292.529938
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",43,0.605500,354.912771
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",44,0.628500,372.082199
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",45,0.713000,229.957277
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",46,0.771000,247.504942
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",47,0.739000,251.205374
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",48,0.684000,301.303454
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",49,0.679000,275.287036
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",0,0.716500,206.194023
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",1,0.728000,218.125589
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",2,0.784000,202.669686
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",3,0.779000,186.988738
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",4,0.791000,164.253699
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",5,0.742000,224.752989
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",6,0.766000,231.601986
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",7,0.699000,228.348240
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",8,0.742000,199.866366
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",9,0.745000,175.743261
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",10,0.762000,263.820046
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",11,0.780500,271.019129
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",12,0.712000,271.089395
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",13,0.659000,284.722580
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",14,0.737500,241.413974
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",15,0.748500,218.534678
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",16,0.719000,327.232757
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",17,0.813500,169.395696
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",18,0.686000,222.564232
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",19,0.804500,161.193847
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",20,0.679000,208.677584
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",21,0.755500,211.940582
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",22,0.728500,216.854247
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",23,0.743000,252.913034
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",24,0.756000,205.747716
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",25,0.813500,128.284920
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",26,0.723500,261.021577
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",27,0.765500,202.545093
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",28,0.701500,273.592545
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",29,0.789500,170.874068
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",30,0.730000,236.264679
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",31,0.656500,231.388881
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",32,0.665500,253.769832
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",33,0.771500,171.360824
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",34,0.790500,223.344700
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",35,0.792500,189.924647
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",36,0.739000,210.118425
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",37,0.746500,266.694246
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",38,0.795500,188.118873
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",39,0.650000,271.116322
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",40,0.794000,181.982616
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",41,0.777000,202.830875
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",42,0.760500,210.326835
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",43,0.704500,160.458796
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",44,0.702000,209.289473
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",45,0.716000,211.939264
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",46,0.813000,157.285504
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",47,0.759500,218.111168
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",48,0.746000,177.704482
-Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",49,0.689500,250.117959
-UCB,UCB c=1.41,0,0.653500,314.881871
-UCB,UCB c=1.41,1,0.714500,245.556241
-UCB,UCB c=1.41,2,0.789500,200.287483
-UCB,UCB c=1.41,3,0.767000,209.256775
-UCB,UCB c=1.41,4,0.771000,213.221049
-UCB,UCB c=1.41,5,0.710000,279.054705
-UCB,UCB c=1.41,6,0.785500,179.182303
-UCB,UCB c=1.41,7,0.689500,261.283378
-UCB,UCB c=1.41,8,0.738000,217.409990
-UCB,UCB c=1.41,9,0.749000,176.182485
-UCB,UCB c=1.41,10,0.786500,238.309818
-UCB,UCB c=1.41,11,0.815500,208.858695
-UCB,UCB c=1.41,12,0.734000,225.416749
-UCB,UCB c=1.41,13,0.675500,243.548573
-UCB,UCB c=1.41,14,0.732500,251.936116
-UCB,UCB c=1.41,15,0.755000,212.119091
-UCB,UCB c=1.41,16,0.765000,222.824670
-UCB,UCB c=1.41,17,0.788000,226.303400
-UCB,UCB c=1.41,18,0.709000,176.649802
-UCB,UCB c=1.41,19,0.792000,218.464439
-UCB,UCB c=1.41,20,0.681500,213.014581
-UCB,UCB c=1.41,21,0.750500,213.947220
-UCB,UCB c=1.41,22,0.667500,328.399328
-UCB,UCB c=1.41,23,0.726500,294.084132
-UCB,UCB c=1.41,24,0.733000,214.466102
-UCB,UCB c=1.41,25,0.801500,154.138671
-UCB,UCB c=1.41,26,0.752500,180.190056
-UCB,UCB c=1.41,27,0.741000,259.314868
-UCB,UCB c=1.41,28,0.687500,302.834392
-UCB,UCB c=1.41,29,0.792000,178.363508
-UCB,UCB c=1.41,30,0.752500,187.116611
-UCB,UCB c=1.41,31,0.677000,202.528086
-UCB,UCB c=1.41,32,0.669000,251.932674
-UCB,UCB c=1.41,33,0.738500,253.477159
-UCB,UCB c=1.41,34,0.787500,239.883565
-UCB,UCB c=1.41,35,0.763500,233.317722
-UCB,UCB c=1.41,36,0.756000,175.266437
-UCB,UCB c=1.41,37,0.791000,188.353027
-UCB,UCB c=1.41,38,0.792000,200.388554
-UCB,UCB c=1.41,39,0.603000,366.036227
-UCB,UCB c=1.41,40,0.814500,168.268761
-UCB,UCB c=1.41,41,0.756500,233.598822
-UCB,UCB c=1.41,42,0.754500,212.124391
-UCB,UCB c=1.41,43,0.610000,356.279008
-UCB,UCB c=1.41,44,0.684000,264.554173
-UCB,UCB c=1.41,45,0.734500,188.215797
-UCB,UCB c=1.41,46,0.817000,150.191313
-UCB,UCB c=1.41,47,0.716000,298.875712
-UCB,UCB c=1.41,48,0.745500,187.877034
-UCB,UCB c=1.41,49,0.716500,198.203320
-Thompson sampling,"Thompson Beta(1,1)",0,0.655500,331.297748
-Thompson sampling,"Thompson Beta(1,1)",1,0.624500,417.410204
-Thompson sampling,"Thompson Beta(1,1)",2,0.780000,215.648966
-Thompson sampling,"Thompson Beta(1,1)",3,0.830000,76.630823
-Thompson sampling,"Thompson Beta(1,1)",4,0.793000,151.667839
-Thompson sampling,"Thompson Beta(1,1)",5,0.648000,393.365704
-Thompson sampling,"Thompson Beta(1,1)",6,0.716500,339.204925
-Thompson sampling,"Thompson Beta(1,1)",7,0.606500,414.909934
-Thompson sampling,"Thompson Beta(1,1)",8,0.715000,250.791304
-Thompson sampling,"Thompson Beta(1,1)",9,0.763500,128.449227
-Thompson sampling,"Thompson Beta(1,1)",10,0.776000,233.797310
-Thompson sampling,"Thompson Beta(1,1)",11,0.778500,280.755832
-Thompson sampling,"Thompson Beta(1,1)",12,0.642000,397.201020
-Thompson sampling,"Thompson Beta(1,1)",13,0.607500,363.314506
-Thompson sampling,"Thompson Beta(1,1)",14,0.715500,275.507577
-Thompson sampling,"Thompson Beta(1,1)",15,0.758000,207.370619
-Thompson sampling,"Thompson Beta(1,1)",16,0.635000,471.505667
-Thompson sampling,"Thompson Beta(1,1)",17,0.709500,386.444388
-Thompson sampling,"Thompson Beta(1,1)",18,0.703500,201.744089
-Thompson sampling,"Thompson Beta(1,1)",19,0.671000,422.410090
-Thompson sampling,"Thompson Beta(1,1)",20,0.561000,452.730853
-Thompson sampling,"Thompson Beta(1,1)",21,0.716500,294.693457
-Thompson sampling,"Thompson Beta(1,1)",22,0.669500,339.766769
-Thompson sampling,"Thompson Beta(1,1)",23,0.646500,440.341885
-Thompson sampling,"Thompson Beta(1,1)",24,0.680500,370.743589
-Thompson sampling,"Thompson Beta(1,1)",25,0.732000,287.002100
-Thompson sampling,"Thompson Beta(1,1)",26,0.719000,272.216977
-Thompson sampling,"Thompson Beta(1,1)",27,0.700500,347.768256
-Thompson sampling,"Thompson Beta(1,1)",28,0.587500,500.466623
-Thompson sampling,"Thompson Beta(1,1)",29,0.683000,369.741681
-Thompson sampling,"Thompson Beta(1,1)",30,0.599500,502.830713
-Thompson sampling,"Thompson Beta(1,1)",31,0.464000,622.939498
-Thompson sampling,"Thompson Beta(1,1)",32,0.668000,249.363266
-Thompson sampling,"Thompson Beta(1,1)",33,0.629000,462.800388
-Thompson sampling,"Thompson Beta(1,1)",34,0.672500,435.871302
-Thompson sampling,"Thompson Beta(1,1)",35,0.586500,568.940472
-Thompson sampling,"Thompson Beta(1,1)",36,0.753500,202.044123
-Thompson sampling,"Thompson Beta(1,1)",37,0.620000,526.757576
-Thompson sampling,"Thompson Beta(1,1)",38,0.735500,313.194421
-Thompson sampling,"Thompson Beta(1,1)",39,0.460000,657.145845
-Thompson sampling,"Thompson Beta(1,1)",40,0.787000,222.534366
-Thompson sampling,"Thompson Beta(1,1)",41,0.663500,441.391595
-Thompson sampling,"Thompson Beta(1,1)",42,0.653500,442.239631
-Thompson sampling,"Thompson Beta(1,1)",43,0.667000,242.373927
-Thompson sampling,"Thompson Beta(1,1)",44,0.528000,564.481373
-Thompson sampling,"Thompson Beta(1,1)",45,0.748000,153.670175
-Thompson sampling,"Thompson Beta(1,1)",46,0.621500,548.254794
-Thompson sampling,"Thompson Beta(1,1)",47,0.580500,552.429432
-Thompson sampling,"Thompson Beta(1,1)",48,0.540000,578.729005
-Thompson sampling,"Thompson Beta(1,1)",49,0.612500,412.273423
+Epsilon-greedy,Epsilon epsilon=0.05,0,0.595900,2931.435839
+Epsilon-greedy,Epsilon epsilon=0.05,1,0.601700,2633.078913
+Epsilon-greedy,Epsilon epsilon=0.05,2,0.635100,2465.222705
+Epsilon-greedy,Epsilon epsilon=0.05,3,0.557300,3089.299833
+Epsilon-greedy,Epsilon epsilon=0.05,4,0.647400,2649.578969
+Epsilon-greedy,Epsilon epsilon=0.05,5,0.653500,2459.593568
+Epsilon-greedy,Epsilon epsilon=0.05,6,0.636900,2696.808562
+Epsilon-greedy,Epsilon epsilon=0.05,7,0.511700,3670.953073
+Epsilon-greedy,Epsilon epsilon=0.05,8,0.623500,2695.537625
+Epsilon-greedy,Epsilon epsilon=0.05,9,0.609500,2853.216503
+Epsilon-greedy,Epsilon epsilon=0.05,10,0.647100,2381.197589
+Epsilon-greedy,Epsilon epsilon=0.05,11,0.712000,2047.923104
+Epsilon-greedy,Epsilon epsilon=0.05,12,0.524100,3491.916974
+Epsilon-greedy,Epsilon epsilon=0.05,13,0.542800,3362.232616
+Epsilon-greedy,Epsilon epsilon=0.05,14,0.682300,1840.009741
+Epsilon-greedy,Epsilon epsilon=0.05,15,0.574300,3044.538667
+Epsilon-greedy,Epsilon epsilon=0.05,16,0.619400,2931.438657
+Epsilon-greedy,Epsilon epsilon=0.05,17,0.660200,2503.422142
+Epsilon-greedy,Epsilon epsilon=0.05,18,0.558500,3308.054331
+Epsilon-greedy,Epsilon epsilon=0.05,19,0.648200,2431.080305
+Epsilon-greedy,Epsilon epsilon=0.05,20,0.603500,2925.553812
+Epsilon-greedy,Epsilon epsilon=0.05,21,0.695400,2056.323146
+Epsilon-greedy,Epsilon epsilon=0.05,22,0.572400,3348.808867
+Epsilon-greedy,Epsilon epsilon=0.05,23,0.599200,2842.997080
+Epsilon-greedy,Epsilon epsilon=0.05,24,0.591800,3222.175599
+Epsilon-greedy,Epsilon epsilon=0.05,25,0.625300,2922.434435
+Epsilon-greedy,Epsilon epsilon=0.05,26,0.638700,2575.455834
+Epsilon-greedy,Epsilon epsilon=0.05,27,0.534500,3433.689456
+Epsilon-greedy,Epsilon epsilon=0.05,28,0.596000,2908.968595
+Epsilon-greedy,Epsilon epsilon=0.05,29,0.560200,3392.072027
+Epsilon-greedy,Epsilon epsilon=0.05,30,0.532600,3367.647590
+Epsilon-greedy,Epsilon epsilon=0.05,31,0.599600,2817.573853
+Epsilon-greedy,Epsilon epsilon=0.05,32,0.589900,3057.407767
+Epsilon-greedy,Epsilon epsilon=0.05,33,0.591900,2877.249794
+Epsilon-greedy,Epsilon epsilon=0.05,34,0.640200,2541.833262
+Epsilon-greedy,Epsilon epsilon=0.05,35,0.523900,3477.805839
+Epsilon-greedy,Epsilon epsilon=0.05,36,0.629800,2619.677520
+Epsilon-greedy,Epsilon epsilon=0.05,37,0.591500,3108.756174
+Epsilon-greedy,Epsilon epsilon=0.05,38,0.705600,1741.094030
+Epsilon-greedy,Epsilon epsilon=0.05,39,0.577700,3064.539556
+Epsilon-greedy,Epsilon epsilon=0.05,40,0.662200,2293.316958
+Epsilon-greedy,Epsilon epsilon=0.05,41,0.682700,2206.701820
+Epsilon-greedy,Epsilon epsilon=0.05,42,0.599600,3060.604811
+Epsilon-greedy,Epsilon epsilon=0.05,43,0.596900,2960.671318
+Epsilon-greedy,Epsilon epsilon=0.05,44,0.501200,4027.745076
+Epsilon-greedy,Epsilon epsilon=0.05,45,0.766200,1315.575079
+Epsilon-greedy,Epsilon epsilon=0.05,46,0.619200,2743.246309
+Epsilon-greedy,Epsilon epsilon=0.05,47,0.565100,3331.809165
+Epsilon-greedy,Epsilon epsilon=0.05,48,0.583600,3198.469275
+Epsilon-greedy,Epsilon epsilon=0.05,49,0.614100,2807.851932
+Epsilon-greedy,Epsilon epsilon=0.1,0,0.571400,3156.574909
+Epsilon-greedy,Epsilon epsilon=0.1,1,0.656000,2166.621447
+Epsilon-greedy,Epsilon epsilon=0.1,2,0.603400,2766.691110
+Epsilon-greedy,Epsilon epsilon=0.1,3,0.537800,3248.156124
+Epsilon-greedy,Epsilon epsilon=0.1,4,0.659700,2515.916515
+Epsilon-greedy,Epsilon epsilon=0.1,5,0.591000,3099.540697
+Epsilon-greedy,Epsilon epsilon=0.1,6,0.620600,2845.643084
+Epsilon-greedy,Epsilon epsilon=0.1,7,0.545600,3302.462426
+Epsilon-greedy,Epsilon epsilon=0.1,8,0.609600,2830.297272
+Epsilon-greedy,Epsilon epsilon=0.1,9,0.570800,3270.320676
+Epsilon-greedy,Epsilon epsilon=0.1,10,0.587800,2982.909506
+Epsilon-greedy,Epsilon epsilon=0.1,11,0.625400,2965.064594
+Epsilon-greedy,Epsilon epsilon=0.1,12,0.547500,3245.831917
+Epsilon-greedy,Epsilon epsilon=0.1,13,0.508600,3689.967059
+Epsilon-greedy,Epsilon epsilon=0.1,14,0.669000,1979.899519
+Epsilon-greedy,Epsilon epsilon=0.1,15,0.569300,3127.976478
+Epsilon-greedy,Epsilon epsilon=0.1,16,0.634000,2819.286849
+Epsilon-greedy,Epsilon epsilon=0.1,17,0.652100,2620.615377
+Epsilon-greedy,Epsilon epsilon=0.1,18,0.606800,2833.785653
+Epsilon-greedy,Epsilon epsilon=0.1,19,0.615000,2764.304626
+Epsilon-greedy,Epsilon epsilon=0.1,20,0.576400,3187.537628
+Epsilon-greedy,Epsilon epsilon=0.1,21,0.679000,2218.232371
+Epsilon-greedy,Epsilon epsilon=0.1,22,0.564700,3378.067863
+Epsilon-greedy,Epsilon epsilon=0.1,23,0.532700,3563.010375
+Epsilon-greedy,Epsilon epsilon=0.1,24,0.594700,3193.319381
+Epsilon-greedy,Epsilon epsilon=0.1,25,0.605700,3116.415622
+Epsilon-greedy,Epsilon epsilon=0.1,26,0.629200,2657.145740
+Epsilon-greedy,Epsilon epsilon=0.1,27,0.600000,2789.541620
+Epsilon-greedy,Epsilon epsilon=0.1,28,0.648600,2346.154490
+Epsilon-greedy,Epsilon epsilon=0.1,29,0.570400,3277.866205
+Epsilon-greedy,Epsilon epsilon=0.1,30,0.533900,3347.201052
+Epsilon-greedy,Epsilon epsilon=0.1,31,0.506400,3818.651070
+Epsilon-greedy,Epsilon epsilon=0.1,32,0.600500,2967.210533
+Epsilon-greedy,Epsilon epsilon=0.1,33,0.617900,2673.457313
+Epsilon-greedy,Epsilon epsilon=0.1,34,0.641300,2531.188085
+Epsilon-greedy,Epsilon epsilon=0.1,35,0.505800,3629.288412
+Epsilon-greedy,Epsilon epsilon=0.1,36,0.620700,2695.867693
+Epsilon-greedy,Epsilon epsilon=0.1,37,0.606900,3037.605677
+Epsilon-greedy,Epsilon epsilon=0.1,38,0.660700,2214.524204
+Epsilon-greedy,Epsilon epsilon=0.1,39,0.562700,3228.393807
+Epsilon-greedy,Epsilon epsilon=0.1,40,0.636900,2537.016063
+Epsilon-greedy,Epsilon epsilon=0.1,41,0.712400,1963.192921
+Epsilon-greedy,Epsilon epsilon=0.1,42,0.605900,2999.702374
+Epsilon-greedy,Epsilon epsilon=0.1,43,0.573000,3220.185306
+Epsilon-greedy,Epsilon epsilon=0.1,44,0.546500,3551.969236
+Epsilon-greedy,Epsilon epsilon=0.1,45,0.713500,1780.148416
+Epsilon-greedy,Epsilon epsilon=0.1,46,0.609300,2846.458301
+Epsilon-greedy,Epsilon epsilon=0.1,47,0.653000,2479.111147
+Epsilon-greedy,Epsilon epsilon=0.1,48,0.602700,3006.351522
+Epsilon-greedy,Epsilon epsilon=0.1,49,0.596500,2977.440693
+Epsilon-greedy,Epsilon epsilon=0.2,0,0.579000,3087.481669
+Epsilon-greedy,Epsilon epsilon=0.2,1,0.573400,2974.502696
+Epsilon-greedy,Epsilon epsilon=0.2,2,0.601500,2764.455045
+Epsilon-greedy,Epsilon epsilon=0.2,3,0.522700,3400.139249
+Epsilon-greedy,Epsilon epsilon=0.2,4,0.670600,2403.526805
+Epsilon-greedy,Epsilon epsilon=0.2,5,0.596500,3083.390194
+Epsilon-greedy,Epsilon epsilon=0.2,6,0.613700,2931.567947
+Epsilon-greedy,Epsilon epsilon=0.2,7,0.590600,2871.472104
+Epsilon-greedy,Epsilon epsilon=0.2,8,0.621500,2755.088223
+Epsilon-greedy,Epsilon epsilon=0.2,9,0.556200,3415.643246
+Epsilon-greedy,Epsilon epsilon=0.2,10,0.592200,2944.518526
+Epsilon-greedy,Epsilon epsilon=0.2,11,0.586800,3329.349146
+Epsilon-greedy,Epsilon epsilon=0.2,12,0.549700,3217.746751
+Epsilon-greedy,Epsilon epsilon=0.2,13,0.561500,3172.275156
+Epsilon-greedy,Epsilon epsilon=0.2,14,0.599200,2673.781405
+Epsilon-greedy,Epsilon epsilon=0.2,15,0.574900,3076.619347
+Epsilon-greedy,Epsilon epsilon=0.2,16,0.633600,2827.370882
+Epsilon-greedy,Epsilon epsilon=0.2,17,0.619800,2910.638306
+Epsilon-greedy,Epsilon epsilon=0.2,18,0.600300,2891.002899
+Epsilon-greedy,Epsilon epsilon=0.2,19,0.614900,2798.869363
+Epsilon-greedy,Epsilon epsilon=0.2,20,0.567900,3268.457284
+Epsilon-greedy,Epsilon epsilon=0.2,21,0.656600,2457.110791
+Epsilon-greedy,Epsilon epsilon=0.2,22,0.585100,3214.726839
+Epsilon-greedy,Epsilon epsilon=0.2,23,0.606000,2812.806003
+Epsilon-greedy,Epsilon epsilon=0.2,24,0.589400,3251.996810
+Epsilon-greedy,Epsilon epsilon=0.2,25,0.595300,3135.375805
+Epsilon-greedy,Epsilon epsilon=0.2,26,0.606000,2886.558067
+Epsilon-greedy,Epsilon epsilon=0.2,27,0.579500,3044.262465
+Epsilon-greedy,Epsilon epsilon=0.2,28,0.616000,2716.079326
+Epsilon-greedy,Epsilon epsilon=0.2,29,0.563700,3306.938993
+Epsilon-greedy,Epsilon epsilon=0.2,30,0.553600,3148.969620
+Epsilon-greedy,Epsilon epsilon=0.2,31,0.571500,3106.132135
+Epsilon-greedy,Epsilon epsilon=0.2,32,0.553400,3399.891211
+Epsilon-greedy,Epsilon epsilon=0.2,33,0.590000,2934.935338
+Epsilon-greedy,Epsilon epsilon=0.2,34,0.638700,2546.642592
+Epsilon-greedy,Epsilon epsilon=0.2,35,0.619100,2504.566976
+Epsilon-greedy,Epsilon epsilon=0.2,36,0.523000,3684.199835
+Epsilon-greedy,Epsilon epsilon=0.2,37,0.632500,2748.713710
+Epsilon-greedy,Epsilon epsilon=0.2,38,0.668600,2152.687231
+Epsilon-greedy,Epsilon epsilon=0.2,39,0.519800,3615.882563
+Epsilon-greedy,Epsilon epsilon=0.2,40,0.630700,2619.958087
+Epsilon-greedy,Epsilon epsilon=0.2,41,0.644300,2603.430914
+Epsilon-greedy,Epsilon epsilon=0.2,42,0.574900,3321.310983
+Epsilon-greedy,Epsilon epsilon=0.2,43,0.560000,3350.306668
+Epsilon-greedy,Epsilon epsilon=0.2,44,0.580700,3272.388778
+Epsilon-greedy,Epsilon epsilon=0.2,45,0.646900,2457.535532
+Epsilon-greedy,Epsilon epsilon=0.2,46,0.606600,2846.474405
+Epsilon-greedy,Epsilon epsilon=0.2,47,0.609900,2884.979830
+Epsilon-greedy,Epsilon epsilon=0.2,48,0.608700,2909.138457
+Epsilon-greedy,Epsilon epsilon=0.2,49,0.599700,2941.877350
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",0,0.753500,1386.340115
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",1,0.728100,1433.327420
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",2,0.736000,1438.974279
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",3,0.741900,1228.638018
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",4,0.790200,1214.917872
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",5,0.742600,1619.068308
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",6,0.760500,1468.857527
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",7,0.703700,1737.614017
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",8,0.753000,1444.275379
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",9,0.751700,1478.234938
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",10,0.723300,1616.004965
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",11,0.783000,1368.666245
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",12,0.683800,1843.374770
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",13,0.726600,1509.999495
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",14,0.714300,1524.352231
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",15,0.750300,1334.899635
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",16,0.778900,1324.429660
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",17,0.744900,1723.476922
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",18,0.728600,1636.385328
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",19,0.742700,1544.774331
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",20,0.774000,1230.409302
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",21,0.748200,1557.992812
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",22,0.739800,1656.306753
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",23,0.752100,1289.562365
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",24,0.752900,1580.674667
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",25,0.755200,1546.224170
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",26,0.734100,1644.902565
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",27,0.731800,1458.121217
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",28,0.718700,1689.953025
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",29,0.779500,1247.693229
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",30,0.717300,1514.945858
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",31,0.706900,1741.336703
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",32,0.766800,1318.637863
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",33,0.725900,1549.863608
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",34,0.755400,1395.645451
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",35,0.693100,1807.222846
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",36,0.720900,1656.535782
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",37,0.742700,1664.266020
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",38,0.787300,989.276935
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",39,0.730700,1525.622580
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",40,0.746100,1447.800548
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",41,0.755900,1483.846760
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",42,0.762100,1441.571788
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",43,0.754200,1423.050287
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",44,0.742400,1640.371686
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",45,0.766100,1307.291429
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",46,0.753200,1409.794781
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",47,0.745500,1551.202481
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",48,0.753300,1525.748848
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.05",49,0.750600,1478.312983
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",0,0.779400,1140.937988
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",1,0.750100,1218.607397
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",2,0.766200,1178.780815
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",3,0.764700,1011.050946
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",4,0.813300,970.321804
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",5,0.781900,1236.217850
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",6,0.792200,1180.581401
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",7,0.744700,1269.434762
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",8,0.769500,1294.523966
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",9,0.786700,1125.525680
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",10,0.755600,1317.890633
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",11,0.805700,1124.237962
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",12,0.748100,1142.729929
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",13,0.746800,1338.885633
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",14,0.754300,1102.199673
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",15,0.773900,1120.182317
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",16,0.788900,1233.411327
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",17,0.785000,1342.756212
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",18,0.750800,1357.886170
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",19,0.775300,1169.633137
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",20,0.800800,991.389557
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",21,0.795600,1081.213628
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",22,0.785100,1206.127878
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",23,0.775400,1072.458215
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",24,0.795400,1144.287456
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",25,0.781300,1246.226404
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",26,0.770500,1289.824658
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",27,0.777100,1024.298572
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",28,0.749000,1388.142169
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",29,0.793400,1068.169480
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",30,0.727900,1405.981982
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",31,0.743400,1363.592478
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",32,0.781700,1138.133879
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",33,0.771600,1071.587855
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",34,0.775300,1202.992731
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",35,0.736200,1372.705351
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",36,0.762100,1229.996026
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",37,0.787100,1207.745165
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",38,0.791600,922.732146
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",39,0.740600,1424.977362
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",40,0.777900,1145.734606
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",41,0.802700,1010.778355
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",42,0.794900,1110.035189
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",43,0.779200,1202.986247
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",44,0.787300,1183.224809
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",45,0.797100,1006.797206
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",46,0.779100,1170.233414
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",47,0.790800,1061.304737
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",48,0.785000,1184.611016
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.1",49,0.788100,1080.405970
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",0,0.801200,943.161621
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",1,0.774200,959.385489
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",2,0.774800,1034.171807
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",3,0.759200,1097.127170
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",4,0.818900,943.012563
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",5,0.798300,1042.651797
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",6,0.811700,987.223772
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",7,0.769900,992.954867
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",8,0.775800,1215.667957
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",9,0.802800,963.527096
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",10,0.782600,1036.820614
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",11,0.818800,1027.413013
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",12,0.754200,1098.584015
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",13,0.764500,1182.064678
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",14,0.765600,1005.430659
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",15,0.779900,1030.973585
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",16,0.802500,1112.318267
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",17,0.812500,1086.517513
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",18,0.788500,956.344822
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",19,0.805100,907.377987
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",20,0.793600,994.996449
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",21,0.808200,935.082303
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",22,0.796100,1082.359311
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",23,0.779700,1020.684722
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",24,0.820400,884.648454
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",25,0.821300,923.285810
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",26,0.791600,1058.964225
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",27,0.781200,980.347880
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",28,0.775300,1113.716496
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",29,0.798100,1000.276926
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",30,0.764800,1016.163672
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",31,0.774300,1058.471073
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",32,0.792500,1036.160951
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",33,0.791100,913.285833
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",34,0.789800,1054.444306
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",35,0.760200,1112.698168
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",36,0.787500,955.503726
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",37,0.794600,1108.040102
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",38,0.786600,979.554234
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",39,0.762200,1192.414793
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",40,0.796700,936.340354
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",41,0.807900,967.734823
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",42,0.807300,979.538685
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",43,0.795800,1006.893995
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",44,0.805400,986.332021
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",45,0.785500,1089.135387
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",46,0.810500,869.722902
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",47,0.800900,978.041416
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",48,0.804000,960.264208
+Epsilon-greedy,"Epsilon epsilon=0.1, alpha=0.2",49,0.799800,972.718934
+UCB,UCB c=1.41,0,0.758500,1294.825899
+UCB,UCB c=1.41,1,0.756600,1120.494122
+UCB,UCB c=1.41,2,0.791800,912.228381
+UCB,UCB c=1.41,3,0.773100,937.389707
+UCB,UCB c=1.41,4,0.825900,871.293660
+UCB,UCB c=1.41,5,0.796000,1036.224068
+UCB,UCB c=1.41,6,0.818300,865.579057
+UCB,UCB c=1.41,7,0.739000,1314.161258
+UCB,UCB c=1.41,8,0.801100,957.387820
+UCB,UCB c=1.41,9,0.802200,960.753029
+UCB,UCB c=1.41,10,0.778600,1115.765613
+UCB,UCB c=1.41,11,0.824000,960.579266
+UCB,UCB c=1.41,12,0.759500,1066.040430
+UCB,UCB c=1.41,13,0.745600,1331.472001
+UCB,UCB c=1.41,14,0.761400,1042.230033
+UCB,UCB c=1.41,15,0.795000,914.152375
+UCB,UCB c=1.41,16,0.816400,960.576749
+UCB,UCB c=1.41,17,0.813700,1042.180870
+UCB,UCB c=1.41,18,0.794500,912.947799
+UCB,UCB c=1.41,19,0.795900,1032.288599
+UCB,UCB c=1.41,20,0.761400,1340.845799
+UCB,UCB c=1.41,21,0.811900,918.323896
+UCB,UCB c=1.41,22,0.753200,1524.478306
+UCB,UCB c=1.41,23,0.761900,1244.514060
+UCB,UCB c=1.41,24,0.802400,1045.815562
+UCB,UCB c=1.41,25,0.821200,941.552623
+UCB,UCB c=1.41,26,0.809400,872.192823
+UCB,UCB c=1.41,27,0.765400,1121.055634
+UCB,UCB c=1.41,28,0.767200,1155.169485
+UCB,UCB c=1.41,29,0.805500,955.006171
+UCB,UCB c=1.41,30,0.764100,1039.739182
+UCB,UCB c=1.41,31,0.763100,1212.258367
+UCB,UCB c=1.41,32,0.753100,1417.590180
+UCB,UCB c=1.41,33,0.762100,1213.968527
+UCB,UCB c=1.41,34,0.795700,979.688289
+UCB,UCB c=1.41,35,0.757900,1147.000982
+UCB,UCB c=1.41,36,0.781400,1027.842071
+UCB,UCB c=1.41,37,0.814700,902.894738
+UCB,UCB c=1.41,38,0.801000,840.326045
+UCB,UCB c=1.41,39,0.718000,1641.214546
+UCB,UCB c=1.41,40,0.805600,912.398447
+UCB,UCB c=1.41,41,0.808600,965.164528
+UCB,UCB c=1.41,42,0.806100,992.267431
+UCB,UCB c=1.41,43,0.745700,1496.963234
+UCB,UCB c=1.41,44,0.787500,1193.054295
+UCB,UCB c=1.41,45,0.789900,1065.520204
+UCB,UCB c=1.41,46,0.791800,1017.329221
+UCB,UCB c=1.41,47,0.797300,1020.260175
+UCB,UCB c=1.41,48,0.802100,1033.055406
+UCB,UCB c=1.41,49,0.796800,990.422399
+Thompson sampling,"Thompson Beta(1,1)",0,0.596800,2936.514916
+Thompson sampling,"Thompson Beta(1,1)",1,0.597800,2695.784857
+Thompson sampling,"Thompson Beta(1,1)",2,0.671400,2113.183424
+Thompson sampling,"Thompson Beta(1,1)",3,0.662600,1994.922082
+Thompson sampling,"Thompson Beta(1,1)",4,0.660500,2536.168714
+Thompson sampling,"Thompson Beta(1,1)",5,0.662600,2384.502078
+Thompson sampling,"Thompson Beta(1,1)",6,0.606500,2999.440328
+Thompson sampling,"Thompson Beta(1,1)",7,0.605200,2705.272018
+Thompson sampling,"Thompson Beta(1,1)",8,0.636600,2613.438006
+Thompson sampling,"Thompson Beta(1,1)",9,0.660700,2356.991092
+Thompson sampling,"Thompson Beta(1,1)",10,0.640800,2480.922140
+Thompson sampling,"Thompson Beta(1,1)",11,0.742400,1778.097936
+Thompson sampling,"Thompson Beta(1,1)",12,0.581100,2864.978775
+Thompson sampling,"Thompson Beta(1,1)",13,0.593100,2861.393542
+Thompson sampling,"Thompson Beta(1,1)",14,0.636300,2301.977065
+Thompson sampling,"Thompson Beta(1,1)",15,0.628200,2546.718640
+Thompson sampling,"Thompson Beta(1,1)",16,0.611100,3036.870341
+Thompson sampling,"Thompson Beta(1,1)",17,0.648700,2651.959725
+Thompson sampling,"Thompson Beta(1,1)",18,0.524100,3620.013786
+Thompson sampling,"Thompson Beta(1,1)",19,0.651300,2413.572079
+Thompson sampling,"Thompson Beta(1,1)",20,0.592400,3003.080756
+Thompson sampling,"Thompson Beta(1,1)",21,0.668400,2339.764314
+Thompson sampling,"Thompson Beta(1,1)",22,0.612300,2915.027117
+Thompson sampling,"Thompson Beta(1,1)",23,0.606500,2755.783323
+Thompson sampling,"Thompson Beta(1,1)",24,0.604600,3054.621164
+Thompson sampling,"Thompson Beta(1,1)",25,0.620200,2916.890231
+Thompson sampling,"Thompson Beta(1,1)",26,0.695600,2017.572977
+Thompson sampling,"Thompson Beta(1,1)",27,0.644500,2341.834696
+Thompson sampling,"Thompson Beta(1,1)",28,0.521400,3643.966780
+Thompson sampling,"Thompson Beta(1,1)",29,0.595500,3000.077002
+Thompson sampling,"Thompson Beta(1,1)",30,0.575800,2916.245628
+Thompson sampling,"Thompson Beta(1,1)",31,0.513900,3696.374443
+Thompson sampling,"Thompson Beta(1,1)",32,0.656100,2366.280358
+Thompson sampling,"Thompson Beta(1,1)",33,0.621400,2574.302215
+Thompson sampling,"Thompson Beta(1,1)",34,0.647700,2454.700741
+Thompson sampling,"Thompson Beta(1,1)",35,0.547300,3195.892108
+Thompson sampling,"Thompson Beta(1,1)",36,0.633700,2547.103013
+Thompson sampling,"Thompson Beta(1,1)",37,0.672000,2371.285687
+Thompson sampling,"Thompson Beta(1,1)",38,0.649300,2301.810874
+Thompson sampling,"Thompson Beta(1,1)",39,0.542200,3405.051426
+Thompson sampling,"Thompson Beta(1,1)",40,0.600200,2934.381101
+Thompson sampling,"Thompson Beta(1,1)",41,0.678700,2333.546432
+Thompson sampling,"Thompson Beta(1,1)",42,0.701700,2004.391229
+Thompson sampling,"Thompson Beta(1,1)",43,0.610300,2831.877876
+Thompson sampling,"Thompson Beta(1,1)",44,0.685900,2217.072258
+Thompson sampling,"Thompson Beta(1,1)",45,0.707900,1846.118430
+Thompson sampling,"Thompson Beta(1,1)",46,0.564600,3304.731853
+Thompson sampling,"Thompson Beta(1,1)",47,0.592700,3031.528511
+Thompson sampling,"Thompson Beta(1,1)",48,0.542600,3565.739166
+Thompson sampling,"Thompson Beta(1,1)",49,0.629300,2660.802374
+UCB,KL-UCB c=3,0,0.725100,1634.628885
+UCB,KL-UCB c=3,1,0.733200,1385.146155
+UCB,KL-UCB c=3,2,0.764400,1159.031679
+UCB,KL-UCB c=3,3,0.753500,1106.559358
+UCB,KL-UCB c=3,4,0.788100,1278.004602
+UCB,KL-UCB c=3,5,0.775300,1256.497595
+UCB,KL-UCB c=3,6,0.750300,1595.301907
+UCB,KL-UCB c=3,7,0.729500,1438.658780
+UCB,KL-UCB c=3,8,0.762300,1362.790555
+UCB,KL-UCB c=3,9,0.747100,1506.737600
+UCB,KL-UCB c=3,10,0.769300,1183.303928
+UCB,KL-UCB c=3,11,0.800900,1211.365575
+UCB,KL-UCB c=3,12,0.715800,1511.245148
+UCB,KL-UCB c=3,13,0.663900,2185.875697
+UCB,KL-UCB c=3,14,0.764000,1016.792659
+UCB,KL-UCB c=3,15,0.717000,1675.324196
+UCB,KL-UCB c=3,16,0.785200,1274.066979
+UCB,KL-UCB c=3,17,0.799200,1150.526661
+UCB,KL-UCB c=3,18,0.726100,1618.391852
+UCB,KL-UCB c=3,19,0.762300,1309.659265
+UCB,KL-UCB c=3,20,0.699000,2000.042999
+UCB,KL-UCB c=3,21,0.802500,1007.583494
+UCB,KL-UCB c=3,22,0.708400,1968.662947
+UCB,KL-UCB c=3,23,0.765800,1155.668558
+UCB,KL-UCB c=3,24,0.813700,968.332193
+UCB,KL-UCB c=3,25,0.797900,1118.432349
+UCB,KL-UCB c=3,26,0.769700,1279.588358
+UCB,KL-UCB c=3,27,0.772400,1045.394158
+UCB,KL-UCB c=3,28,0.694400,1940.196573
+UCB,KL-UCB c=3,29,0.786300,1174.839063
+UCB,KL-UCB c=3,30,0.748400,1178.743032
+UCB,KL-UCB c=3,31,0.718600,1642.782690
+UCB,KL-UCB c=3,32,0.697000,1982.253091
+UCB,KL-UCB c=3,33,0.755800,1278.155998
+UCB,KL-UCB c=3,34,0.791500,1019.452434
+UCB,KL-UCB c=3,35,0.736100,1383.262845
+UCB,KL-UCB c=3,36,0.780800,1095.557790
+UCB,KL-UCB c=3,37,0.777000,1298.225739
+UCB,KL-UCB c=3,38,0.773700,1081.879775
+UCB,KL-UCB c=3,39,0.627200,2527.237333
+UCB,KL-UCB c=3,40,0.757800,1347.504213
+UCB,KL-UCB c=3,41,0.794600,1122.982927
+UCB,KL-UCB c=3,42,0.788300,1138.918565
+UCB,KL-UCB c=3,43,0.673800,2186.531342
+UCB,KL-UCB c=3,44,0.739600,1662.236031
+UCB,KL-UCB c=3,45,0.758500,1360.335111
+UCB,KL-UCB c=3,46,0.754500,1408.210945
+UCB,KL-UCB c=3,47,0.741600,1569.491359
+UCB,KL-UCB c=3,48,0.774500,1301.958528
+UCB,KL-UCB c=3,49,0.753600,1396.127469
+UCB,UCB-V(default),0,0.776600,1103.523129
+UCB,UCB-V(default),1,0.754200,1138.100487
+UCB,UCB-V(default),2,0.775800,1034.119747
+UCB,UCB-V(default),3,0.774400,919.789746
+UCB,UCB-V(default),4,0.805500,1022.273237
+UCB,UCB-V(default),5,0.781500,1175.042524
+UCB,UCB-V(default),6,0.802100,1050.202200
+UCB,UCB-V(default),7,0.725300,1548.572203
+UCB,UCB-V(default),8,0.797300,984.851118
+UCB,UCB-V(default),9,0.800000,961.764936
+UCB,UCB-V(default),10,0.765600,1244.785599
+UCB,UCB-V(default),11,0.801400,1191.095013
+UCB,UCB-V(default),12,0.736800,1301.433824
+UCB,UCB-V(default),13,0.758100,1204.092850
+UCB,UCB-V(default),14,0.743500,1230.050520
+UCB,UCB-V(default),15,0.783000,989.650734
+UCB,UCB-V(default),16,0.817000,977.529584
+UCB,UCB-V(default),17,0.799600,1153.265231
+UCB,UCB-V(default),18,0.794000,898.584151
+UCB,UCB-V(default),19,0.782600,1109.999185
+UCB,UCB-V(default),20,0.794900,977.930171
+UCB,UCB-V(default),21,0.798400,1059.974687
+UCB,UCB-V(default),22,0.816500,916.083809
+UCB,UCB-V(default),23,0.767700,1167.310168
+UCB,UCB-V(default),24,0.797700,1092.268190
+UCB,UCB-V(default),25,0.809400,1027.771076
+UCB,UCB-V(default),26,0.804200,938.354447
+UCB,UCB-V(default),27,0.764900,1146.142443
+UCB,UCB-V(default),28,0.784200,985.454335
+UCB,UCB-V(default),29,0.788100,1095.987630
+UCB,UCB-V(default),30,0.734000,1356.109815
+UCB,UCB-V(default),31,0.768500,1153.731859
+UCB,UCB-V(default),32,0.754500,1415.963078
+UCB,UCB-V(default),33,0.770100,1114.339938
+UCB,UCB-V(default),34,0.775300,1154.528608
+UCB,UCB-V(default),35,0.732500,1385.573064
+UCB,UCB-V(default),36,0.771500,1174.716959
+UCB,UCB-V(default),37,0.811000,950.582262
+UCB,UCB-V(default),38,0.796200,895.087167
+UCB,UCB-V(default),39,0.773500,1067.647056
+UCB,UCB-V(default),40,0.799400,957.330331
+UCB,UCB-V(default),41,0.806900,990.257925
+UCB,UCB-V(default),42,0.790500,1103.322902
+UCB,UCB-V(default),43,0.781100,1158.591965
+UCB,UCB-V(default),44,0.782200,1254.591371
+UCB,UCB-V(default),45,0.782700,1144.934106
+UCB,UCB-V(default),46,0.781400,1184.430939
+UCB,UCB-V(default),47,0.796000,1023.767612
+UCB,UCB-V(default),48,0.783000,1161.688035
+UCB,UCB-V(default),49,0.760400,1331.649586
+UCB,UCB SW(tau=1000),0,0.773700,1137.572797
+UCB,UCB SW(tau=1000),1,0.752400,1144.798955
+UCB,UCB SW(tau=1000),2,0.782100,965.639212
+UCB,UCB SW(tau=1000),3,0.767200,973.982655
+UCB,UCB SW(tau=1000),4,0.791300,1254.290460
+UCB,UCB SW(tau=1000),5,0.772300,1250.694821
+UCB,UCB SW(tau=1000),6,0.801100,1075.500210
+UCB,UCB SW(tau=1000),7,0.734800,1429.719495
+UCB,UCB SW(tau=1000),8,0.772700,1171.464678
+UCB,UCB SW(tau=1000),9,0.758600,1346.279658
+UCB,UCB SW(tau=1000),10,0.766300,1255.019480
+UCB,UCB SW(tau=1000),11,0.810200,1084.880426
+UCB,UCB SW(tau=1000),12,0.721600,1484.178676
+UCB,UCB SW(tau=1000),13,0.728600,1498.854053
+UCB,UCB SW(tau=1000),14,0.759600,1063.075660
+UCB,UCB SW(tau=1000),15,0.775100,1055.586264
+UCB,UCB SW(tau=1000),16,0.818900,933.170594
+UCB,UCB SW(tau=1000),17,0.815400,1015.761388
+UCB,UCB SW(tau=1000),18,0.736900,1511.718642
+UCB,UCB SW(tau=1000),19,0.796500,998.763623
+UCB,UCB SW(tau=1000),20,0.749800,1443.583276
+UCB,UCB SW(tau=1000),21,0.811500,926.429480
+UCB,UCB SW(tau=1000),22,0.714000,1901.109925
+UCB,UCB SW(tau=1000),23,0.765000,1220.103375
+UCB,UCB SW(tau=1000),24,0.784100,1234.748825
+UCB,UCB SW(tau=1000),25,0.792400,1166.491657
+UCB,UCB SW(tau=1000),26,0.802800,957.675420
+UCB,UCB SW(tau=1000),27,0.766200,1108.411678
+UCB,UCB SW(tau=1000),28,0.767600,1169.602807
+UCB,UCB SW(tau=1000),29,0.790800,1085.431867
+UCB,UCB SW(tau=1000),30,0.755100,1143.839948
+UCB,UCB SW(tau=1000),31,0.737200,1449.553096
+UCB,UCB SW(tau=1000),32,0.725200,1665.498128
+UCB,UCB SW(tau=1000),33,0.756900,1258.916109
+UCB,UCB SW(tau=1000),34,0.783400,1130.394830
+UCB,UCB SW(tau=1000),35,0.747400,1260.334782
+UCB,UCB SW(tau=1000),36,0.768400,1215.028850
+UCB,UCB SW(tau=1000),37,0.801700,1016.920924
+UCB,UCB SW(tau=1000),38,0.809300,760.440507
+UCB,UCB SW(tau=1000),39,0.697600,1855.676234
+UCB,UCB SW(tau=1000),40,0.803900,899.811095
+UCB,UCB SW(tau=1000),41,0.813200,896.509660
+UCB,UCB SW(tau=1000),42,0.770400,1334.370496
+UCB,UCB SW(tau=1000),43,0.748900,1487.778595
+UCB,UCB SW(tau=1000),44,0.793800,1123.989887
+UCB,UCB SW(tau=1000),45,0.780100,1168.338224
+UCB,UCB SW(tau=1000),46,0.792100,1054.062350
+UCB,UCB SW(tau=1000),47,0.768700,1304.619936
+UCB,UCB SW(tau=1000),48,0.786600,1167.902461
+UCB,UCB SW(tau=1000),49,0.760900,1345.330351
+Thompson sampling,Thompson decay=0.95,0,0.668000,2226.672360
+Thompson sampling,Thompson decay=0.95,1,0.642700,2266.660100
+Thompson sampling,Thompson decay=0.95,2,0.664200,2139.761442
+Thompson sampling,Thompson decay=0.95,3,0.619500,2441.279782
+Thompson sampling,Thompson decay=0.95,4,0.699000,2145.574484
+Thompson sampling,Thompson decay=0.95,5,0.685200,2161.083973
+Thompson sampling,Thompson decay=0.95,6,0.705500,2000.065061
+Thompson sampling,Thompson decay=0.95,7,0.652600,2223.169002
+Thompson sampling,Thompson decay=0.95,8,0.688200,2088.471995
+Thompson sampling,Thompson decay=0.95,9,0.683100,2134.043074
+Thompson sampling,Thompson decay=0.95,10,0.677000,2150.013487
+Thompson sampling,Thompson decay=0.95,11,0.728500,1941.495939
+Thompson sampling,Thompson decay=0.95,12,0.639500,2268.047114
+Thompson sampling,Thompson decay=0.95,13,0.655400,2251.602740
+Thompson sampling,Thompson decay=0.95,14,0.626500,2443.301080
+Thompson sampling,Thompson decay=0.95,15,0.671600,2164.676929
+Thompson sampling,Thompson decay=0.95,16,0.713000,2025.901281
+Thompson sampling,Thompson decay=0.95,17,0.710300,2028.505916
+Thompson sampling,Thompson decay=0.95,18,0.667000,2213.070795
+Thompson sampling,Thompson decay=0.95,19,0.684800,2125.662489
+Thompson sampling,Thompson decay=0.95,20,0.684600,2115.122926
+Thompson sampling,Thompson decay=0.95,21,0.682200,2202.857024
+Thompson sampling,Thompson decay=0.95,22,0.681300,2249.819421
+Thompson sampling,Thompson decay=0.95,23,0.658500,2293.047713
+Thompson sampling,Thompson decay=0.95,24,0.691300,2136.632565
+Thompson sampling,Thompson decay=0.95,25,0.703900,2029.344017
+Thompson sampling,Thompson decay=0.95,26,0.700700,2010.887376
+Thompson sampling,Thompson decay=0.95,27,0.658300,2222.742242
+Thompson sampling,Thompson decay=0.95,28,0.665100,2191.516135
+Thompson sampling,Thompson decay=0.95,29,0.687100,2115.636371
+Thompson sampling,Thompson decay=0.95,30,0.646200,2256.910359
+Thompson sampling,Thompson decay=0.95,31,0.654700,2237.649139
+Thompson sampling,Thompson decay=0.95,32,0.681100,2150.642009
+Thompson sampling,Thompson decay=0.95,33,0.645400,2386.524404
+Thompson sampling,Thompson decay=0.95,34,0.694000,2016.035772
+Thompson sampling,Thompson decay=0.95,35,0.646200,2235.869871
+Thompson sampling,Thompson decay=0.95,36,0.670600,2174.821167
+Thompson sampling,Thompson decay=0.95,37,0.698400,2086.545589
+Thompson sampling,Thompson decay=0.95,38,0.658900,2231.713380
+Thompson sampling,Thompson decay=0.95,39,0.658800,2264.637841
+Thompson sampling,Thompson decay=0.95,40,0.673300,2206.230361
+Thompson sampling,Thompson decay=0.95,41,0.696300,2115.350850
+Thompson sampling,Thompson decay=0.95,42,0.691800,2097.307650
+Thompson sampling,Thompson decay=0.95,43,0.684000,2101.668813
+Thompson sampling,Thompson decay=0.95,44,0.688500,2154.815702
+Thompson sampling,Thompson decay=0.95,45,0.691900,2070.704853
+Thompson sampling,Thompson decay=0.95,46,0.687900,2069.003813
+Thompson sampling,Thompson decay=0.95,47,0.680500,2136.933730
+Thompson sampling,Thompson decay=0.95,48,0.682100,2187.278089
+Thompson sampling,Thompson decay=0.95,49,0.682200,2160.669947
+Thompson sampling,Thompson decay=0.99,0,0.756700,1350.413857
+Thompson sampling,Thompson decay=0.99,1,0.728800,1379.434557
+Thompson sampling,Thompson decay=0.99,2,0.746800,1309.075956
+Thompson sampling,Thompson decay=0.99,3,0.738600,1270.371401
+Thompson sampling,Thompson decay=0.99,4,0.781900,1282.890084
+Thompson sampling,Thompson decay=0.99,5,0.761600,1385.723762
+Thompson sampling,Thompson decay=0.99,6,0.776100,1345.480381
+Thompson sampling,Thompson decay=0.99,7,0.743000,1319.211095
+Thompson sampling,Thompson decay=0.99,8,0.759900,1346.179682
+Thompson sampling,Thompson decay=0.99,9,0.767000,1311.106695
+Thompson sampling,Thompson decay=0.99,10,0.750900,1393.324383
+Thompson sampling,Thompson decay=0.99,11,0.801000,1218.590679
+Thompson sampling,Thompson decay=0.99,12,0.732000,1347.450860
+Thompson sampling,Thompson decay=0.99,13,0.731200,1442.505053
+Thompson sampling,Thompson decay=0.99,14,0.720700,1452.099090
+Thompson sampling,Thompson decay=0.99,15,0.748500,1293.485373
+Thompson sampling,Thompson decay=0.99,16,0.782800,1317.309777
+Thompson sampling,Thompson decay=0.99,17,0.782400,1363.880134
+Thompson sampling,Thompson decay=0.99,18,0.751800,1303.152204
+Thompson sampling,Thompson decay=0.99,19,0.765000,1344.840665
+Thompson sampling,Thompson decay=0.99,20,0.765100,1298.268450
+Thompson sampling,Thompson decay=0.99,21,0.765500,1381.920597
+Thompson sampling,Thompson decay=0.99,22,0.767400,1364.862640
+Thompson sampling,Thompson decay=0.99,23,0.745000,1390.995461
+Thompson sampling,Thompson decay=0.99,24,0.775300,1367.272286
+Thompson sampling,Thompson decay=0.99,25,0.783700,1275.763715
+Thompson sampling,Thompson decay=0.99,26,0.761500,1345.322029
+Thompson sampling,Thompson decay=0.99,27,0.739600,1371.729807
+Thompson sampling,Thompson decay=0.99,28,0.750700,1351.540822
+Thompson sampling,Thompson decay=0.99,29,0.767600,1297.010995
+Thompson sampling,Thompson decay=0.99,30,0.730500,1351.657782
+Thompson sampling,Thompson decay=0.99,31,0.749700,1312.571846
+Thompson sampling,Thompson decay=0.99,32,0.771100,1261.317357
+Thompson sampling,Thompson decay=0.99,33,0.747400,1360.861877
+Thompson sampling,Thompson decay=0.99,34,0.761000,1328.844020
+Thompson sampling,Thompson decay=0.99,35,0.732600,1391.471650
+Thompson sampling,Thompson decay=0.99,36,0.751700,1379.183360
+Thompson sampling,Thompson decay=0.99,37,0.777900,1273.119674
+Thompson sampling,Thompson decay=0.99,38,0.753000,1329.828223
+Thompson sampling,Thompson decay=0.99,39,0.752000,1305.305998
+Thompson sampling,Thompson decay=0.99,40,0.761200,1306.273216
+Thompson sampling,Thompson decay=0.99,41,0.778400,1322.148353
+Thompson sampling,Thompson decay=0.99,42,0.773800,1272.528806
+Thompson sampling,Thompson decay=0.99,43,0.753700,1438.340552
+Thompson sampling,Thompson decay=0.99,44,0.776100,1276.683015
+Thompson sampling,Thompson decay=0.99,45,0.757600,1367.228728
+Thompson sampling,Thompson decay=0.99,46,0.768900,1233.540852
+Thompson sampling,Thompson decay=0.99,47,0.759900,1341.969008
+Thompson sampling,Thompson decay=0.99,48,0.767700,1336.881098
+Thompson sampling,Thompson decay=0.99,49,0.766100,1287.884345

@@ -14,7 +14,14 @@ class EpsilonGreedy(BanditAlgorithm):
     Values are sample means by default.  Pass ``step_size`` to use an
     exponential recency-weighted average instead, which tracks non-stationary
     problems.  Pass ``optimistic_value`` above every arm's mean to encourage
-    early exploration through pessimistic initial estimates.
+    early exploration through optimistic initial estimates.
+
+    The prior behaves differently in the two modes.  With sample means it is
+    discarded after an arm's first pull (the first reward replaces it), so
+    optimism only guarantees one early pull per arm.  With ``step_size`` it
+    persists and decays geometrically, so it keeps steering exploration
+    longer.  For a persistent optimistic prior on Bernoulli rewards consider
+    ``ThompsonSampling`` with matching prior parameters instead.
     """
 
     epsilon: float = 0.1

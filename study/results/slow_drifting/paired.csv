@@ -1,0 +1,14 @@
+baseline,configuration,n_seeds,mean_regret_difference,ci95_half_width,win_rate
+"Thompson Beta(1,1)",KL-UCB c=3,50,-23.692708,67.998876,0.2400
+"Thompson Beta(1,1)",UCB SW(tau=1000),50,-104.103867,53.756200,0.1200
+"Thompson Beta(1,1)",UCB SW(tau=4000),50,-149.938657,63.264998,0.1000
+"Thompson Beta(1,1)",UCB c=1.41,50,-155.206501,65.270669,0.1200
+"Thompson Beta(1,1)",UCB-V(default),50,-171.938685,56.083849,0.1000
+"Thompson Beta(1,1)",Epsilon epsilon=0.05,50,-244.933980,105.427129,0.0800
+"Thompson Beta(1,1)","Epsilon epsilon=0.1, alpha=0.05",50,-307.126252,72.561044,0.1000
+"Thompson Beta(1,1)","Epsilon epsilon=0.1, alpha=0.1",50,-343.043570,64.517183,0.0800
+"Thompson Beta(1,1)",Epsilon epsilon=0.1,50,-368.276993,73.537964,0.0200
+"Thompson Beta(1,1)","Epsilon epsilon=0.1, alpha=0.2",50,-527.976147,69.186938,0.0600
+"Thompson Beta(1,1)",Epsilon epsilon=0.2,50,-571.851646,53.991392,0.0200
+"Thompson Beta(1,1)",Thompson decay=0.99,50,-1171.886531,71.665865,0.0000
+"Thompson Beta(1,1)",Thompson decay=0.95,50,-2137.620282,120.918643,0.0000

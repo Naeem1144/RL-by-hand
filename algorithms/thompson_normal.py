@@ -15,13 +15,17 @@ class NormalThompsonSampling(BanditAlgorithm):
     deviation ``reward_std`` and an unknown mean given a normal prior.  The
     posterior is conjugate, so each update is a precision-weighted average
     of the prior mean and the observed rewards.
+
+    Posterior means are kept as running precision-weighted averages rather
+    than raw reward sums, so estimates stay numerically stable even on very
+    long runs.
     """
 
     reward_std: float = 1.0
     prior_mean: float = 0.0
     prior_std: float = 1.0
     _rng: np.random.Generator = field(init=False, repr=False)
-    _sums: np.ndarray = field(init=False, repr=False)
+    _means: np.ndarray = field(init=False, repr=False)
     _pulls: np.ndarray = field(init=False, repr=False)
 
     def __post_init__(self) -> None:
@@ -44,15 +48,12 @@ class NormalThompsonSampling(BanditAlgorithm):
 
     def reset(self, n_arms: int, rng: np.random.Generator) -> None:
         self._rng = rng
-        self._sums = np.zeros(n_arms)
+        self._means = np.full(n_arms, self.prior_mean)
         self._pulls = np.zeros(n_arms, dtype=int)
 
     def _posterior(self) -> tuple[np.ndarray, np.ndarray]:
-        prior_precision = 1.0 / self.prior_std**2
-        noise_precision = 1.0 / self.reward_std**2
-        precision = prior_precision + self._pulls * noise_precision
-        mean = (self.prior_mean * prior_precision + self._sums * noise_precision) / precision
-        return mean, precision
+        precision = 1.0 / self.prior_std**2 + self._pulls / self.reward_std**2
+        return self._means, precision
 
     def select_arm(self, step: int) -> int:
         del step
@@ -61,7 +62,10 @@ class NormalThompsonSampling(BanditAlgorithm):
         return int(np.argmax(samples))
 
     def update(self, arm: int, reward: float) -> None:
-        self._sums[arm] += reward
+        noise_precision = 1.0 / self.reward_std**2
+        previous_precision = 1.0 / self.prior_std**2 + self._pulls[arm] * noise_precision
+        next_precision = previous_precision + noise_precision
+        self._means[arm] += (reward - self._means[arm]) * noise_precision / next_precision
         self._pulls[arm] += 1
 
     @property

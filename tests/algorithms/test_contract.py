@@ -5,18 +5,35 @@ from collections.abc import Callable
 import numpy as np
 import pytest
 
-from algorithms import UCB, EpsilonGreedy, NormalThompsonSampling, ThompsonSampling
+from algorithms import (
+    KLUCB,
+    UCB,
+    EpsilonGreedy,
+    ForgettingThompsonSampling,
+    NormalThompsonSampling,
+    SlidingWindowUCB,
+    ThompsonSampling,
+    UCBVariance,
+)
 from algorithms.base import BanditAlgorithm
 from evaluation import run
 from problems import BernoulliBandit
 
 AlgorithmFactory = Callable[[], BanditAlgorithm]
 
-
-@pytest.mark.parametrize(
-    "factory",
-    [EpsilonGreedy, UCB, ThompsonSampling, NormalThompsonSampling],
+ALGORITHMS = (
+    EpsilonGreedy,
+    UCB,
+    ThompsonSampling,
+    NormalThompsonSampling,
+    KLUCB,
+    UCBVariance,
+    SlidingWindowUCB,
+    ForgettingThompsonSampling,
 )
+
+
+@pytest.mark.parametrize("factory", ALGORITHMS)
 def test_algorithm_satisfies_shared_run_contract(factory: AlgorithmFactory) -> None:
     problem = BernoulliBandit(np.array([0.1, 0.4, 0.9]))
     first = run(factory(), problem, n_steps=50, seed=123)
@@ -33,10 +50,7 @@ def test_algorithm_satisfies_shared_run_contract(factory: AlgorithmFactory) -> N
     assert first.total_regret >= 0.0
 
 
-@pytest.mark.parametrize(
-    "factory",
-    [EpsilonGreedy, UCB, ThompsonSampling, NormalThompsonSampling],
-)
+@pytest.mark.parametrize("factory", ALGORITHMS)
 def test_problem_is_not_mutated(factory: AlgorithmFactory) -> None:
     probabilities = np.array([0.1, 0.4, 0.9])
     original = probabilities.copy()

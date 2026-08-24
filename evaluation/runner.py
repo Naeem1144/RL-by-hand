@@ -80,6 +80,9 @@ def run(
     independent streams so two algorithms can receive matched reward streams
     without having to consume policy randomness in the same way.
 
+    The problem is not reset, so pass a fresh instance of a mutating problem
+    for each run; a single ``run`` on one fresh instance is always safe.
+
     The expected reward of the selected and best arm is recorded after every
     sample, so regret stays correct for problems whose arm means change over
     time.

@@ -46,6 +46,26 @@ def test_optimistic_value_initializes_all_arms_high() -> None:
     assert np.allclose(algorithm.estimated_values, np.full(3, 2.5))
 
 
+def test_optimistic_value_is_discarded_after_first_pull_with_sample_means() -> None:
+    algorithm = EpsilonGreedy(epsilon=0.0, optimistic_value=1.0)
+    algorithm.reset(n_arms=2, rng=np.random.default_rng(4))
+    algorithm.update(arm=0, reward=0.0)
+
+    # The first reward replaces the prior for arm 0, while an unpulled arm
+    # keeps the optimistic value and therefore keeps being explored.
+    assert np.allclose(algorithm.estimated_values, np.array([0.0, 1.0]))
+
+
+def test_optimistic_value_persists_and_decays_with_step_size() -> None:
+    algorithm = EpsilonGreedy(epsilon=0.0, optimistic_value=1.0, step_size=0.1)
+    algorithm.reset(n_arms=2, rng=np.random.default_rng(4))
+    for _ in range(10):
+        algorithm.update(arm=0, reward=0.0)
+
+    expected = 0.9**10 * 1.0
+    assert np.allclose(algorithm.estimated_values, np.array([expected, 1.0]))
+
+
 @pytest.mark.parametrize(
     "configuration",
     [
