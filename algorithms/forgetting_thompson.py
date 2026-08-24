@@ -1,4 +1,4 @@
-"""Beta-Bernoulli Thompson sampling bandit algorithm."""
+"""Beta-Bernoulli Thompson sampling with exponentially decaying counts."""
 
 from dataclasses import dataclass, field
 
@@ -8,9 +8,18 @@ from algorithms.base import BanditAlgorithm
 
 
 @dataclass
-class ThompsonSampling(BanditAlgorithm):
-    """Sample from one Beta posterior per Bernoulli arm."""
+class ForgettingThompsonSampling(BanditAlgorithm):
+    """Thompson sampling with exponentially discounted posterior counts.
 
+    At every step the pseudo-counts of every arm are multiplied by
+    ``gamma`` before the new reward is added, so the effective horizon is
+    about ``1 / (1 - gamma)`` observations.  This keeps the posterior
+    responsive on drifting problems while retaining the Beta-Bernoulli
+    conjugate update of :class:`algorithms.thompson.ThompsonSampling`
+    (which is recovered exactly at ``gamma = 1``).
+    """
+
+    gamma: float = 0.99
     prior_alpha: float = 1.0
     prior_beta: float = 1.0
     _rng: np.random.Generator = field(init=False, repr=False)
@@ -19,8 +28,11 @@ class ThompsonSampling(BanditAlgorithm):
     _pulls: np.ndarray = field(init=False, repr=False)
 
     def __post_init__(self) -> None:
+        self.gamma = float(self.gamma)
         self.prior_alpha = float(self.prior_alpha)
         self.prior_beta = float(self.prior_beta)
+        if not np.isfinite(self.gamma) or not 0.0 < self.gamma <= 1.0:
+            raise ValueError("gamma must be finite and lie in (0, 1]")
         if (
             not np.isfinite(self.prior_alpha)
             or not np.isfinite(self.prior_beta)
@@ -31,12 +43,12 @@ class ThompsonSampling(BanditAlgorithm):
 
     @property
     def name(self) -> str:
-        return f"Thompson(alpha={self.prior_alpha:g}, beta={self.prior_beta:g})"
+        return f"Thompson decay={self.gamma:g}"
 
     def reset(self, n_arms: int, rng: np.random.Generator) -> None:
         self._rng = rng
-        self._successes = np.zeros(n_arms, dtype=int)
-        self._failures = np.zeros(n_arms, dtype=int)
+        self._successes = np.zeros(n_arms, dtype=float)
+        self._failures = np.zeros(n_arms, dtype=float)
         self._pulls = np.zeros(n_arms, dtype=int)
 
     def select_arm(self, step: int) -> int:
@@ -49,15 +61,17 @@ class ThompsonSampling(BanditAlgorithm):
 
     def update(self, arm: int, reward: float) -> None:
         if reward not in (0.0, 1.0):
-            raise ValueError("ThompsonSampling requires binary rewards")
-        self._successes[arm] += int(reward)
+            raise ValueError("ForgettingThompsonSampling requires binary rewards")
+        self._successes *= self.gamma
+        self._failures *= self.gamma
+        self._successes[arm] += reward
         self._failures[arm] += int(1 - reward)
         self._pulls[arm] += 1
 
     @property
     def estimated_values(self) -> np.ndarray:
         return (self._successes + self.prior_alpha) / (
-            self._pulls + self.prior_alpha + self.prior_beta
+            self._successes + self._failures + self.prior_alpha + self.prior_beta
         )
 
     @property

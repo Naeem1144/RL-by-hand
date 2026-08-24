@@ -1,0 +1,390 @@
+{
+  "git_commit": "c389f21",
+  "n_steps": 10000,
+  "seeds": {
+    "start": 0,
+    "stop": 50
+  },
+  "interval": "normal-approximation 95% confidence interval",
+  "scenarios": {
+    "bernoulli": {
+      "title": "Fixed ten-arm Bernoulli",
+      "reference_reward": 0.55,
+      "grids": {
+        "epsilon": [
+          0.01,
+          0.05,
+          0.1,
+          0.2,
+          0.3
+        ],
+        "decayed_epsilon": [
+          [
+            0.1,
+            0.999
+          ],
+          [
+            0.2,
+            0.995
+          ]
+        ],
+        "optimistic_value": [
+          1.0
+        ],
+        "ucb_c": [
+          0.1,
+          0.5,
+          1.0,
+          1.4142135623730951,
+          2.0
+        ],
+        "symmetric_beta_prior": [
+          0.5,
+          1.0,
+          2.0,
+          5.0
+        ],
+        "kl_ucb_c": [
+          3.0
+        ],
+        "ucb_v": [
+          "default"
+        ]
+      },
+      "configurations": {
+        "Epsilon epsilon=0.01": {
+          "family": "Epsilon-greedy",
+          "algorithm": "Epsilon-greedy(epsilon=0.01)"
+        },
+        "Epsilon epsilon=0.05": {
+          "family": "Epsilon-greedy",
+          "algorithm": "Epsilon-greedy(epsilon=0.05)"
+        },
+        "Epsilon epsilon=0.1": {
+          "family": "Epsilon-greedy",
+          "algorithm": "Epsilon-greedy(epsilon=0.1)"
+        },
+        "Epsilon epsilon=0.2": {
+          "family": "Epsilon-greedy",
+          "algorithm": "Epsilon-greedy(epsilon=0.2)"
+        },
+        "Epsilon epsilon=0.3": {
+          "family": "Epsilon-greedy",
+          "algorithm": "Epsilon-greedy(epsilon=0.3)"
+        },
+        "Epsilon epsilon=0.1, decay=0.999": {
+          "family": "Epsilon-greedy",
+          "algorithm": "Epsilon-greedy(epsilon=0.1, decay=0.999)"
+        },
+        "Epsilon epsilon=0.2, decay=0.995": {
+          "family": "Epsilon-greedy",
+          "algorithm": "Epsilon-greedy(epsilon=0.2, decay=0.995)"
+        },
+        "Epsilon epsilon=0, optimistic": {
+          "family": "Epsilon-greedy",
+          "algorithm": "Epsilon-greedy(epsilon=0, optimistic)"
+        },
+        "UCB c=0.1": {
+          "family": "UCB",
+          "algorithm": "UCB(c=0.1)"
+        },
+        "UCB c=0.5": {
+          "family": "UCB",
+          "algorithm": "UCB(c=0.5)"
+        },
+        "UCB c=1": {
+          "family": "UCB",
+          "algorithm": "UCB(c=1)"
+        },
+        "UCB c=1.41": {
+          "family": "UCB",
+          "algorithm": "UCB(c=1.41421)"
+        },
+        "UCB c=2": {
+          "family": "UCB",
+          "algorithm": "UCB(c=2)"
+        },
+        "Thompson Beta(0.5,0.5)": {
+          "family": "Thompson sampling",
+          "algorithm": "Thompson(alpha=0.5, beta=0.5)"
+        },
+        "Thompson Beta(1,1)": {
+          "family": "Thompson sampling",
+          "algorithm": "Thompson(alpha=1, beta=1)"
+        },
+        "Thompson Beta(2,2)": {
+          "family": "Thompson sampling",
+          "algorithm": "Thompson(alpha=2, beta=2)"
+        },
+        "Thompson Beta(5,5)": {
+          "family": "Thompson sampling",
+          "algorithm": "Thompson(alpha=5, beta=5)"
+        },
+        "KL-UCB c=3": {
+          "family": "UCB",
+          "algorithm": "KL-UCB(c=3)"
+        },
+        "UCB-V(default)": {
+          "family": "UCB",
+          "algorithm": "UCB-V(c=1.4142, b=3)"
+        }
+      }
+    },
+    "gaussian": {
+      "title": "Fixed ten-arm Gaussian",
+      "reference_reward": 3.5,
+      "grids": {
+        "epsilon": [
+          0.05,
+          0.1,
+          0.2
+        ],
+        "optimistic_value": [
+          4.0
+        ],
+        "ucb_c": [
+          0.5,
+          1.0,
+          1.4142135623730951
+        ],
+        "normal_prior_std": [
+          0.5,
+          1.0,
+          2.0
+        ],
+        "ucb_v": [
+          "default"
+        ]
+      },
+      "configurations": {
+        "Epsilon epsilon=0.05": {
+          "family": "Epsilon-greedy",
+          "algorithm": "Epsilon-greedy(epsilon=0.05)"
+        },
+        "Epsilon epsilon=0.1": {
+          "family": "Epsilon-greedy",
+          "algorithm": "Epsilon-greedy(epsilon=0.1)"
+        },
+        "Epsilon epsilon=0.2": {
+          "family": "Epsilon-greedy",
+          "algorithm": "Epsilon-greedy(epsilon=0.2)"
+        },
+        "Epsilon epsilon=0, optimistic": {
+          "family": "Epsilon-greedy",
+          "algorithm": "Epsilon-greedy(epsilon=0, optimistic)"
+        },
+        "UCB c=0.5": {
+          "family": "UCB",
+          "algorithm": "UCB(c=0.5)"
+        },
+        "UCB c=1": {
+          "family": "UCB",
+          "algorithm": "UCB(c=1)"
+        },
+        "UCB c=1.41": {
+          "family": "UCB",
+          "algorithm": "UCB(c=1.41421)"
+        },
+        "Thompson-Normal sigma0=0.5": {
+          "family": "Thompson sampling",
+          "algorithm": "Thompson-Normal(mu0=0, sigma0=0.5, sigma=1)"
+        },
+        "Thompson-Normal sigma0=1": {
+          "family": "Thompson sampling",
+          "algorithm": "Thompson-Normal(mu0=0, sigma0=1, sigma=1)"
+        },
+        "Thompson-Normal sigma0=2": {
+          "family": "Thompson sampling",
+          "algorithm": "Thompson-Normal(mu0=0, sigma0=2, sigma=1)"
+        },
+        "UCB-V(default)": {
+          "family": "UCB",
+          "algorithm": "UCB-V(c=1.4142, b=3)"
+        }
+      }
+    },
+    "drifting": {
+      "title": "Drifting ten-arm Bernoulli",
+      "reference_reward": null,
+      "grids": {
+        "epsilon": [
+          0.05,
+          0.1,
+          0.2
+        ],
+        "step_size": [
+          0.05,
+          0.1,
+          0.2
+        ],
+        "ucb_c": [
+          1.4142135623730951
+        ],
+        "symmetric_beta_prior": [
+          1.0
+        ],
+        "kl_ucb_c": [
+          3.0
+        ],
+        "ucb_v": [
+          "default"
+        ],
+        "sw_window": [
+          1000
+        ],
+        "forgetting_gamma": [
+          0.95,
+          0.99
+        ]
+      },
+      "configurations": {
+        "Epsilon epsilon=0.05": {
+          "family": "Epsilon-greedy",
+          "algorithm": "Epsilon-greedy(epsilon=0.05)"
+        },
+        "Epsilon epsilon=0.1": {
+          "family": "Epsilon-greedy",
+          "algorithm": "Epsilon-greedy(epsilon=0.1)"
+        },
+        "Epsilon epsilon=0.2": {
+          "family": "Epsilon-greedy",
+          "algorithm": "Epsilon-greedy(epsilon=0.2)"
+        },
+        "Epsilon epsilon=0.1, alpha=0.05": {
+          "family": "Epsilon-greedy",
+          "algorithm": "Epsilon-greedy(epsilon=0.1, alpha=0.05)"
+        },
+        "Epsilon epsilon=0.1, alpha=0.1": {
+          "family": "Epsilon-greedy",
+          "algorithm": "Epsilon-greedy(epsilon=0.1, alpha=0.1)"
+        },
+        "Epsilon epsilon=0.1, alpha=0.2": {
+          "family": "Epsilon-greedy",
+          "algorithm": "Epsilon-greedy(epsilon=0.1, alpha=0.2)"
+        },
+        "UCB c=1.41": {
+          "family": "UCB",
+          "algorithm": "UCB(c=1.41421)"
+        },
+        "Thompson Beta(1,1)": {
+          "family": "Thompson sampling",
+          "algorithm": "Thompson(alpha=1, beta=1)"
+        },
+        "KL-UCB c=3": {
+          "family": "UCB",
+          "algorithm": "KL-UCB(c=3)"
+        },
+        "UCB-V(default)": {
+          "family": "UCB",
+          "algorithm": "UCB-V(c=1.4142, b=3)"
+        },
+        "UCB SW(tau=1000)": {
+          "family": "UCB",
+          "algorithm": "UCB-SW(tau=1000, c=1.4142)"
+        },
+        "Thompson decay=0.95": {
+          "family": "Thompson sampling",
+          "algorithm": "Thompson decay=0.95"
+        },
+        "Thompson decay=0.99": {
+          "family": "Thompson sampling",
+          "algorithm": "Thompson decay=0.99"
+        }
+      }
+    },
+    "slow_drifting": {
+      "title": "Slowly drifting ten-arm Bernoulli",
+      "reference_reward": null,
+      "grids": {
+        "epsilon": [
+          0.05,
+          0.1,
+          0.2
+        ],
+        "step_size": [
+          0.05,
+          0.1,
+          0.2
+        ],
+        "ucb_c": [
+          1.4142135623730951
+        ],
+        "symmetric_beta_prior": [
+          1.0
+        ],
+        "kl_ucb_c": [
+          3.0
+        ],
+        "ucb_v": [
+          "default"
+        ],
+        "sw_window": [
+          1000,
+          4000
+        ],
+        "forgetting_gamma": [
+          0.95,
+          0.99
+        ]
+      },
+      "configurations": {
+        "Epsilon epsilon=0.05": {
+          "family": "Epsilon-greedy",
+          "algorithm": "Epsilon-greedy(epsilon=0.05)"
+        },
+        "Epsilon epsilon=0.1": {
+          "family": "Epsilon-greedy",
+          "algorithm": "Epsilon-greedy(epsilon=0.1)"
+        },
+        "Epsilon epsilon=0.2": {
+          "family": "Epsilon-greedy",
+          "algorithm": "Epsilon-greedy(epsilon=0.2)"
+        },
+        "Epsilon epsilon=0.1, alpha=0.05": {
+          "family": "Epsilon-greedy",
+          "algorithm": "Epsilon-greedy(epsilon=0.1, alpha=0.05)"
+        },
+        "Epsilon epsilon=0.1, alpha=0.1": {
+          "family": "Epsilon-greedy",
+          "algorithm": "Epsilon-greedy(epsilon=0.1, alpha=0.1)"
+        },
+        "Epsilon epsilon=0.1, alpha=0.2": {
+          "family": "Epsilon-greedy",
+          "algorithm": "Epsilon-greedy(epsilon=0.1, alpha=0.2)"
+        },
+        "UCB c=1.41": {
+          "family": "UCB",
+          "algorithm": "UCB(c=1.41421)"
+        },
+        "Thompson Beta(1,1)": {
+          "family": "Thompson sampling",
+          "algorithm": "Thompson(alpha=1, beta=1)"
+        },
+        "KL-UCB c=3": {
+          "family": "UCB",
+          "algorithm": "KL-UCB(c=3)"
+        },
+        "UCB-V(default)": {
+          "family": "UCB",
+          "algorithm": "UCB-V(c=1.4142, b=3)"
+        },
+        "UCB SW(tau=1000)": {
+          "family": "UCB",
+          "algorithm": "UCB-SW(tau=1000, c=1.4142)"
+        },
+        "UCB SW(tau=4000)": {
+          "family": "UCB",
+          "algorithm": "UCB-SW(tau=4000, c=1.4142)"
+        },
+        "Thompson decay=0.95": {
+          "family": "Thompson sampling",
+          "algorithm": "Thompson decay=0.95"
+        },
+        "Thompson decay=0.99": {
+          "family": "Thompson sampling",
+          "algorithm": "Thompson decay=0.99"
+        }
+      }
+    }
+  }
+}

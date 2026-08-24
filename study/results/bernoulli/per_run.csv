@@ -1,0 +1,951 @@
+family,configuration,seed,average_reward,total_regret
+Epsilon-greedy,Epsilon epsilon=0.01,0,0.454400,1017.250000
+Epsilon-greedy,Epsilon epsilon=0.01,1,0.434900,1017.150000
+Epsilon-greedy,Epsilon epsilon=0.01,2,0.450100,1010.950000
+Epsilon-greedy,Epsilon epsilon=0.01,3,0.551600,48.650000
+Epsilon-greedy,Epsilon epsilon=0.01,4,0.500200,442.800000
+Epsilon-greedy,Epsilon epsilon=0.01,5,0.549500,35.300000
+Epsilon-greedy,Epsilon epsilon=0.01,6,0.526900,155.800000
+Epsilon-greedy,Epsilon epsilon=0.01,7,0.552200,30.800000
+Epsilon-greedy,Epsilon epsilon=0.01,8,0.519500,286.800000
+Epsilon-greedy,Epsilon epsilon=0.01,9,0.518900,247.600000
+Epsilon-greedy,Epsilon epsilon=0.01,10,0.399800,1512.400000
+Epsilon-greedy,Epsilon epsilon=0.01,11,0.549900,64.500000
+Epsilon-greedy,Epsilon epsilon=0.01,12,0.418100,1285.100000
+Epsilon-greedy,Epsilon epsilon=0.01,13,0.549700,43.350000
+Epsilon-greedy,Epsilon epsilon=0.01,14,0.483600,707.750000
+Epsilon-greedy,Epsilon epsilon=0.01,15,0.537200,121.050000
+Epsilon-greedy,Epsilon epsilon=0.01,16,0.500500,557.700000
+Epsilon-greedy,Epsilon epsilon=0.01,17,0.535400,133.400000
+Epsilon-greedy,Epsilon epsilon=0.01,18,0.422500,1256.600000
+Epsilon-greedy,Epsilon epsilon=0.01,19,0.539900,27.050000
+Epsilon-greedy,Epsilon epsilon=0.01,20,0.530100,265.550000
+Epsilon-greedy,Epsilon epsilon=0.01,21,0.467300,831.800000
+Epsilon-greedy,Epsilon epsilon=0.01,22,0.409700,1356.050000
+Epsilon-greedy,Epsilon epsilon=0.01,23,0.548700,25.800000
+Epsilon-greedy,Epsilon epsilon=0.01,24,0.543700,38.150000
+Epsilon-greedy,Epsilon epsilon=0.01,25,0.444700,1024.600000
+Epsilon-greedy,Epsilon epsilon=0.01,26,0.453600,1019.200000
+Epsilon-greedy,Epsilon epsilon=0.01,27,0.541000,87.650000
+Epsilon-greedy,Epsilon epsilon=0.01,28,0.434800,1148.800000
+Epsilon-greedy,Epsilon epsilon=0.01,29,0.550700,32.400000
+Epsilon-greedy,Epsilon epsilon=0.01,30,0.541100,104.000000
+Epsilon-greedy,Epsilon epsilon=0.01,31,0.520700,224.150000
+Epsilon-greedy,Epsilon epsilon=0.01,32,0.443300,1088.050000
+Epsilon-greedy,Epsilon epsilon=0.01,33,0.490700,577.850000
+Epsilon-greedy,Epsilon epsilon=0.01,34,0.522700,282.000000
+Epsilon-greedy,Epsilon epsilon=0.01,35,0.515400,299.850000
+Epsilon-greedy,Epsilon epsilon=0.01,36,0.520500,264.650000
+Epsilon-greedy,Epsilon epsilon=0.01,37,0.554300,23.700000
+Epsilon-greedy,Epsilon epsilon=0.01,38,0.536100,135.600000
+Epsilon-greedy,Epsilon epsilon=0.01,39,0.541500,84.000000
+Epsilon-greedy,Epsilon epsilon=0.01,40,0.552100,24.150000
+Epsilon-greedy,Epsilon epsilon=0.01,41,0.455500,933.150000
+Epsilon-greedy,Epsilon epsilon=0.01,42,0.540100,30.050000
+Epsilon-greedy,Epsilon epsilon=0.01,43,0.537700,156.050000
+Epsilon-greedy,Epsilon epsilon=0.01,44,0.413500,1304.750000
+Epsilon-greedy,Epsilon epsilon=0.01,45,0.420200,1273.950000
+Epsilon-greedy,Epsilon epsilon=0.01,46,0.543300,41.550000
+Epsilon-greedy,Epsilon epsilon=0.01,47,0.541400,45.000000
+Epsilon-greedy,Epsilon epsilon=0.01,48,0.502900,405.700000
+Epsilon-greedy,Epsilon epsilon=0.01,49,0.555400,27.250000
+Epsilon-greedy,Epsilon epsilon=0.05,0,0.447700,1090.350000
+Epsilon-greedy,Epsilon epsilon=0.05,1,0.524600,149.950000
+Epsilon-greedy,Epsilon epsilon=0.05,2,0.532700,224.800000
+Epsilon-greedy,Epsilon epsilon=0.05,3,0.543500,133.350000
+Epsilon-greedy,Epsilon epsilon=0.05,4,0.516100,290.850000
+Epsilon-greedy,Epsilon epsilon=0.05,5,0.539600,135.800000
+Epsilon-greedy,Epsilon epsilon=0.05,6,0.488800,544.100000
+Epsilon-greedy,Epsilon epsilon=0.05,7,0.542100,136.500000
+Epsilon-greedy,Epsilon epsilon=0.05,8,0.516800,318.300000
+Epsilon-greedy,Epsilon epsilon=0.05,9,0.511300,314.900000
+Epsilon-greedy,Epsilon epsilon=0.05,10,0.480700,670.500000
+Epsilon-greedy,Epsilon epsilon=0.05,11,0.486200,679.650000
+Epsilon-greedy,Epsilon epsilon=0.05,12,0.404700,1402.000000
+Epsilon-greedy,Epsilon epsilon=0.05,13,0.537800,165.700000
+Epsilon-greedy,Epsilon epsilon=0.05,14,0.535600,176.050000
+Epsilon-greedy,Epsilon epsilon=0.05,15,0.531800,184.050000
+Epsilon-greedy,Epsilon epsilon=0.05,16,0.474400,823.550000
+Epsilon-greedy,Epsilon epsilon=0.05,17,0.531600,159.200000
+Epsilon-greedy,Epsilon epsilon=0.05,18,0.504600,482.400000
+Epsilon-greedy,Epsilon epsilon=0.05,19,0.531200,126.150000
+Epsilon-greedy,Epsilon epsilon=0.05,20,0.522200,353.800000
+Epsilon-greedy,Epsilon epsilon=0.05,21,0.533400,164.800000
+Epsilon-greedy,Epsilon epsilon=0.05,22,0.529200,165.200000
+Epsilon-greedy,Epsilon epsilon=0.05,23,0.537300,140.300000
+Epsilon-greedy,Epsilon epsilon=0.05,24,0.520400,273.200000
+Epsilon-greedy,Epsilon epsilon=0.05,25,0.512600,385.900000
+Epsilon-greedy,Epsilon epsilon=0.05,26,0.537700,159.100000
+Epsilon-greedy,Epsilon epsilon=0.05,27,0.424700,1223.650000
+Epsilon-greedy,Epsilon epsilon=0.05,28,0.531400,180.350000
+Epsilon-greedy,Epsilon epsilon=0.05,29,0.541400,142.100000
+Epsilon-greedy,Epsilon epsilon=0.05,30,0.535700,159.800000
+Epsilon-greedy,Epsilon epsilon=0.05,31,0.521400,214.750000
+Epsilon-greedy,Epsilon epsilon=0.05,32,0.470900,799.850000
+Epsilon-greedy,Epsilon epsilon=0.05,33,0.528600,182.100000
+Epsilon-greedy,Epsilon epsilon=0.05,34,0.533100,191.750000
+Epsilon-greedy,Epsilon epsilon=0.05,35,0.530700,160.000000
+Epsilon-greedy,Epsilon epsilon=0.05,36,0.443700,1017.150000
+Epsilon-greedy,Epsilon epsilon=0.05,37,0.544900,123.700000
+Epsilon-greedy,Epsilon epsilon=0.05,38,0.533100,148.900000
+Epsilon-greedy,Epsilon epsilon=0.05,39,0.532000,163.100000
+Epsilon-greedy,Epsilon epsilon=0.05,40,0.541000,134.000000
+Epsilon-greedy,Epsilon epsilon=0.05,41,0.454500,953.100000
+Epsilon-greedy,Epsilon epsilon=0.05,42,0.530500,139.300000
+Epsilon-greedy,Epsilon epsilon=0.05,43,0.535700,166.850000
+Epsilon-greedy,Epsilon epsilon=0.05,44,0.511500,324.700000
+Epsilon-greedy,Epsilon epsilon=0.05,45,0.522800,212.150000
+Epsilon-greedy,Epsilon epsilon=0.05,46,0.437200,1085.850000
+Epsilon-greedy,Epsilon epsilon=0.05,47,0.513100,322.250000
+Epsilon-greedy,Epsilon epsilon=0.05,48,0.516900,283.550000
+Epsilon-greedy,Epsilon epsilon=0.05,49,0.543800,135.900000
+Epsilon-greedy,Epsilon epsilon=0.1,0,0.518600,393.100000
+Epsilon-greedy,Epsilon epsilon=0.1,1,0.507000,280.750000
+Epsilon-greedy,Epsilon epsilon=0.1,2,0.522000,322.400000
+Epsilon-greedy,Epsilon epsilon=0.1,3,0.530400,273.200000
+Epsilon-greedy,Epsilon epsilon=0.1,4,0.509200,360.650000
+Epsilon-greedy,Epsilon epsilon=0.1,5,0.526100,265.050000
+Epsilon-greedy,Epsilon epsilon=0.1,6,0.512500,311.350000
+Epsilon-greedy,Epsilon epsilon=0.1,7,0.526500,274.800000
+Epsilon-greedy,Epsilon epsilon=0.1,8,0.517300,298.000000
+Epsilon-greedy,Epsilon epsilon=0.1,9,0.493500,501.300000
+Epsilon-greedy,Epsilon epsilon=0.1,10,0.517900,294.600000
+Epsilon-greedy,Epsilon epsilon=0.1,11,0.525600,278.000000
+Epsilon-greedy,Epsilon epsilon=0.1,12,0.512300,309.950000
+Epsilon-greedy,Epsilon epsilon=0.1,13,0.526200,283.150000
+Epsilon-greedy,Epsilon epsilon=0.1,14,0.518500,358.700000
+Epsilon-greedy,Epsilon epsilon=0.1,15,0.503200,470.500000
+Epsilon-greedy,Epsilon epsilon=0.1,16,0.523100,314.950000
+Epsilon-greedy,Epsilon epsilon=0.1,17,0.500600,510.500000
+Epsilon-greedy,Epsilon epsilon=0.1,18,0.476600,725.100000
+Epsilon-greedy,Epsilon epsilon=0.1,19,0.519000,246.450000
+Epsilon-greedy,Epsilon epsilon=0.1,20,0.525400,295.550000
+Epsilon-greedy,Epsilon epsilon=0.1,21,0.514000,348.150000
+Epsilon-greedy,Epsilon epsilon=0.1,22,0.515500,321.000000
+Epsilon-greedy,Epsilon epsilon=0.1,23,0.520800,282.150000
+Epsilon-greedy,Epsilon epsilon=0.1,24,0.522700,273.350000
+Epsilon-greedy,Epsilon epsilon=0.1,25,0.517700,297.250000
+Epsilon-greedy,Epsilon epsilon=0.1,26,0.495400,595.600000
+Epsilon-greedy,Epsilon epsilon=0.1,27,0.486800,623.800000
+Epsilon-greedy,Epsilon epsilon=0.1,28,0.519300,300.450000
+Epsilon-greedy,Epsilon epsilon=0.1,29,0.526500,275.950000
+Epsilon-greedy,Epsilon epsilon=0.1,30,0.526500,280.350000
+Epsilon-greedy,Epsilon epsilon=0.1,31,0.508100,343.850000
+Epsilon-greedy,Epsilon epsilon=0.1,32,0.515600,331.700000
+Epsilon-greedy,Epsilon epsilon=0.1,33,0.516900,283.150000
+Epsilon-greedy,Epsilon epsilon=0.1,34,0.519100,316.350000
+Epsilon-greedy,Epsilon epsilon=0.1,35,0.518900,281.700000
+Epsilon-greedy,Epsilon epsilon=0.1,36,0.513500,361.700000
+Epsilon-greedy,Epsilon epsilon=0.1,37,0.532200,242.300000
+Epsilon-greedy,Epsilon epsilon=0.1,38,0.496500,557.000000
+Epsilon-greedy,Epsilon epsilon=0.1,39,0.520300,310.600000
+Epsilon-greedy,Epsilon epsilon=0.1,40,0.530000,262.900000
+Epsilon-greedy,Epsilon epsilon=0.1,41,0.500400,497.050000
+Epsilon-greedy,Epsilon epsilon=0.1,42,0.516700,272.250000
+Epsilon-greedy,Epsilon epsilon=0.1,43,0.495400,567.900000
+Epsilon-greedy,Epsilon epsilon=0.1,44,0.432500,1112.150000
+Epsilon-greedy,Epsilon epsilon=0.1,45,0.516400,281.250000
+Epsilon-greedy,Epsilon epsilon=0.1,46,0.518200,284.950000
+Epsilon-greedy,Epsilon epsilon=0.1,47,0.512700,320.150000
+Epsilon-greedy,Epsilon epsilon=0.1,48,0.515100,325.450000
+Epsilon-greedy,Epsilon epsilon=0.1,49,0.531600,259.850000
+Epsilon-greedy,Epsilon epsilon=0.2,0,0.499200,559.450000
+Epsilon-greedy,Epsilon epsilon=0.2,1,0.479500,579.100000
+Epsilon-greedy,Epsilon epsilon=0.2,2,0.499600,558.850000
+Epsilon-greedy,Epsilon epsilon=0.2,3,0.499900,552.250000
+Epsilon-greedy,Epsilon epsilon=0.2,4,0.487100,570.950000
+Epsilon-greedy,Epsilon epsilon=0.2,5,0.486400,647.100000
+Epsilon-greedy,Epsilon epsilon=0.2,6,0.492500,550.150000
+Epsilon-greedy,Epsilon epsilon=0.2,7,0.499500,543.700000
+Epsilon-greedy,Epsilon epsilon=0.2,8,0.489400,578.000000
+Epsilon-greedy,Epsilon epsilon=0.2,9,0.488300,555.050000
+Epsilon-greedy,Epsilon epsilon=0.2,10,0.494600,561.700000
+Epsilon-greedy,Epsilon epsilon=0.2,11,0.494500,585.650000
+Epsilon-greedy,Epsilon epsilon=0.2,12,0.479400,635.550000
+Epsilon-greedy,Epsilon epsilon=0.2,13,0.498700,546.000000
+Epsilon-greedy,Epsilon epsilon=0.2,14,0.486200,658.350000
+Epsilon-greedy,Epsilon epsilon=0.2,15,0.491900,574.550000
+Epsilon-greedy,Epsilon epsilon=0.2,16,0.496700,558.200000
+Epsilon-greedy,Epsilon epsilon=0.2,17,0.482900,627.850000
+Epsilon-greedy,Epsilon epsilon=0.2,18,0.495800,590.500000
+Epsilon-greedy,Epsilon epsilon=0.2,19,0.489600,527.600000
+Epsilon-greedy,Epsilon epsilon=0.2,20,0.498000,566.100000
+Epsilon-greedy,Epsilon epsilon=0.2,21,0.452000,953.300000
+Epsilon-greedy,Epsilon epsilon=0.2,22,0.490100,546.500000
+Epsilon-greedy,Epsilon epsilon=0.2,23,0.495300,562.600000
+Epsilon-greedy,Epsilon epsilon=0.2,24,0.496100,543.600000
+Epsilon-greedy,Epsilon epsilon=0.2,25,0.496900,553.100000
+Epsilon-greedy,Epsilon epsilon=0.2,26,0.461400,912.150000
+Epsilon-greedy,Epsilon epsilon=0.2,27,0.482500,693.900000
+Epsilon-greedy,Epsilon epsilon=0.2,28,0.492300,554.950000
+Epsilon-greedy,Epsilon epsilon=0.2,29,0.500700,529.300000
+Epsilon-greedy,Epsilon epsilon=0.2,30,0.496900,558.750000
+Epsilon-greedy,Epsilon epsilon=0.2,31,0.483300,579.550000
+Epsilon-greedy,Epsilon epsilon=0.2,32,0.493400,560.300000
+Epsilon-greedy,Epsilon epsilon=0.2,33,0.490000,569.100000
+Epsilon-greedy,Epsilon epsilon=0.2,34,0.489000,601.850000
+Epsilon-greedy,Epsilon epsilon=0.2,35,0.492600,543.550000
+Epsilon-greedy,Epsilon epsilon=0.2,36,0.488400,576.350000
+Epsilon-greedy,Epsilon epsilon=0.2,37,0.504800,515.700000
+Epsilon-greedy,Epsilon epsilon=0.2,38,0.496300,554.550000
+Epsilon-greedy,Epsilon epsilon=0.2,39,0.492800,561.200000
+Epsilon-greedy,Epsilon epsilon=0.2,40,0.502400,521.650000
+Epsilon-greedy,Epsilon epsilon=0.2,41,0.491500,552.850000
+Epsilon-greedy,Epsilon epsilon=0.2,42,0.488000,536.750000
+Epsilon-greedy,Epsilon epsilon=0.2,43,0.497200,569.800000
+Epsilon-greedy,Epsilon epsilon=0.2,44,0.487500,567.000000
+Epsilon-greedy,Epsilon epsilon=0.2,45,0.477600,713.200000
+Epsilon-greedy,Epsilon epsilon=0.2,46,0.492000,550.900000
+Epsilon-greedy,Epsilon epsilon=0.2,47,0.487500,565.300000
+Epsilon-greedy,Epsilon epsilon=0.2,48,0.486000,585.750000
+Epsilon-greedy,Epsilon epsilon=0.2,49,0.493900,660.500000
+Epsilon-greedy,Epsilon epsilon=0.3,0,0.469300,863.300000
+Epsilon-greedy,Epsilon epsilon=0.3,1,0.454000,847.400000
+Epsilon-greedy,Epsilon epsilon=0.3,2,0.470600,814.750000
+Epsilon-greedy,Epsilon epsilon=0.3,3,0.473800,801.150000
+Epsilon-greedy,Epsilon epsilon=0.3,4,0.464000,829.650000
+Epsilon-greedy,Epsilon epsilon=0.3,5,0.465900,854.050000
+Epsilon-greedy,Epsilon epsilon=0.3,6,0.465500,813.250000
+Epsilon-greedy,Epsilon epsilon=0.3,7,0.468200,870.900000
+Epsilon-greedy,Epsilon epsilon=0.3,8,0.459400,839.650000
+Epsilon-greedy,Epsilon epsilon=0.3,9,0.457300,861.000000
+Epsilon-greedy,Epsilon epsilon=0.3,10,0.463700,893.950000
+Epsilon-greedy,Epsilon epsilon=0.3,11,0.471600,822.250000
+Epsilon-greedy,Epsilon epsilon=0.3,12,0.459900,866.300000
+Epsilon-greedy,Epsilon epsilon=0.3,13,0.467500,819.350000
+Epsilon-greedy,Epsilon epsilon=0.3,14,0.471500,813.000000
+Epsilon-greedy,Epsilon epsilon=0.3,15,0.454600,936.650000
+Epsilon-greedy,Epsilon epsilon=0.3,16,0.469800,836.900000
+Epsilon-greedy,Epsilon epsilon=0.3,17,0.459200,855.500000
+Epsilon-greedy,Epsilon epsilon=0.3,18,0.469800,810.250000
+Epsilon-greedy,Epsilon epsilon=0.3,19,0.463900,801.100000
+Epsilon-greedy,Epsilon epsilon=0.3,20,0.470300,838.400000
+Epsilon-greedy,Epsilon epsilon=0.3,21,0.470300,829.500000
+Epsilon-greedy,Epsilon epsilon=0.3,22,0.461500,846.700000
+Epsilon-greedy,Epsilon epsilon=0.3,23,0.468600,842.000000
+Epsilon-greedy,Epsilon epsilon=0.3,24,0.464700,813.400000
+Epsilon-greedy,Epsilon epsilon=0.3,25,0.465700,832.600000
+Epsilon-greedy,Epsilon epsilon=0.3,26,0.470000,824.850000
+Epsilon-greedy,Epsilon epsilon=0.3,27,0.451900,942.500000
+Epsilon-greedy,Epsilon epsilon=0.3,28,0.450100,998.550000
+Epsilon-greedy,Epsilon epsilon=0.3,29,0.470100,818.800000
+Epsilon-greedy,Epsilon epsilon=0.3,30,0.454100,996.600000
+Epsilon-greedy,Epsilon epsilon=0.3,31,0.453500,918.300000
+Epsilon-greedy,Epsilon epsilon=0.3,32,0.467300,840.300000
+Epsilon-greedy,Epsilon epsilon=0.3,33,0.464800,836.600000
+Epsilon-greedy,Epsilon epsilon=0.3,34,0.466500,826.650000
+Epsilon-greedy,Epsilon epsilon=0.3,35,0.464600,817.000000
+Epsilon-greedy,Epsilon epsilon=0.3,36,0.434200,1129.350000
+Epsilon-greedy,Epsilon epsilon=0.3,37,0.477500,798.550000
+Epsilon-greedy,Epsilon epsilon=0.3,38,0.463300,828.250000
+Epsilon-greedy,Epsilon epsilon=0.3,39,0.471500,810.600000
+Epsilon-greedy,Epsilon epsilon=0.3,40,0.476100,794.500000
+Epsilon-greedy,Epsilon epsilon=0.3,41,0.464300,835.450000
+Epsilon-greedy,Epsilon epsilon=0.3,42,0.458200,846.000000
+Epsilon-greedy,Epsilon epsilon=0.3,43,0.466300,871.000000
+Epsilon-greedy,Epsilon epsilon=0.3,44,0.459400,842.400000
+Epsilon-greedy,Epsilon epsilon=0.3,45,0.463300,836.900000
+Epsilon-greedy,Epsilon epsilon=0.3,46,0.460400,829.300000
+Epsilon-greedy,Epsilon epsilon=0.3,47,0.460700,847.100000
+Epsilon-greedy,Epsilon epsilon=0.3,48,0.461700,802.950000
+Epsilon-greedy,Epsilon epsilon=0.3,49,0.472300,851.300000
+Epsilon-greedy,"Epsilon epsilon=0.1, decay=0.999",0,0.454500,1017.350000
+Epsilon-greedy,"Epsilon epsilon=0.1, decay=0.999",1,0.534700,28.700000
+Epsilon-greedy,"Epsilon epsilon=0.1, decay=0.999",2,0.550700,31.400000
+Epsilon-greedy,"Epsilon epsilon=0.1, decay=0.999",3,0.554500,28.450000
+Epsilon-greedy,"Epsilon epsilon=0.1, decay=0.999",4,0.294500,2513.950000
+Epsilon-greedy,"Epsilon epsilon=0.1, decay=0.999",5,0.550400,25.450000
+Epsilon-greedy,"Epsilon epsilon=0.1, decay=0.999",6,0.529400,141.600000
+Epsilon-greedy,"Epsilon epsilon=0.1, decay=0.999",7,0.552600,34.550000
+Epsilon-greedy,"Epsilon epsilon=0.1, decay=0.999",8,0.542800,49.500000
+Epsilon-greedy,"Epsilon epsilon=0.1, decay=0.999",9,0.434800,1057.100000
+Epsilon-greedy,"Epsilon epsilon=0.1, decay=0.999",10,0.543100,46.450000
+Epsilon-greedy,"Epsilon epsilon=0.1, decay=0.999",11,0.551800,37.200000
+Epsilon-greedy,"Epsilon epsilon=0.1, decay=0.999",12,0.498400,480.800000
+Epsilon-greedy,"Epsilon epsilon=0.1, decay=0.999",13,0.550500,40.400000
+Epsilon-greedy,"Epsilon epsilon=0.1, decay=0.999",14,0.399200,1534.650000
+Epsilon-greedy,"Epsilon epsilon=0.1, decay=0.999",15,0.539600,106.350000
+Epsilon-greedy,"Epsilon epsilon=0.1, decay=0.999",16,0.450900,1037.000000
+Epsilon-greedy,"Epsilon epsilon=0.1, decay=0.999",17,0.540500,80.850000
+Epsilon-greedy,"Epsilon epsilon=0.1, decay=0.999",18,0.446500,1024.250000
+Epsilon-greedy,"Epsilon epsilon=0.1, decay=0.999",19,0.539900,32.350000
+Epsilon-greedy,"Epsilon epsilon=0.1, decay=0.999",20,0.552200,47.100000
+Epsilon-greedy,"Epsilon epsilon=0.1, decay=0.999",21,0.447800,1020.900000
+Epsilon-greedy,"Epsilon epsilon=0.1, decay=0.999",22,0.430400,1132.750000
+Epsilon-greedy,"Epsilon epsilon=0.1, decay=0.999",23,0.547900,33.550000
+Epsilon-greedy,"Epsilon epsilon=0.1, decay=0.999",24,0.544200,36.250000
+Epsilon-greedy,"Epsilon epsilon=0.1, decay=0.999",25,0.542500,53.500000
+Epsilon-greedy,"Epsilon epsilon=0.1, decay=0.999",26,0.532100,209.950000
+Epsilon-greedy,"Epsilon epsilon=0.1, decay=0.999",27,0.545200,46.200000
+Epsilon-greedy,"Epsilon epsilon=0.1, decay=0.999",28,0.445400,1043.100000
+Epsilon-greedy,"Epsilon epsilon=0.1, decay=0.999",29,0.551300,23.500000
+Epsilon-greedy,"Epsilon epsilon=0.1, decay=0.999",30,0.536200,164.000000
+Epsilon-greedy,"Epsilon epsilon=0.1, decay=0.999",31,0.438500,1041.100000
+Epsilon-greedy,"Epsilon epsilon=0.1, decay=0.999",32,0.447100,1031.650000
+Epsilon-greedy,"Epsilon epsilon=0.1, decay=0.999",33,0.541800,37.500000
+Epsilon-greedy,"Epsilon epsilon=0.1, decay=0.999",34,0.533600,160.950000
+Epsilon-greedy,"Epsilon epsilon=0.1, decay=0.999",35,0.541800,49.800000
+Epsilon-greedy,"Epsilon epsilon=0.1, decay=0.999",36,0.534600,121.300000
+Epsilon-greedy,"Epsilon epsilon=0.1, decay=0.999",37,0.554100,23.400000
+Epsilon-greedy,"Epsilon epsilon=0.1, decay=0.999",38,0.450000,1031.300000
+Epsilon-greedy,"Epsilon epsilon=0.1, decay=0.999",39,0.545500,46.800000
+Epsilon-greedy,"Epsilon epsilon=0.1, decay=0.999",40,0.552800,30.650000
+Epsilon-greedy,"Epsilon epsilon=0.1, decay=0.999",41,0.397600,1513.750000
+Epsilon-greedy,"Epsilon epsilon=0.1, decay=0.999",42,0.539900,27.450000
+Epsilon-greedy,"Epsilon epsilon=0.1, decay=0.999",43,0.448000,1045.550000
+Epsilon-greedy,"Epsilon epsilon=0.1, decay=0.999",44,0.536600,83.750000
+Epsilon-greedy,"Epsilon epsilon=0.1, decay=0.999",45,0.540800,36.100000
+Epsilon-greedy,"Epsilon epsilon=0.1, decay=0.999",46,0.444900,1011.450000
+Epsilon-greedy,"Epsilon epsilon=0.1, decay=0.999",47,0.539300,70.300000
+Epsilon-greedy,"Epsilon epsilon=0.1, decay=0.999",48,0.538700,65.050000
+Epsilon-greedy,"Epsilon epsilon=0.1, decay=0.999",49,0.555700,29.050000
+Epsilon-greedy,"Epsilon epsilon=0.2, decay=0.995",0,0.455200,1009.350000
+Epsilon-greedy,"Epsilon epsilon=0.2, decay=0.995",1,0.434100,1031.100000
+Epsilon-greedy,"Epsilon epsilon=0.2, decay=0.995",2,0.450700,1008.600000
+Epsilon-greedy,"Epsilon epsilon=0.2, decay=0.995",3,0.555200,14.200000
+Epsilon-greedy,"Epsilon epsilon=0.2, decay=0.995",4,0.445700,1017.300000
+Epsilon-greedy,"Epsilon epsilon=0.2, decay=0.995",5,0.449000,1010.350000
+Epsilon-greedy,"Epsilon epsilon=0.2, decay=0.995",6,0.543400,16.550000
+Epsilon-greedy,"Epsilon epsilon=0.2, decay=0.995",7,0.403600,1506.300000
+Epsilon-greedy,"Epsilon epsilon=0.2, decay=0.995",8,0.545600,18.300000
+Epsilon-greedy,"Epsilon epsilon=0.2, decay=0.995",9,0.539700,27.400000
+Epsilon-greedy,"Epsilon epsilon=0.2, decay=0.995",10,0.545200,31.600000
+Epsilon-greedy,"Epsilon epsilon=0.2, decay=0.995",11,0.451300,1006.800000
+Epsilon-greedy,"Epsilon epsilon=0.2, decay=0.995",12,0.537700,55.850000
+Epsilon-greedy,"Epsilon epsilon=0.2, decay=0.995",13,0.452400,1011.000000
+Epsilon-greedy,"Epsilon epsilon=0.2, decay=0.995",14,0.451900,1008.450000
+Epsilon-greedy,"Epsilon epsilon=0.2, decay=0.995",15,0.549100,19.950000
+Epsilon-greedy,"Epsilon epsilon=0.2, decay=0.995",16,0.551900,23.550000
+Epsilon-greedy,"Epsilon epsilon=0.2, decay=0.995",17,0.448100,1006.450000
+Epsilon-greedy,"Epsilon epsilon=0.2, decay=0.995",18,0.445100,1044.800000
+Epsilon-greedy,"Epsilon epsilon=0.2, decay=0.995",19,0.541200,17.350000
+Epsilon-greedy,"Epsilon epsilon=0.2, decay=0.995",20,0.305400,2500.650000
+Epsilon-greedy,"Epsilon epsilon=0.2, decay=0.995",21,0.394100,1515.800000
+Epsilon-greedy,"Epsilon epsilon=0.2, decay=0.995",22,0.440500,1033.500000
+Epsilon-greedy,"Epsilon epsilon=0.2, decay=0.995",23,0.550000,15.150000
+Epsilon-greedy,"Epsilon epsilon=0.2, decay=0.995",24,0.546400,13.800000
+Epsilon-greedy,"Epsilon epsilon=0.2, decay=0.995",25,0.547600,13.300000
+Epsilon-greedy,"Epsilon epsilon=0.2, decay=0.995",26,0.400900,1504.550000
+Epsilon-greedy,"Epsilon epsilon=0.2, decay=0.995",27,0.547100,28.950000
+Epsilon-greedy,"Epsilon epsilon=0.2, decay=0.995",28,0.447900,1016.500000
+Epsilon-greedy,"Epsilon epsilon=0.2, decay=0.995",29,0.452500,1000.650000
+Epsilon-greedy,"Epsilon epsilon=0.2, decay=0.995",30,0.550000,23.750000
+Epsilon-greedy,"Epsilon epsilon=0.2, decay=0.995",31,0.392000,1519.000000
+Epsilon-greedy,"Epsilon epsilon=0.2, decay=0.995",32,0.539200,86.900000
+Epsilon-greedy,"Epsilon epsilon=0.2, decay=0.995",33,0.543300,25.800000
+Epsilon-greedy,"Epsilon epsilon=0.2, decay=0.995",34,0.544500,52.700000
+Epsilon-greedy,"Epsilon epsilon=0.2, decay=0.995",35,0.545200,14.950000
+Epsilon-greedy,"Epsilon epsilon=0.2, decay=0.995",36,0.544500,24.900000
+Epsilon-greedy,"Epsilon epsilon=0.2, decay=0.995",37,0.555600,9.250000
+Epsilon-greedy,"Epsilon epsilon=0.2, decay=0.995",38,0.441700,1087.100000
+Epsilon-greedy,"Epsilon epsilon=0.2, decay=0.995",39,0.547600,20.850000
+Epsilon-greedy,"Epsilon epsilon=0.2, decay=0.995",40,0.554300,15.250000
+Epsilon-greedy,"Epsilon epsilon=0.2, decay=0.995",41,0.443800,1037.150000
+Epsilon-greedy,"Epsilon epsilon=0.2, decay=0.995",42,0.541400,17.300000
+Epsilon-greedy,"Epsilon epsilon=0.2, decay=0.995",43,0.549700,23.850000
+Epsilon-greedy,"Epsilon epsilon=0.2, decay=0.995",44,0.501400,400.250000
+Epsilon-greedy,"Epsilon epsilon=0.2, decay=0.995",45,0.302700,2501.000000
+Epsilon-greedy,"Epsilon epsilon=0.2, decay=0.995",46,0.545000,13.750000
+Epsilon-greedy,"Epsilon epsilon=0.2, decay=0.995",47,0.544000,16.900000
+Epsilon-greedy,"Epsilon epsilon=0.2, decay=0.995",48,0.400700,1511.200000
+Epsilon-greedy,"Epsilon epsilon=0.2, decay=0.995",49,0.552600,44.450000
+Epsilon-greedy,"Epsilon epsilon=0, optimistic",0,0.149400,3998.200000
+Epsilon-greedy,"Epsilon epsilon=0, optimistic",1,0.537600,3.000000
+Epsilon-greedy,"Epsilon epsilon=0, optimistic",2,0.302500,2500.200000
+Epsilon-greedy,"Epsilon epsilon=0, optimistic",3,0.556700,3.350000
+Epsilon-greedy,"Epsilon epsilon=0, optimistic",4,0.296900,2500.600000
+Epsilon-greedy,"Epsilon epsilon=0, optimistic",5,0.552300,5.100000
+Epsilon-greedy,"Epsilon epsilon=0, optimistic",6,0.243600,2999.700000
+Epsilon-greedy,"Epsilon epsilon=0, optimistic",7,0.555100,8.100000
+Epsilon-greedy,"Epsilon epsilon=0, optimistic",8,0.397000,1501.200000
+Epsilon-greedy,"Epsilon epsilon=0, optimistic",9,0.292200,2502.200000
+Epsilon-greedy,"Epsilon epsilon=0, optimistic",10,0.400300,1501.000000
+Epsilon-greedy,"Epsilon epsilon=0, optimistic",11,0.554600,5.900000
+Epsilon-greedy,"Epsilon epsilon=0, optimistic",12,0.342400,2004.050000
+Epsilon-greedy,"Epsilon epsilon=0, optimistic",13,0.554000,2.900000
+Epsilon-greedy,"Epsilon epsilon=0, optimistic",14,0.402600,1501.200000
+Epsilon-greedy,"Epsilon epsilon=0, optimistic",15,0.203600,3499.200000
+Epsilon-greedy,"Epsilon epsilon=0, optimistic",16,0.454700,1004.250000
+Epsilon-greedy,"Epsilon epsilon=0, optimistic",17,0.447800,1009.400000
+Epsilon-greedy,"Epsilon epsilon=0, optimistic",18,0.449400,1001.850000
+Epsilon-greedy,"Epsilon epsilon=0, optimistic",19,0.542300,2.700000
+Epsilon-greedy,"Epsilon epsilon=0, optimistic",20,0.555100,16.000000
+Epsilon-greedy,"Epsilon epsilon=0, optimistic",21,0.395300,1501.200000
+Epsilon-greedy,"Epsilon epsilon=0, optimistic",22,0.249700,2999.700000
+Epsilon-greedy,"Epsilon epsilon=0, optimistic",23,0.551300,2.700000
+Epsilon-greedy,"Epsilon epsilon=0, optimistic",24,0.547200,3.600000
+Epsilon-greedy,"Epsilon epsilon=0, optimistic",25,0.548200,3.200000
+Epsilon-greedy,"Epsilon epsilon=0, optimistic",26,0.401200,1501.200000
+Epsilon-greedy,"Epsilon epsilon=0, optimistic",27,0.549100,11.600000
+Epsilon-greedy,"Epsilon epsilon=0, optimistic",28,0.546900,6.650000
+Epsilon-greedy,"Epsilon epsilon=0, optimistic",29,0.552600,5.200000
+Epsilon-greedy,"Epsilon epsilon=0, optimistic",30,0.404000,1501.200000
+Epsilon-greedy,"Epsilon epsilon=0, optimistic",31,0.442400,1004.550000
+Epsilon-greedy,"Epsilon epsilon=0, optimistic",32,0.547600,4.800000
+Epsilon-greedy,"Epsilon epsilon=0, optimistic",33,0.353300,2002.900000
+Epsilon-greedy,"Epsilon epsilon=0, optimistic",34,0.351800,2001.300000
+Epsilon-greedy,"Epsilon epsilon=0, optimistic",35,0.346800,2003.350000
+Epsilon-greedy,"Epsilon epsilon=0, optimistic",36,0.546300,4.500000
+Epsilon-greedy,"Epsilon epsilon=0, optimistic",37,0.556500,5.700000
+Epsilon-greedy,"Epsilon epsilon=0, optimistic",38,0.452600,1002.850000
+Epsilon-greedy,"Epsilon epsilon=0, optimistic",39,0.548500,15.000000
+Epsilon-greedy,"Epsilon epsilon=0, optimistic",40,0.555500,3.350000
+Epsilon-greedy,"Epsilon epsilon=0, optimistic",41,0.248400,2999.900000
+Epsilon-greedy,"Epsilon epsilon=0, optimistic",42,0.542400,6.950000
+Epsilon-greedy,"Epsilon epsilon=0, optimistic",43,0.452600,1002.100000
+Epsilon-greedy,"Epsilon epsilon=0, optimistic",44,0.442400,1011.700000
+Epsilon-greedy,"Epsilon epsilon=0, optimistic",45,0.399100,1501.650000
+Epsilon-greedy,"Epsilon epsilon=0, optimistic",46,0.544600,24.800000
+Epsilon-greedy,"Epsilon epsilon=0, optimistic",47,0.545600,5.200000
+Epsilon-greedy,"Epsilon epsilon=0, optimistic",48,0.542900,14.850000
+Epsilon-greedy,"Epsilon epsilon=0, optimistic",49,0.406000,1502.200000
+UCB,UCB c=0.1,0,0.456200,1001.700000
+UCB,UCB c=0.1,1,0.435200,1016.300000
+UCB,UCB c=0.1,2,0.553100,3.200000
+UCB,UCB c=0.1,3,0.556400,3.750000
+UCB,UCB c=0.1,4,0.545500,8.450000
+UCB,UCB c=0.1,5,0.551900,10.250000
+UCB,UCB c=0.1,6,0.439400,1053.900000
+UCB,UCB c=0.1,7,0.555000,7.800000
+UCB,UCB c=0.1,8,0.324100,2196.350000
+UCB,UCB c=0.1,9,0.392200,1503.350000
+UCB,UCB c=0.1,10,0.400200,1502.100000
+UCB,UCB c=0.1,11,0.554700,2.700000
+UCB,UCB c=0.1,12,0.443100,1001.800000
+UCB,UCB c=0.1,13,0.553700,3.500000
+UCB,UCB c=0.1,14,0.551500,3.400000
+UCB,UCB c=0.1,15,0.448800,1001.400000
+UCB,UCB c=0.1,16,0.552200,19.400000
+UCB,UCB c=0.1,17,0.396800,1504.650000
+UCB,UCB c=0.1,18,0.555500,3.700000
+UCB,UCB c=0.1,19,0.444700,1002.150000
+UCB,UCB c=0.1,20,0.556400,3.500000
+UCB,UCB c=0.1,21,0.449300,1001.700000
+UCB,UCB c=0.1,22,0.545500,3.950000
+UCB,UCB c=0.1,23,0.448300,1002.950000
+UCB,UCB c=0.1,24,0.447800,1004.450000
+UCB,UCB c=0.1,25,0.547600,10.450000
+UCB,UCB c=0.1,26,0.351200,2006.250000
+UCB,UCB c=0.1,27,0.442200,1044.450000
+UCB,UCB c=0.1,28,0.546800,7.500000
+UCB,UCB c=0.1,29,0.552300,10.500000
+UCB,UCB c=0.1,30,0.452900,1001.700000
+UCB,UCB c=0.1,31,0.442700,1002.800000
+UCB,UCB c=0.1,32,0.547700,3.900000
+UCB,UCB c=0.1,33,0.400500,1505.750000
+UCB,UCB c=0.1,34,0.351200,2006.100000
+UCB,UCB c=0.1,35,0.397900,1502.850000
+UCB,UCB c=0.1,36,0.545700,7.050000
+UCB,UCB c=0.1,37,0.556300,5.000000
+UCB,UCB c=0.1,38,0.549700,5.850000
+UCB,UCB c=0.1,39,0.350600,2000.100000
+UCB,UCB c=0.1,40,0.396500,1501.400000
+UCB,UCB c=0.1,41,0.398200,1501.500000
+UCB,UCB c=0.1,42,0.541800,13.200000
+UCB,UCB c=0.1,43,0.452300,1003.650000
+UCB,UCB c=0.1,44,0.546000,4.100000
+UCB,UCB c=0.1,45,0.343600,2073.250000
+UCB,UCB c=0.1,46,0.401300,1501.500000
+UCB,UCB c=0.1,47,0.388700,1497.550000
+UCB,UCB c=0.1,48,0.351700,2003.000000
+UCB,UCB c=0.1,49,0.557500,7.300000
+UCB,UCB c=0.5,0,0.550000,63.500000
+UCB,UCB c=0.5,1,0.528500,95.850000
+UCB,UCB c=0.5,2,0.544000,108.350000
+UCB,UCB c=0.5,3,0.550100,55.700000
+UCB,UCB c=0.5,4,0.540100,76.350000
+UCB,UCB c=0.5,5,0.545200,72.200000
+UCB,UCB c=0.5,6,0.536700,82.150000
+UCB,UCB c=0.5,7,0.546900,95.150000
+UCB,UCB c=0.5,8,0.537700,87.050000
+UCB,UCB c=0.5,9,0.532800,98.200000
+UCB,UCB c=0.5,10,0.541100,71.650000
+UCB,UCB c=0.5,11,0.549700,49.250000
+UCB,UCB c=0.5,12,0.537700,63.350000
+UCB,UCB c=0.5,13,0.548200,54.600000
+UCB,UCB c=0.5,14,0.543500,99.150000
+UCB,UCB c=0.5,15,0.544600,65.000000
+UCB,UCB c=0.5,16,0.549800,43.250000
+UCB,UCB c=0.5,17,0.539700,83.600000
+UCB,UCB c=0.5,18,0.550200,55.700000
+UCB,UCB c=0.5,19,0.536400,82.500000
+UCB,UCB c=0.5,20,0.550300,74.000000
+UCB,UCB c=0.5,21,0.539500,92.800000
+UCB,UCB c=0.5,22,0.539200,69.400000
+UCB,UCB c=0.5,23,0.542500,77.950000
+UCB,UCB c=0.5,24,0.542000,55.100000
+UCB,UCB c=0.5,25,0.542900,52.950000
+UCB,UCB c=0.5,26,0.547500,56.450000
+UCB,UCB c=0.5,27,0.544100,55.000000
+UCB,UCB c=0.5,28,0.541600,56.550000
+UCB,UCB c=0.5,29,0.543000,103.550000
+UCB,UCB c=0.5,30,0.543200,92.200000
+UCB,UCB c=0.5,31,0.533600,80.000000
+UCB,UCB c=0.5,32,0.539800,83.550000
+UCB,UCB c=0.5,33,0.538500,61.200000
+UCB,UCB c=0.5,34,0.543000,66.500000
+UCB,UCB c=0.5,35,0.540100,61.100000
+UCB,UCB c=0.5,36,0.541700,49.600000
+UCB,UCB c=0.5,37,0.548700,83.650000
+UCB,UCB c=0.5,38,0.540200,106.650000
+UCB,UCB c=0.5,39,0.542800,58.800000
+UCB,UCB c=0.5,40,0.549100,67.000000
+UCB,UCB c=0.5,41,0.539400,88.650000
+UCB,UCB c=0.5,42,0.535000,100.600000
+UCB,UCB c=0.5,43,0.540000,117.400000
+UCB,UCB c=0.5,44,0.537800,74.900000
+UCB,UCB c=0.5,45,0.536500,87.100000
+UCB,UCB c=0.5,46,0.538500,81.800000
+UCB,UCB c=0.5,47,0.538800,71.050000
+UCB,UCB c=0.5,48,0.519500,253.750000
+UCB,UCB c=0.5,49,0.550800,76.450000
+UCB,UCB c=1,0,0.532000,224.000000
+UCB,UCB c=1,1,0.515000,247.500000
+UCB,UCB c=1,2,0.530900,228.450000
+UCB,UCB c=1,3,0.534000,214.700000
+UCB,UCB c=1,4,0.515800,311.300000
+UCB,UCB c=1,5,0.526500,248.100000
+UCB,UCB c=1,6,0.513100,284.100000
+UCB,UCB c=1,7,0.530300,235.700000
+UCB,UCB c=1,8,0.526200,217.100000
+UCB,UCB c=1,9,0.514900,282.300000
+UCB,UCB c=1,10,0.522100,254.750000
+UCB,UCB c=1,11,0.535700,192.500000
+UCB,UCB c=1,12,0.517300,261.150000
+UCB,UCB c=1,13,0.527300,270.450000
+UCB,UCB c=1,14,0.528300,235.700000
+UCB,UCB c=1,15,0.526800,234.950000
+UCB,UCB c=1,16,0.529600,244.350000
+UCB,UCB c=1,17,0.524100,244.050000
+UCB,UCB c=1,18,0.535700,186.150000
+UCB,UCB c=1,19,0.517400,282.850000
+UCB,UCB c=1,20,0.530400,235.550000
+UCB,UCB c=1,21,0.522900,258.750000
+UCB,UCB c=1,22,0.516900,277.150000
+UCB,UCB c=1,23,0.527400,239.800000
+UCB,UCB c=1,24,0.523500,257.850000
+UCB,UCB c=1,25,0.520900,275.700000
+UCB,UCB c=1,26,0.532100,204.450000
+UCB,UCB c=1,27,0.531100,203.000000
+UCB,UCB c=1,28,0.518200,296.100000
+UCB,UCB c=1,29,0.524800,299.000000
+UCB,UCB c=1,30,0.530500,228.750000
+UCB,UCB c=1,31,0.517200,256.350000
+UCB,UCB c=1,32,0.528300,223.200000
+UCB,UCB c=1,33,0.517700,285.550000
+UCB,UCB c=1,34,0.526000,237.400000
+UCB,UCB c=1,35,0.520000,263.100000
+UCB,UCB c=1,36,0.521700,246.050000
+UCB,UCB c=1,37,0.529800,271.250000
+UCB,UCB c=1,38,0.519800,330.150000
+UCB,UCB c=1,39,0.522000,276.450000
+UCB,UCB c=1,40,0.531500,244.300000
+UCB,UCB c=1,41,0.524600,235.950000
+UCB,UCB c=1,42,0.519200,245.850000
+UCB,UCB c=1,43,0.527100,265.600000
+UCB,UCB c=1,44,0.520400,288.500000
+UCB,UCB c=1,45,0.517100,270.100000
+UCB,UCB c=1,46,0.518300,262.450000
+UCB,UCB c=1,47,0.522500,199.100000
+UCB,UCB c=1,48,0.520000,234.850000
+UCB,UCB c=1,49,0.531500,259.650000
+UCB,UCB c=1.41,0,0.512200,473.550000
+UCB,UCB c=1.41,1,0.489400,511.150000
+UCB,UCB c=1.41,2,0.504500,492.600000
+UCB,UCB c=1.41,3,0.513600,422.300000
+UCB,UCB c=1.41,4,0.495400,501.000000
+UCB,UCB c=1.41,5,0.506300,462.500000
+UCB,UCB c=1.41,6,0.500000,441.400000
+UCB,UCB c=1.41,7,0.506300,470.850000
+UCB,UCB c=1.41,8,0.503100,475.350000
+UCB,UCB c=1.41,9,0.495800,456.850000
+UCB,UCB c=1.41,10,0.499600,506.000000
+UCB,UCB c=1.41,11,0.518100,379.150000
+UCB,UCB c=1.41,12,0.499900,444.950000
+UCB,UCB c=1.41,13,0.508600,457.400000
+UCB,UCB c=1.41,14,0.503500,485.750000
+UCB,UCB c=1.41,15,0.505600,426.450000
+UCB,UCB c=1.41,16,0.513800,417.350000
+UCB,UCB c=1.41,17,0.501500,447.500000
+UCB,UCB c=1.41,18,0.521400,356.050000
+UCB,UCB c=1.41,19,0.499400,467.350000
+UCB,UCB c=1.41,20,0.508500,471.900000
+UCB,UCB c=1.41,21,0.508900,393.600000
+UCB,UCB c=1.41,22,0.494200,519.700000
+UCB,UCB c=1.41,23,0.504800,470.950000
+UCB,UCB c=1.41,24,0.500000,464.850000
+UCB,UCB c=1.41,25,0.504700,467.050000
+UCB,UCB c=1.41,26,0.513700,395.800000
+UCB,UCB c=1.41,27,0.510300,406.700000
+UCB,UCB c=1.41,28,0.503700,447.200000
+UCB,UCB c=1.41,29,0.506600,480.200000
+UCB,UCB c=1.41,30,0.510900,433.600000
+UCB,UCB c=1.41,31,0.493700,467.100000
+UCB,UCB c=1.41,32,0.504500,446.700000
+UCB,UCB c=1.41,33,0.494000,555.300000
+UCB,UCB c=1.41,34,0.504100,465.050000
+UCB,UCB c=1.41,35,0.502100,427.700000
+UCB,UCB c=1.41,36,0.500900,459.050000
+UCB,UCB c=1.41,37,0.510400,442.200000
+UCB,UCB c=1.41,38,0.500700,491.650000
+UCB,UCB c=1.41,39,0.503500,462.950000
+UCB,UCB c=1.41,40,0.512800,418.750000
+UCB,UCB c=1.41,41,0.501400,459.300000
+UCB,UCB c=1.41,42,0.498100,455.000000
+UCB,UCB c=1.41,43,0.504200,479.150000
+UCB,UCB c=1.41,44,0.496600,460.400000
+UCB,UCB c=1.41,45,0.492500,545.550000
+UCB,UCB c=1.41,46,0.502200,463.400000
+UCB,UCB c=1.41,47,0.496500,478.250000
+UCB,UCB c=1.41,48,0.497500,472.850000
+UCB,UCB c=1.41,49,0.515700,450.700000
+UCB,UCB c=2,0,0.488500,697.450000
+UCB,UCB c=2,1,0.468300,754.700000
+UCB,UCB c=2,2,0.470200,810.350000
+UCB,UCB c=2,3,0.481700,767.200000
+UCB,UCB c=2,4,0.466100,816.650000
+UCB,UCB c=2,5,0.475500,767.900000
+UCB,UCB c=2,6,0.465200,788.950000
+UCB,UCB c=2,7,0.479300,736.600000
+UCB,UCB c=2,8,0.467300,830.850000
+UCB,UCB c=2,9,0.463300,804.250000
+UCB,UCB c=2,10,0.474300,773.450000
+UCB,UCB c=2,11,0.487500,691.550000
+UCB,UCB c=2,12,0.466900,805.750000
+UCB,UCB c=2,13,0.477900,778.500000
+UCB,UCB c=2,14,0.484300,697.200000
+UCB,UCB c=2,15,0.470300,799.100000
+UCB,UCB c=2,16,0.484000,713.150000
+UCB,UCB c=2,17,0.470100,752.800000
+UCB,UCB c=2,18,0.487800,673.050000
+UCB,UCB c=2,19,0.466900,795.000000
+UCB,UCB c=2,20,0.485400,707.600000
+UCB,UCB c=2,21,0.477500,691.600000
+UCB,UCB c=2,22,0.465500,813.700000
+UCB,UCB c=2,23,0.478500,740.300000
+UCB,UCB c=2,24,0.465100,804.200000
+UCB,UCB c=2,25,0.472500,770.050000
+UCB,UCB c=2,26,0.484600,676.750000
+UCB,UCB c=2,27,0.479400,731.550000
+UCB,UCB c=2,28,0.469500,802.050000
+UCB,UCB c=2,29,0.477400,763.450000
+UCB,UCB c=2,30,0.481900,733.100000
+UCB,UCB c=2,31,0.466700,763.250000
+UCB,UCB c=2,32,0.474600,768.100000
+UCB,UCB c=2,33,0.465400,810.800000
+UCB,UCB c=2,34,0.475400,750.950000
+UCB,UCB c=2,35,0.473900,720.800000
+UCB,UCB c=2,36,0.469100,781.850000
+UCB,UCB c=2,37,0.481000,712.250000
+UCB,UCB c=2,38,0.474100,803.700000
+UCB,UCB c=2,39,0.469500,786.800000
+UCB,UCB c=2,40,0.486300,678.350000
+UCB,UCB c=2,41,0.472900,723.400000
+UCB,UCB c=2,42,0.468600,751.750000
+UCB,UCB c=2,43,0.478500,724.900000
+UCB,UCB c=2,44,0.472600,704.600000
+UCB,UCB c=2,45,0.474000,714.750000
+UCB,UCB c=2,46,0.474000,756.500000
+UCB,UCB c=2,47,0.475200,659.850000
+UCB,UCB c=2,48,0.461600,827.150000
+UCB,UCB c=2,49,0.481300,762.150000
+Thompson sampling,"Thompson Beta(0.5,0.5)",0,0.547300,84.150000
+Thompson sampling,"Thompson Beta(0.5,0.5)",1,0.529200,87.850000
+Thompson sampling,"Thompson Beta(0.5,0.5)",2,0.547200,72.200000
+Thompson sampling,"Thompson Beta(0.5,0.5)",3,0.549900,81.050000
+Thompson sampling,"Thompson Beta(0.5,0.5)",4,0.535500,90.000000
+Thompson sampling,"Thompson Beta(0.5,0.5)",5,0.543100,102.550000
+Thompson sampling,"Thompson Beta(0.5,0.5)",6,0.536100,91.050000
+Thompson sampling,"Thompson Beta(0.5,0.5)",7,0.548000,76.450000
+Thompson sampling,"Thompson Beta(0.5,0.5)",8,0.537400,92.450000
+Thompson sampling,"Thompson Beta(0.5,0.5)",9,0.533400,93.700000
+Thompson sampling,"Thompson Beta(0.5,0.5)",10,0.541100,61.100000
+Thompson sampling,"Thompson Beta(0.5,0.5)",11,0.546800,80.150000
+Thompson sampling,"Thompson Beta(0.5,0.5)",12,0.533600,95.400000
+Thompson sampling,"Thompson Beta(0.5,0.5)",13,0.546700,66.900000
+Thompson sampling,"Thompson Beta(0.5,0.5)",14,0.538100,137.450000
+Thompson sampling,"Thompson Beta(0.5,0.5)",15,0.542700,79.250000
+Thompson sampling,"Thompson Beta(0.5,0.5)",16,0.546900,83.850000
+Thompson sampling,"Thompson Beta(0.5,0.5)",17,0.537400,106.000000
+Thompson sampling,"Thompson Beta(0.5,0.5)",18,0.547100,87.650000
+Thompson sampling,"Thompson Beta(0.5,0.5)",19,0.534700,97.050000
+Thompson sampling,"Thompson Beta(0.5,0.5)",20,0.547700,95.550000
+Thompson sampling,"Thompson Beta(0.5,0.5)",21,0.538200,108.450000
+Thompson sampling,"Thompson Beta(0.5,0.5)",22,0.535100,91.400000
+Thompson sampling,"Thompson Beta(0.5,0.5)",23,0.544800,65.200000
+Thompson sampling,"Thompson Beta(0.5,0.5)",24,0.537800,105.500000
+Thompson sampling,"Thompson Beta(0.5,0.5)",25,0.538000,108.800000
+Thompson sampling,"Thompson Beta(0.5,0.5)",26,0.546000,76.300000
+Thompson sampling,"Thompson Beta(0.5,0.5)",27,0.541000,87.250000
+Thompson sampling,"Thompson Beta(0.5,0.5)",28,0.541200,63.700000
+Thompson sampling,"Thompson Beta(0.5,0.5)",29,0.544800,86.600000
+Thompson sampling,"Thompson Beta(0.5,0.5)",30,0.542400,98.700000
+Thompson sampling,"Thompson Beta(0.5,0.5)",31,0.535000,69.200000
+Thompson sampling,"Thompson Beta(0.5,0.5)",32,0.538600,97.050000
+Thompson sampling,"Thompson Beta(0.5,0.5)",33,0.536200,102.600000
+Thompson sampling,"Thompson Beta(0.5,0.5)",34,0.540900,84.850000
+Thompson sampling,"Thompson Beta(0.5,0.5)",35,0.536900,109.700000
+Thompson sampling,"Thompson Beta(0.5,0.5)",36,0.537900,83.450000
+Thompson sampling,"Thompson Beta(0.5,0.5)",37,0.547500,93.100000
+Thompson sampling,"Thompson Beta(0.5,0.5)",38,0.540100,95.550000
+Thompson sampling,"Thompson Beta(0.5,0.5)",39,0.542600,66.300000
+Thompson sampling,"Thompson Beta(0.5,0.5)",40,0.547200,81.350000
+Thompson sampling,"Thompson Beta(0.5,0.5)",41,0.530600,180.950000
+Thompson sampling,"Thompson Beta(0.5,0.5)",42,0.533100,105.050000
+Thompson sampling,"Thompson Beta(0.5,0.5)",43,0.541800,105.400000
+Thompson sampling,"Thompson Beta(0.5,0.5)",44,0.538400,77.400000
+Thompson sampling,"Thompson Beta(0.5,0.5)",45,0.535800,81.000000
+Thompson sampling,"Thompson Beta(0.5,0.5)",46,0.539000,87.600000
+Thompson sampling,"Thompson Beta(0.5,0.5)",47,0.534400,104.550000
+Thompson sampling,"Thompson Beta(0.5,0.5)",48,0.534900,96.350000
+Thompson sampling,"Thompson Beta(0.5,0.5)",49,0.549100,86.650000
+Thompson sampling,"Thompson Beta(1,1)",0,0.547200,102.050000
+Thompson sampling,"Thompson Beta(1,1)",1,0.521400,173.300000
+Thompson sampling,"Thompson Beta(1,1)",2,0.542800,91.300000
+Thompson sampling,"Thompson Beta(1,1)",3,0.547500,94.950000
+Thompson sampling,"Thompson Beta(1,1)",4,0.538700,72.650000
+Thompson sampling,"Thompson Beta(1,1)",5,0.547200,66.250000
+Thompson sampling,"Thompson Beta(1,1)",6,0.532600,126.500000
+Thompson sampling,"Thompson Beta(1,1)",7,0.547100,90.450000
+Thompson sampling,"Thompson Beta(1,1)",8,0.536800,96.350000
+Thompson sampling,"Thompson Beta(1,1)",9,0.530900,113.250000
+Thompson sampling,"Thompson Beta(1,1)",10,0.534700,119.450000
+Thompson sampling,"Thompson Beta(1,1)",11,0.546100,81.850000
+Thompson sampling,"Thompson Beta(1,1)",12,0.534100,76.250000
+Thompson sampling,"Thompson Beta(1,1)",13,0.547500,59.850000
+Thompson sampling,"Thompson Beta(1,1)",14,0.543000,103.650000
+Thompson sampling,"Thompson Beta(1,1)",15,0.542800,82.350000
+Thompson sampling,"Thompson Beta(1,1)",16,0.546100,77.800000
+Thompson sampling,"Thompson Beta(1,1)",17,0.536700,125.250000
+Thompson sampling,"Thompson Beta(1,1)",18,0.548300,76.950000
+Thompson sampling,"Thompson Beta(1,1)",19,0.534900,80.400000
+Thompson sampling,"Thompson Beta(1,1)",20,0.549700,63.600000
+Thompson sampling,"Thompson Beta(1,1)",21,0.539500,89.250000
+Thompson sampling,"Thompson Beta(1,1)",22,0.535000,102.300000
+Thompson sampling,"Thompson Beta(1,1)",23,0.544900,71.950000
+Thompson sampling,"Thompson Beta(1,1)",24,0.535600,118.500000
+Thompson sampling,"Thompson Beta(1,1)",25,0.540300,82.950000
+Thompson sampling,"Thompson Beta(1,1)",26,0.543200,97.700000
+Thompson sampling,"Thompson Beta(1,1)",27,0.544600,61.150000
+Thompson sampling,"Thompson Beta(1,1)",28,0.535500,120.200000
+Thompson sampling,"Thompson Beta(1,1)",29,0.542500,107.250000
+Thompson sampling,"Thompson Beta(1,1)",30,0.544000,89.400000
+Thompson sampling,"Thompson Beta(1,1)",31,0.534400,77.900000
+Thompson sampling,"Thompson Beta(1,1)",32,0.538200,96.400000
+Thompson sampling,"Thompson Beta(1,1)",33,0.534500,133.500000
+Thompson sampling,"Thompson Beta(1,1)",34,0.540900,86.600000
+Thompson sampling,"Thompson Beta(1,1)",35,0.535500,101.250000
+Thompson sampling,"Thompson Beta(1,1)",36,0.538200,92.600000
+Thompson sampling,"Thompson Beta(1,1)",37,0.545700,105.150000
+Thompson sampling,"Thompson Beta(1,1)",38,0.540400,82.700000
+Thompson sampling,"Thompson Beta(1,1)",39,0.537400,120.950000
+Thompson sampling,"Thompson Beta(1,1)",40,0.549200,60.850000
+Thompson sampling,"Thompson Beta(1,1)",41,0.539000,86.500000
+Thompson sampling,"Thompson Beta(1,1)",42,0.528300,153.350000
+Thompson sampling,"Thompson Beta(1,1)",43,0.539800,120.400000
+Thompson sampling,"Thompson Beta(1,1)",44,0.538200,76.950000
+Thompson sampling,"Thompson Beta(1,1)",45,0.534700,97.200000
+Thompson sampling,"Thompson Beta(1,1)",46,0.539200,71.300000
+Thompson sampling,"Thompson Beta(1,1)",47,0.538200,66.200000
+Thompson sampling,"Thompson Beta(1,1)",48,0.535000,79.650000
+Thompson sampling,"Thompson Beta(1,1)",49,0.550700,71.250000
+Thompson sampling,"Thompson Beta(2,2)",0,0.547100,95.850000
+Thompson sampling,"Thompson Beta(2,2)",1,0.526200,125.150000
+Thompson sampling,"Thompson Beta(2,2)",2,0.543900,93.800000
+Thompson sampling,"Thompson Beta(2,2)",3,0.547200,85.200000
+Thompson sampling,"Thompson Beta(2,2)",4,0.536900,93.400000
+Thompson sampling,"Thompson Beta(2,2)",5,0.543300,99.200000
+Thompson sampling,"Thompson Beta(2,2)",6,0.534900,101.850000
+Thompson sampling,"Thompson Beta(2,2)",7,0.548000,87.800000
+Thompson sampling,"Thompson Beta(2,2)",8,0.538600,82.450000
+Thompson sampling,"Thompson Beta(2,2)",9,0.531800,115.050000
+Thompson sampling,"Thompson Beta(2,2)",10,0.539700,86.250000
+Thompson sampling,"Thompson Beta(2,2)",11,0.547200,84.150000
+Thompson sampling,"Thompson Beta(2,2)",12,0.532100,112.600000
+Thompson sampling,"Thompson Beta(2,2)",13,0.542600,113.800000
+Thompson sampling,"Thompson Beta(2,2)",14,0.541500,113.100000
+Thompson sampling,"Thompson Beta(2,2)",15,0.540800,98.450000
+Thompson sampling,"Thompson Beta(2,2)",16,0.545500,96.300000
+Thompson sampling,"Thompson Beta(2,2)",17,0.537500,99.850000
+Thompson sampling,"Thompson Beta(2,2)",18,0.548000,80.150000
+Thompson sampling,"Thompson Beta(2,2)",19,0.535000,91.000000
+Thompson sampling,"Thompson Beta(2,2)",20,0.545700,106.750000
+Thompson sampling,"Thompson Beta(2,2)",21,0.536000,139.400000
+Thompson sampling,"Thompson Beta(2,2)",22,0.534300,117.650000
+Thompson sampling,"Thompson Beta(2,2)",23,0.541000,95.400000
+Thompson sampling,"Thompson Beta(2,2)",24,0.533700,154.100000
+Thompson sampling,"Thompson Beta(2,2)",25,0.539100,93.350000
+Thompson sampling,"Thompson Beta(2,2)",26,0.544200,81.650000
+Thompson sampling,"Thompson Beta(2,2)",27,0.541800,83.500000
+Thompson sampling,"Thompson Beta(2,2)",28,0.539500,83.800000
+Thompson sampling,"Thompson Beta(2,2)",29,0.542700,109.750000
+Thompson sampling,"Thompson Beta(2,2)",30,0.543200,111.150000
+Thompson sampling,"Thompson Beta(2,2)",31,0.530800,112.250000
+Thompson sampling,"Thompson Beta(2,2)",32,0.535700,120.550000
+Thompson sampling,"Thompson Beta(2,2)",33,0.534100,133.200000
+Thompson sampling,"Thompson Beta(2,2)",34,0.540100,95.100000
+Thompson sampling,"Thompson Beta(2,2)",35,0.535400,115.150000
+Thompson sampling,"Thompson Beta(2,2)",36,0.536200,117.650000
+Thompson sampling,"Thompson Beta(2,2)",37,0.547300,84.350000
+Thompson sampling,"Thompson Beta(2,2)",38,0.537600,117.550000
+Thompson sampling,"Thompson Beta(2,2)",39,0.538800,97.650000
+Thompson sampling,"Thompson Beta(2,2)",40,0.548100,74.250000
+Thompson sampling,"Thompson Beta(2,2)",41,0.536900,103.350000
+Thompson sampling,"Thompson Beta(2,2)",42,0.531500,128.200000
+Thompson sampling,"Thompson Beta(2,2)",43,0.538800,144.300000
+Thompson sampling,"Thompson Beta(2,2)",44,0.536600,86.150000
+Thompson sampling,"Thompson Beta(2,2)",45,0.534100,112.000000
+Thompson sampling,"Thompson Beta(2,2)",46,0.539100,70.500000
+Thompson sampling,"Thompson Beta(2,2)",47,0.532800,127.300000
+Thompson sampling,"Thompson Beta(2,2)",48,0.531300,128.550000
+Thompson sampling,"Thompson Beta(2,2)",49,0.545100,140.300000
+Thompson sampling,"Thompson Beta(5,5)",0,0.550000,73.600000
+Thompson sampling,"Thompson Beta(5,5)",1,0.526100,129.900000
+Thompson sampling,"Thompson Beta(5,5)",2,0.544700,105.250000
+Thompson sampling,"Thompson Beta(5,5)",3,0.546600,94.850000
+Thompson sampling,"Thompson Beta(5,5)",4,0.531500,135.100000
+Thompson sampling,"Thompson Beta(5,5)",5,0.544400,82.800000
+Thompson sampling,"Thompson Beta(5,5)",6,0.535500,88.450000
+Thompson sampling,"Thompson Beta(5,5)",7,0.539300,145.250000
+Thompson sampling,"Thompson Beta(5,5)",8,0.538500,86.550000
+Thompson sampling,"Thompson Beta(5,5)",9,0.532900,106.100000
+Thompson sampling,"Thompson Beta(5,5)",10,0.537000,124.400000
+Thompson sampling,"Thompson Beta(5,5)",11,0.547000,82.000000
+Thompson sampling,"Thompson Beta(5,5)",12,0.531400,115.750000
+Thompson sampling,"Thompson Beta(5,5)",13,0.544200,98.150000
+Thompson sampling,"Thompson Beta(5,5)",14,0.542500,97.950000
+Thompson sampling,"Thompson Beta(5,5)",15,0.542600,85.350000
+Thompson sampling,"Thompson Beta(5,5)",16,0.544700,103.200000
+Thompson sampling,"Thompson Beta(5,5)",17,0.534400,142.050000
+Thompson sampling,"Thompson Beta(5,5)",18,0.548600,74.350000
+Thompson sampling,"Thompson Beta(5,5)",19,0.532500,109.950000
+Thompson sampling,"Thompson Beta(5,5)",20,0.546600,95.650000
+Thompson sampling,"Thompson Beta(5,5)",21,0.535200,133.350000
+Thompson sampling,"Thompson Beta(5,5)",22,0.536000,104.400000
+Thompson sampling,"Thompson Beta(5,5)",23,0.541700,88.700000
+Thompson sampling,"Thompson Beta(5,5)",24,0.536600,118.300000
+Thompson sampling,"Thompson Beta(5,5)",25,0.538700,108.850000
+Thompson sampling,"Thompson Beta(5,5)",26,0.543000,109.250000
+Thompson sampling,"Thompson Beta(5,5)",27,0.537400,131.850000
+Thompson sampling,"Thompson Beta(5,5)",28,0.537100,106.050000
+Thompson sampling,"Thompson Beta(5,5)",29,0.542300,115.650000
+Thompson sampling,"Thompson Beta(5,5)",30,0.540400,107.450000
+Thompson sampling,"Thompson Beta(5,5)",31,0.531900,92.150000
+Thompson sampling,"Thompson Beta(5,5)",32,0.535700,121.950000
+Thompson sampling,"Thompson Beta(5,5)",33,0.534000,129.100000
+Thompson sampling,"Thompson Beta(5,5)",34,0.539200,104.000000
+Thompson sampling,"Thompson Beta(5,5)",35,0.530500,160.750000
+Thompson sampling,"Thompson Beta(5,5)",36,0.535000,100.000000
+Thompson sampling,"Thompson Beta(5,5)",37,0.544200,122.550000
+Thompson sampling,"Thompson Beta(5,5)",38,0.538000,118.700000
+Thompson sampling,"Thompson Beta(5,5)",39,0.540200,81.150000
+Thompson sampling,"Thompson Beta(5,5)",40,0.544500,107.350000
+Thompson sampling,"Thompson Beta(5,5)",41,0.536500,115.850000
+Thompson sampling,"Thompson Beta(5,5)",42,0.531700,130.600000
+Thompson sampling,"Thompson Beta(5,5)",43,0.541600,111.700000
+Thompson sampling,"Thompson Beta(5,5)",44,0.535600,96.500000
+Thompson sampling,"Thompson Beta(5,5)",45,0.534200,102.400000
+Thompson sampling,"Thompson Beta(5,5)",46,0.538400,88.650000
+Thompson sampling,"Thompson Beta(5,5)",47,0.534900,114.650000
+Thompson sampling,"Thompson Beta(5,5)",48,0.534100,97.650000
+Thompson sampling,"Thompson Beta(5,5)",49,0.549100,79.500000
+UCB,KL-UCB c=3,0,0.535700,208.850000
+UCB,KL-UCB c=3,1,0.515000,237.450000
+UCB,KL-UCB c=3,2,0.534300,192.800000
+UCB,KL-UCB c=3,3,0.541200,159.050000
+UCB,KL-UCB c=3,4,0.524700,231.450000
+UCB,KL-UCB c=3,5,0.536500,160.700000
+UCB,KL-UCB c=3,6,0.521200,230.550000
+UCB,KL-UCB c=3,7,0.534500,209.650000
+UCB,KL-UCB c=3,8,0.526900,218.600000
+UCB,KL-UCB c=3,9,0.519500,244.800000
+UCB,KL-UCB c=3,10,0.519800,275.700000
+UCB,KL-UCB c=3,11,0.535300,191.650000
+UCB,KL-UCB c=3,12,0.520400,229.050000
+UCB,KL-UCB c=3,13,0.535000,202.950000
+UCB,KL-UCB c=3,14,0.529900,213.300000
+UCB,KL-UCB c=3,15,0.530700,220.200000
+UCB,KL-UCB c=3,16,0.539900,136.850000
+UCB,KL-UCB c=3,17,0.525200,243.900000
+UCB,KL-UCB c=3,18,0.534200,193.300000
+UCB,KL-UCB c=3,19,0.522900,206.800000
+UCB,KL-UCB c=3,20,0.536700,189.350000
+UCB,KL-UCB c=3,21,0.528200,208.300000
+UCB,KL-UCB c=3,22,0.521900,238.350000
+UCB,KL-UCB c=3,23,0.534100,174.500000
+UCB,KL-UCB c=3,24,0.526200,213.850000
+UCB,KL-UCB c=3,25,0.528500,205.700000
+UCB,KL-UCB c=3,26,0.536400,169.500000
+UCB,KL-UCB c=3,27,0.530800,213.650000
+UCB,KL-UCB c=3,28,0.528300,198.750000
+UCB,KL-UCB c=3,29,0.526400,279.150000
+UCB,KL-UCB c=3,30,0.533000,217.450000
+UCB,KL-UCB c=3,31,0.524300,188.750000
+UCB,KL-UCB c=3,32,0.521400,296.900000
+UCB,KL-UCB c=3,33,0.525800,209.850000
+UCB,KL-UCB c=3,34,0.532300,157.600000
+UCB,KL-UCB c=3,35,0.524300,208.200000
+UCB,KL-UCB c=3,36,0.525500,201.300000
+UCB,KL-UCB c=3,37,0.534700,212.450000
+UCB,KL-UCB c=3,38,0.525700,264.150000
+UCB,KL-UCB c=3,39,0.529500,186.500000
+UCB,KL-UCB c=3,40,0.540000,162.250000
+UCB,KL-UCB c=3,41,0.526800,183.350000
+UCB,KL-UCB c=3,42,0.519900,249.400000
+UCB,KL-UCB c=3,43,0.532500,208.050000
+UCB,KL-UCB c=3,44,0.528500,166.850000
+UCB,KL-UCB c=3,45,0.518800,246.200000
+UCB,KL-UCB c=3,46,0.520500,271.500000
+UCB,KL-UCB c=3,47,0.524600,207.400000
+UCB,KL-UCB c=3,48,0.518700,257.050000
+UCB,KL-UCB c=3,49,0.536600,216.900000
+UCB,UCB-V(default),0,0.510400,453.800000
+UCB,UCB-V(default),1,0.501100,386.650000
+UCB,UCB-V(default),2,0.511300,417.150000
+UCB,UCB-V(default),3,0.515500,397.450000
+UCB,UCB-V(default),4,0.499900,443.750000
+UCB,UCB-V(default),5,0.512200,389.000000
+UCB,UCB-V(default),6,0.500200,430.850000
+UCB,UCB-V(default),7,0.509100,435.550000
+UCB,UCB-V(default),8,0.505700,438.800000
+UCB,UCB-V(default),9,0.498600,434.650000
+UCB,UCB-V(default),10,0.507100,420.900000
+UCB,UCB-V(default),11,0.512500,427.700000
+UCB,UCB-V(default),12,0.504900,400.300000
+UCB,UCB-V(default),13,0.511900,423.100000
+UCB,UCB-V(default),14,0.512700,424.800000
+UCB,UCB-V(default),15,0.506900,465.600000
+UCB,UCB-V(default),16,0.513600,394.000000
+UCB,UCB-V(default),17,0.503300,456.600000
+UCB,UCB-V(default),18,0.512500,411.550000
+UCB,UCB-V(default),19,0.503100,437.550000
+UCB,UCB-V(default),20,0.516000,398.950000
+UCB,UCB-V(default),21,0.508700,394.150000
+UCB,UCB-V(default),22,0.499700,449.950000
+UCB,UCB-V(default),23,0.513400,389.650000
+UCB,UCB-V(default),24,0.503900,447.350000
+UCB,UCB-V(default),25,0.505400,428.300000
+UCB,UCB-V(default),26,0.517100,375.750000
+UCB,UCB-V(default),27,0.510700,392.550000
+UCB,UCB-V(default),28,0.505400,466.850000
+UCB,UCB-V(default),29,0.511800,438.400000
+UCB,UCB-V(default),30,0.509300,471.750000
+UCB,UCB-V(default),31,0.500100,410.600000
+UCB,UCB-V(default),32,0.500800,494.250000
+UCB,UCB-V(default),33,0.495400,531.150000
+UCB,UCB-V(default),34,0.514800,366.150000
+UCB,UCB-V(default),35,0.505300,405.600000
+UCB,UCB-V(default),36,0.502700,453.850000
+UCB,UCB-V(default),37,0.514400,420.800000
+UCB,UCB-V(default),38,0.499100,497.150000
+UCB,UCB-V(default),39,0.509700,422.800000
+UCB,UCB-V(default),40,0.519700,354.550000
+UCB,UCB-V(default),41,0.505700,418.850000
+UCB,UCB-V(default),42,0.501700,434.450000
+UCB,UCB-V(default),43,0.508200,438.150000
+UCB,UCB-V(default),44,0.499200,470.200000
+UCB,UCB-V(default),45,0.502100,425.250000
+UCB,UCB-V(default),46,0.496100,488.800000
+UCB,UCB-V(default),47,0.503600,399.450000
+UCB,UCB-V(default),48,0.499700,446.600000
+UCB,UCB-V(default),49,0.515600,436.700000

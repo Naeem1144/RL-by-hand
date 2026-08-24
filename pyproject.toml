@@ -1,7 +1,7 @@
 [project]
 name = "rl-by-hand"
 version = "0.1.0"
-description = "Reinforcement learning algorithms implemented from scratch with NumPy and Matplotlib."
+description = "Interchangeable multi-armed bandit algorithms implemented from scratch."
 requires-python = ">=3.12"
 dependencies = [
     "matplotlib>=3.11.1",
@@ -13,9 +13,8 @@ requires = ["setuptools>=80"]
 build-backend = "setuptools.build_meta"
 
 [project.scripts]
-rl-compare-algorithms = "compare_algorithms:main"
-rl-compare-epsilon = "compare_bandits:main"
-rl-compare-hyperparameters = "compare_hyperparameters:main"
+rl-study = "study.compare:main"
+rl-horizons = "study.horizons:main"
 
 [dependency-groups]
 dev = [
@@ -23,19 +22,12 @@ dev = [
     "ruff>=0.12",
 ]
 
-[tool.setuptools]
-py-modules = [
-    "bandit_utils",
-    "compare_algorithms",
-    "compare_bandits",
-    "compare_hyperparameters",
-    "compare_problem_suites",
-    "visualizations",
-]
-
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["algorithms*"]
+include = ["algorithms*", "evaluation*", "problems*", "study*"]
+
+[tool.setuptools.package-data]
+study = ["results/*.json", "results/*/*.csv", "results/*/*.png"]
 
 [tool.ruff]
 line-length = 100
