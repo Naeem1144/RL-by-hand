@@ -18,15 +18,21 @@ Algorithm  <── evaluation runner ──>  Problem
 - `study/`: one reproducible multi-scenario comparison of the included
   algorithms, plus a regret-versus-horizon sweep
 
-## Install and test
+## Setup
+
+Requirements: [uv](https://docs.astral.sh/uv/) and Python 3.12 or newer (the
+repository pins the development version in `.python-version`).
 
 ```bash
+# create .venv and install the locked dependencies (incl. pytest, ruff)
 uv sync --locked
+
+# verify the installation
 uv run pytest
 uv run ruff check .
 ```
 
-## Run one algorithm
+To use the library directly:
 
 ```python
 import numpy as np
@@ -43,23 +49,20 @@ print(result.total_regret)
 print(result.total_pulls)
 ```
 
-## Compare algorithms
+To compare several algorithms on matched random streams:
 
 ```python
-import numpy as np
-
 from algorithms import UCB, EpsilonGreedy, ThompsonSampling
 from evaluation import compare
 from problems import BernoulliBandit
 
-problem = BernoulliBandit(np.array([0.1, 0.25, 0.8]))
 comparison = compare(
     {
         "epsilon-greedy": EpsilonGreedy(),
         "ucb": UCB(),
         "thompson": ThompsonSampling(),
     },
-    problem,
+    BernoulliBandit(np.array([0.1, 0.25, 0.8])),
     n_steps=1_000,
     seeds=range(30),
 )
@@ -70,42 +73,41 @@ for row in comparison.summaries():
 
 Every algorithm sees the same problem and matched random seeds in each run.
 
-## Comparison study
+## The study
 
-The repository contains one focused hyperparameter study instead of several
-overlapping benchmark scripts. It evaluates 57 configurations across four
-scenarios — a fixed ten-arm Bernoulli problem, a fixed ten-arm Gaussian
-problem, a fast-drifting ten-arm Bernoulli problem, and a slowly drifting
-ten-arm Bernoulli problem — for 10,000 steps over 50 matched runs each:
+One focused hyperparameter study instead of several overlapping benchmark
+scripts. It evaluates **57 configurations across four scenarios** — for
+10,000 steps over 50 matched runs each:
 
-- Bernoulli (19 configurations): epsilon-greedy with `epsilon` in
-  `{0.01, 0.05, 0.1, 0.2, 0.3}`, two decayed-epsilon variants, one optimistic
-  initialization, UCB with `c` in `{0.1, 0.5, 1.0, sqrt(2), 2.0}`, KL-UCB
-  with `c=3`, variance-aware UCB, and Thompson sampling with symmetric Beta
-  priors in `{0.5, 1.0, 2.0, 5.0}`
-- Gaussian (11 configurations): epsilon-greedy and UCB subsets, an optimistic
-  initialization, variance-aware UCB, and normal Thompson sampling with
-  prior width `sigma0` in `{0.5, 1.0, 2.0}`
-- Drifting (13 configurations): fixed versus recency-weighted epsilon-greedy,
-  UCB, KL-UCB and Beta Thompson references, plus drift-aware variants
-  (sliding-window UCB, forgetting Thompson sampling)
-- Slowly drifting (14 configurations): the same grid plus one longer
-  sliding-window setting, on a problem whose arm means drift ten times
-  slower (0.002 per step, so walks stay comparable to the arm spread over
-  the horizon)
+| Scenario | Problem | Arm-mean drift | Configs |
+| --- | --- | --- | ---: |
+| Bernoulli | fixed ten-arm, means 0.05–0.55 | none | 19 |
+| Gaussian | fixed ten-arm, means −1…3.5, σ=1 | none | 11 |
+| Drifting | ten-arm, random-walk means | 0.02 per step | 13 |
+| Slowly drifting | ten-arm, random-walk means | 0.002 per step | 14 |
 
-Run it with:
-
-```bash
-uv run rl-study
-```
+The stationary scenarios sweep epsilon-greedy (`epsilon`, decay, optimistic
+initialization), UCB (`c` in `{0.1, 0.5, 1.0, sqrt(2), 2.0}`), KL-UCB,
+variance-aware UCB, and Beta-Bernoulli / normal Thompson priors. The
+drifting scenarios contrast fixed-epsilon and recency-weighted
+(`step_size`) epsilon-greedy with stationary UCB/KL-UCB/Thompson references
+and drift-aware variants (sliding-window UCB, forgetting Thompson sampling);
+the slow-drifting variant drifts ten times slower so that walks stay
+comparable to the arm spread over the horizon.
 
 A companion sweep examines how the ranking depends on the horizon
-(1,000, 10,000 and 100,000 steps, 6 configurations, 50 matched runs):
+(1,000, 10,000 and 100,000 steps, 6 configurations, 50 matched runs).
+
+Run either with (each takes a few minutes):
 
 ```bash
-uv run rl-horizons
+uv run rl-study       # the four-scenario study
+uv run rl-horizons    # the horizon sweep
 ```
+
+## Results
+
+### Stationary problems
 
 Best configuration from each family on the fixed Bernoulli problem:
 
@@ -126,17 +128,22 @@ of 251.4, 459.0, and 753.8. The "theoretically improved" UCB variants do not
 help at this horizon: KL-UCB `c=3` (212.2, rank 6) loses to UCB `c=0.5` on
 all 50 matched seeds (-133.1 ± 9.8), and variance-aware UCB (429.2 on
 Bernoulli, 442.8 on Gaussian) also trails tuned UCB, because their
-logarithmic exploration budgets are tuned for asymptopia. Averages and
-per-seed win rates can disagree, though: on the Gaussian problem UCB `c=1`
-beats `c=0.5` on average (paired -265 ± 331) yet wins only 8% of paired
-seeds, because `c=0.5` loses a few runs catastrophically (its median regret
-is 31.5 against `c=1`'s 59.0). On the fast-drifting problem recency weighting
-is decisive: epsilon-greedy with `alpha=0.2` reaches regret 1015.8 ± 21.4,
-beats UCB `c=1.41` (1077.5 ± 51.0) by -61.7 ± 49.8, beats UCB-V (1112.5, rank
-3) and sliding-window UCB (1208.1), and beats every fixed-epsilon
-configuration (2,835–2,973) and stationary Thompson `Beta(1,1)` (2,688.8) on
-all 50 matched seeds. Adaptive Thompson helps: forgetting with `gamma=0.99`
-cuts Thompson's drifting regret from 2,688.8 to 1,334.0, but stays behind
+logarithmic exploration budgets are tuned for asymptopia.
+
+Averages and per-seed win rates can disagree, though: on the Gaussian
+problem UCB `c=1` beats `c=0.5` on average (paired -265 ± 331) yet wins only
+8% of paired seeds, because `c=0.5` loses a few runs catastrophically (its
+median regret is 31.5 against `c=1`'s 59.0).
+
+### Non-stationary problems
+
+On the fast-drifting problem recency weighting is decisive: epsilon-greedy
+with `alpha=0.2` reaches regret 1015.8 ± 21.4, beats UCB `c=1.41`
+(1077.5 ± 51.0) by -61.7 ± 49.8, beats UCB-V (1112.5, rank 3) and
+sliding-window UCB (1208.1), and beats every fixed-epsilon configuration
+(2,835–2,973) and stationary Thompson `Beta(1,1)` (2,688.8) on all 50
+matched seeds. Adaptive Thompson helps: forgetting with `gamma=0.99` cuts
+Thompson's drifting regret from 2,688.8 to 1,334.0, but stays behind
 `alpha=0.2`.
 
 On the slowly drifting problem the ordering inverts: stationary Thompson
@@ -149,14 +156,21 @@ so long-memory algorithms are right: decaying the posterior throws away
 precisely the information that slow drift preserves. There is no universal
 non-stationary algorithm: the right memory length is set by the drift rate.
 
-The horizon sweep shows the same picture as the trajectory curves: with
-1,000, 10,000 and 100,000 steps, UCB `c=0.5` stays the Bernoulli winner
-(51.3, 79.2, 107.2) and its regret per step collapses logarithmically
-(0.0513, 0.0079, 0.0011), while fixed-epsilon greedy `epsilon=0.1`
-keeps an almost constant per-step cost (0.0756, 0.0364, 0.0280) and reaches
-2,795.7 at 100,000 steps. The small UCB scale never loses its lead on this
-problem at these horizons: `c=1.41` still trails 7-fold at 100,000 steps
-(752.9, 0.0075 per step).
+### Horizon dependence
+
+| Horizon | UCB `c=0.5` | Thompson `Beta(0.5,0.5)` | UCB `c=1.41` | Epsilon `ε=0.1` |
+| ---: | ---: | ---: | ---: | ---: |
+| 1,000 | 51.3 | 57.1 | 153.6 | 75.6 |
+| 10,000 | 79.2 | 91.2 | 459.0 | 363.6 |
+| 100,000 | 107.2 | 126.0 | 752.9 | 2,795.7 |
+
+UCB `c=0.5` stays the Bernoulli winner at every horizon and its regret per
+step collapses logarithmically (0.0513, 0.0079, 0.0011), while fixed-epsilon
+`epsilon=0.1` keeps an almost constant per-step cost (0.0756, 0.0364, 0.0280).
+The small UCB scale never loses its lead on this problem at these horizons:
+`c=1.41` still trails 7-fold at 100,000 steps (752.9, 0.0075 per step).
+
+### Statistics and reproducibility
 
 Values after `±` are 95% confidence-interval half-widths. Because every run
 shares its seed, each configuration is also compared with the scenario's best
@@ -213,9 +227,13 @@ or `compare`; no simulation loop or benchmark adapter is needed.
 ├── algorithms/
 │   ├── base.py
 │   ├── epsilon_greedy.py
+│   ├── forgetting_thompson.py
+│   ├── klucb.py
+│   ├── sliding_window_ucb.py
 │   ├── thompson.py
 │   ├── thompson_normal.py
-│   └── ucb.py
+│   ├── ucb.py
+│   └── ucb_variance.py
 ├── problems/
 │   ├── base.py
 │   ├── bernoulli.py
@@ -226,9 +244,11 @@ or `compare`; no simulation loop or benchmark adapter is needed.
 │   └── runner.py
 ├── study/
 │   ├── compare.py
+│   ├── horizons.py
 │   └── results/
 │       ├── bernoulli/
 │       ├── drifting/
-│       └── gaussian/
+│       ├── gaussian/
+│       └── slow_drifting/
 └── tests/
 ```
